@@ -80,7 +80,7 @@ public class PdfCreator {
             PdfWriter.getInstance(document, new FileOutputStream(esporte.getNome()));
             document.open();
 
-            adicionarLogo(document, "src/imagens.esporteLogo.png");
+            adicionarLogo(document, "src/imagens/esporteLogo.png");
 
             //MODEL
             adicionarParagrafoEsquerda(document, formatarData.DateToString(esporte.getDataEvento()), Fonts.TIMES_ROMAN_RED_NORMAL_16);
