@@ -9,7 +9,7 @@ public class Evento {
     private Date dataInclusao;
     private Date dataEvento;
     private String sinopse;
-    private String duracao;
+    private int duracao;
     private Ingresso ingresso;
     private Contatos contatos;
     private Ambiente ambiente;
@@ -48,11 +48,11 @@ public class Evento {
         this.sinopse = sinopse;
     }
 
-    public String getDuracao() {
+    public int getDuracao() {
         return duracao;
     }
 
-    public void setDuracao(String duracao) {
+    public void setDuracao(int duracao) {
         this.duracao = duracao;
     }        
 

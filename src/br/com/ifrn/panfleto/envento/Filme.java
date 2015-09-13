@@ -40,5 +40,18 @@ public class Filme extends Evento{
 
     public void setGenero(String genero) {
         this.genero = genero;
-    }              
+    }
+    
+    public String censuraFilme(int censura){
+        if(censura < 10){
+            return "Livre para todos os públicos";
+        }else{
+            return "Somente para maiores de " + censura + " anos.";
+        }
+    }
+    
+    public String informacoesTecnicas(){
+     return "Informações Técnicas: "
+                + "\nEstreia: " + getEstreia() + "\nGenêro: " + getGenero() + "\nCensura: " + censuraFilme(getCensura());
+    }            
 }

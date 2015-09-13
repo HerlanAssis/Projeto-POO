@@ -40,6 +40,6 @@ public class Contatos {
 
     @Override
     public String toString() {
-        return getNome() + "\n" + getEmail() + "\n" + getTelefone() + "\n" + getEndereco();
+        return getNome() + "\n" + getEmail() + " - " + getTelefone() + "\n" + getEndereco();
     }       
 }
