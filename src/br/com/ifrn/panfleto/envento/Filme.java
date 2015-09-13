@@ -4,9 +4,9 @@ import br.com.ifrn.panfleto.Evento;
 
 public class Filme extends Evento{
     private String nome;
-    private int censura;
+    private int censura;    
     private String estreia;
-    private String genero;
+    private String genero;   
 
     public Filme(){}
 
@@ -24,7 +24,7 @@ public class Filme extends Evento{
 
     public void setCensura(int censura) {
         this.censura = censura;
-    }
+    }        
 
     public String getEstreia() {
         return estreia;

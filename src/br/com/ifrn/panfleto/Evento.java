@@ -9,9 +9,9 @@ public class Evento {
     private Date dataInclusao;
     private Date dataEvento;
     private String sinopse;
+    private String duracao;
     private Ingresso ingresso;
     private Contatos contatos;
-
     private Ambiente ambiente;
 
     public Evento(){}
@@ -42,11 +42,19 @@ public class Evento {
 
     public String getSinopse() {
         return sinopse;
-    }
+    }    
 
     public void setSinopse(String sinopse) {
         this.sinopse = sinopse;
     }
+
+    public String getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(String duracao) {
+        this.duracao = duracao;
+    }        
 
     public Ingresso getIngresso() {
         return ingresso;
