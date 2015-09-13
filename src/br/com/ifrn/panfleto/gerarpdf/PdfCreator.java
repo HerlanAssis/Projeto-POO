@@ -65,6 +65,7 @@ public class PdfCreator {
         esporte.setSinopse("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget leo quis elit pulvinar gravida in quis orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum congue maximus cursus. Sed faucibus felis eu ligula gravida, vel tincidunt purus bibendum. In volutpat ornare nisl, id egestas ligula gravida vitae. Proin mollis luctus bibendum. Suspendisse a elit lacinia, auctor leo eget, tincidunt velit. Duis lobortis tempor elit ut ullamcorper. Sed a ultricies erat, et scelerisque lacus. Pellentesque in ullamcorper felis, molestie semper ex. Donec neque ligula, rhoncus sed rhoncus nec, venenatis ac nulla.");
         Contatos contatos = new Contatos();
         contatos.setNome("FH Divulgações");
+        contatos.setEndereco("Alexandria/RN - Avenida Deputado Patrício de Figueredo Neto, 469, Cascalho");
         contatos.setEmail("alunos@ifrn.edu.br");
         contatos.setTelefone("(84) 99999-9999");
         esporte.setContatos(contatos);
@@ -83,7 +84,9 @@ public class PdfCreator {
             PdfWriter.getInstance(document, new FileOutputStream(esporte.getNome()));
             document.open();
 
-            adicionarLogo(document, "src/imagens/esporteLogo.png");
+            String pathImage = "src/imagens/esporteLogo.png";
+            
+            adicionarLogo(document, pathImage);
 
             //MODEL
             adicionarParagrafoEsquerda(document, formatarData.DateToString(esporte.getDataEvento()), Fonts.TIMES_ROMAN_RED_NORMAL_16);
@@ -109,7 +112,7 @@ public class PdfCreator {
     }
 
     public void gerarPlanfletoEsporte(Esporte esporte) {
-
+        String pathImage = "src/imagens/esporteLogo.png";
     }
 
     public void gerarPlanfletoFilme(Filme filme) {
@@ -162,14 +165,24 @@ public class PdfCreator {
     }
 
     public static void adicionarTabelaEquipe(Document document, String conteudo, Font font) throws DocumentException {
-        PdfPTable table = new PdfPTable(1);
+        PdfPTable table = new PdfPTable(2);
         // the cell object
         PdfPCell cell;
         
+        table.setSpacingBefore(50);
+        table.setSpacingAfter(50);
+        
+        int i = 1;
         for (String aux : conteudo.split(";")) {
-            cell = new PdfPCell(new Phrase(aux));
+            cell = new PdfPCell(new Phrase(""+i));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
-        }        
+            cell = new PdfPCell(new Phrase(aux));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            i++;
+        }
+        
         document.add(table);
     }
 }

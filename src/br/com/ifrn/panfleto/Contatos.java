@@ -2,8 +2,9 @@ package br.com.ifrn.panfleto;
 
 public class Contatos {
     private String nome;
+    private String endereco;
     private String telefone;
-    private String email;
+    private String email; 
 
     public String getNome() {
         return nome;
@@ -11,6 +12,14 @@ public class Contatos {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String getTelefone() {
@@ -31,6 +40,6 @@ public class Contatos {
 
     @Override
     public String toString() {
-        return getNome() + "\n" + getEmail() + "\n" + getTelefone();
+        return getNome() + "\n" + getEmail() + "\n" + getTelefone() + "\n" + getEndereco();
     }       
 }
