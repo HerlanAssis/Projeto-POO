@@ -22,7 +22,10 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -50,18 +53,18 @@ public class PdfCreator {
         esporte.setDataEvento(date);
         esporte.setDataInclusao(date);
         esporte.setDescricao("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget leo quis elit pulvinar gravida in quis orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum congue maximus cursus. Sed faucibus felis eu ligula gravida, vel tincidunt purus bibendum. In volutpat ornare nisl, id egestas ligula gravida vitae. Proin mollis luctus bibendum. Suspendisse a elit lacinia, auctor leo eget, tincidunt velit. Duis lobortis tempor elit ut ullamcorper. Sed a ultricies erat, et scelerisque lacus. Pellentesque in ullamcorper felis, molestie semper ex. Donec neque ligula, rhoncus sed rhoncus nec, venenatis ac nulla.");
-        esporte.setEquipe("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12");
+        esporte.setEquipe("Herlan;Faran:Toin;Rennan;Alana;Dhyego");
         Ingresso ingresso = new Ingresso();
         ingresso.setQuantidade(100);
         ingresso.setQuantidadeDisponivél(50);
         ingresso.setValor(100.0);
         ingresso.setValorDeDesconto(50);
-        ingresso.setMensagem("Promoção para os Primeiros Participantes");        
+        ingresso.setMensagem("Promoção para os Primeiros Participantes");
         esporte.setIngresso(ingresso);
         esporte.setNome("Encontrão");
         esporte.setSinopse("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget leo quis elit pulvinar gravida in quis orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum congue maximus cursus. Sed faucibus felis eu ligula gravida, vel tincidunt purus bibendum. In volutpat ornare nisl, id egestas ligula gravida vitae. Proin mollis luctus bibendum. Suspendisse a elit lacinia, auctor leo eget, tincidunt velit. Duis lobortis tempor elit ut ullamcorper. Sed a ultricies erat, et scelerisque lacus. Pellentesque in ullamcorper felis, molestie semper ex. Donec neque ligula, rhoncus sed rhoncus nec, venenatis ac nulla.");
         Contatos contatos = new Contatos();
-        contatos.setNome("FA Divulgações");
+        contatos.setNome("FH Divulgações");
         contatos.setEmail("alunos@ifrn.edu.br");
         contatos.setTelefone("(84) 99999-9999");
         esporte.setContatos(contatos);
@@ -73,7 +76,7 @@ public class PdfCreator {
 
         // criação do documento
         Rectangle layout = new Rectangle(PageSize.A3);
-        layout.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        layout.setBackgroundColor(BaseColor.WHITE);
         Document document = new Document(layout);
 
         try {
@@ -87,6 +90,7 @@ public class PdfCreator {
             adicionarParagrafoCentralizado(document, esporte.getNome(), Fonts.TIMES_ROMAN_BOLD_UNDERLINE_BLACK_24);
             adicionarParagrafoJustificado(document, esporte.getDescricao(), Fonts.TIMES_ROMAN_BLACK_NORMAL_16);
             adicionarParagrafoJustificado(document, esporte.getSinopse(), Fonts.TIMES_ROMAN_BLACK_NORMAL_16);
+            adicionarTabelaEquipe(document, esporte.getEquipe(), null);
             adicionarParagrafoCentralizado(document, esporte.getAmbiente().getNome(), Fonts.TIMES_ROMAN_BOLD_UNDERLINE_BLACK_24);
             adicionarParagrafoEsquerda(document, esporte.getAmbiente().getSetor().toString(), Fonts.TIMES_ROMAN_BLACK_NORMAL_16);
             adicionarParagrafoEsquerda(document, esporte.getAmbiente().getDescricao(), Fonts.TIMES_ROMAN_BLACK_NORMAL_16);
@@ -94,7 +98,7 @@ public class PdfCreator {
             adicionarParagrafoEsquerda(document, esporte.getAmbiente().getProntoReferencia(), Fonts.TIMES_ROMAN_BLACK_NORMAL_16);
             adicionarParagrafoDireita(document, esporte.getIngresso().toString(), Fonts.TIMES_ROMAN_RED_BOLD_20);
             adicionarParagrafoCentralizado(document, esporte.getContatos().toString(), Fonts.TIMES_ROMAN_BOLD_BLACK_16);
-            //END           
+            //END            
 
             JOptionPane.showMessageDialog(null, "Arquivo gerado com com sucesso!");
         } catch (DocumentException | IOException de) {
@@ -155,5 +159,17 @@ public class PdfCreator {
         Paragraph paragraph = new Paragraph(conteudo, font);
         paragraph.setAlignment(Element.ALIGN_BOTTOM);
         document.add(paragraph);
-    }    
+    }
+
+    public static void adicionarTabelaEquipe(Document document, String conteudo, Font font) throws DocumentException {
+        PdfPTable table = new PdfPTable(1);
+        // the cell object
+        PdfPCell cell;
+        
+        for (String aux : conteudo.split(";")) {
+            cell = new PdfPCell(new Phrase(aux));
+            table.addCell(cell);
+        }        
+        document.add(table);
+    }
 }
