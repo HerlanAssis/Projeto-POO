@@ -33,4 +33,9 @@ public class Show extends Evento{
     public void setEstilo(String estilo) {
         this.estilo = estilo;
     }        
+
+    @Override
+    public String toString() {
+        return "\"" +getNome() + "\n" + getArtista() + "\n" + getEstilo() + "\"";
+    }        
 }

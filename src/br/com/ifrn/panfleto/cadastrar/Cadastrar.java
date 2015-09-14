@@ -76,5 +76,9 @@ public class Cadastrar implements FormalizarEvento{
         for (int i = 0; i < esporte.size(); i++) {
             System.out.println(this.esporte.get(i).toString());
         }
+        
+        for (int i = 0; i < filme.size(); i++) {
+            System.out.println(this.filme.get(i).toString());
+        }
     }
 }

@@ -6,7 +6,8 @@ public class Peca extends Evento{
 
     private String nome;
     private String companhia;
-    private String genero;    
+    private String genero;
+    private int censura;
 
     public Peca(){}
 
@@ -33,4 +34,25 @@ public class Peca extends Evento{
     public void setGenero(String genero) {
         this.genero = genero;
     }        
+
+    public int getCensura() {
+        return censura;
+    }
+
+    public void setCensura(int censura) {
+        this.censura = censura;
+    }        
+    
+    private String censuraPeca(int censura){
+        if(censura < 10){
+            return "Livre para todos os públicos";
+        }else{
+            return "Somente para maiores de " + censura + " anos.";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Informaçoẽs Técnicas: \nNome: " + getNome() + "\nGenêro: " + getGenero() + "\nCompanhia: " + getCompanhia() + "\nCensura: " + censuraPeca(getCensura());
+    }    
 }

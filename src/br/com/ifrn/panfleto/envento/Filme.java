@@ -42,7 +42,7 @@ public class Filme extends Evento{
         this.genero = genero;
     }
     
-    public String censuraFilme(int censura){
+    private String censuraFilme(int censura){
         if(censura < 10){
             return "Livre para todos os públicos";
         }else{
