@@ -258,4 +258,8 @@ public class PdfCreator extends PdfPageEventHelper {
 
         document.add(table);
     }
+
+    public String getDiretorioPrincipal() {
+        return diretorioPrincipal;
+    }        
 }

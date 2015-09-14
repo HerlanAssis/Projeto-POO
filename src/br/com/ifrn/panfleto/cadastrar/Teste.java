@@ -18,14 +18,14 @@ import java.io.IOException;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-public class Teste {
+public class Teste {   
 
     public static void main(String[] args) throws Exception {
         Date date = new Date(System.currentTimeMillis());
         FormatarData formatarData = new FormatarData();
 
-        Cadastrar cadastrar = Cadastrar.getUniqueInstance();                        
-        
+        Cadastrar cadastrar = Cadastrar.getUniqueInstance();
+
         Esporte esporte = new Esporte();
         esporte.setNome("Encontrão");
         esporte.setEquipe("Herlan;Savio;Faran;Toin");
@@ -44,7 +44,7 @@ public class Teste {
                 + "nois paga. Sapien in monti palavris qui num significa nadis i pareci "
                 + "latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.");
         esporte.setDuracao(180);
-        
+
         Ambiente ambiente = new Ambiente();
         ambiente.setNome("Ginásio Poliespotivo");
         ambiente.setDescricao("Local Arejado e em otimas condições");
@@ -55,7 +55,7 @@ public class Teste {
         setor.setNome("Bloco Único");
         ambiente.setSetor(setor);
         esporte.setAmbiente(ambiente);
-        
+
         Contatos contatos = new Contatos();
         contatos.setNome("FH Divulgações");
         contatos.setEmail("alunos@ifrn.edu.br");
@@ -63,19 +63,19 @@ public class Teste {
         contatos.setEndereco("Avenida Deputado, Centro, Alexandria/RN, 59965-000");
         esporte.setContatos(contatos);
         esporte.setDataEvento(date);
-        
+
         Ingresso ingresso = new Ingresso();
         ingresso.setMensagem("Promoção do dia!");
         ingresso.setQuantidade(100);
         ingresso.setQuantidadeDisponivél(50);
         ingresso.setValor(20);
         ingresso.setValorDeDesconto(2);
-        
-        esporte.setIngresso(ingresso);                
+
+        esporte.setIngresso(ingresso);
 
         cadastrar.cadastrarEsporte(esporte);
-        
-        Filme filme = new Filme();        
+
+        Filme filme = new Filme();
         filme.setNome("Interestelar");
         filme.setGenero("Ficção Científica");
         filme.setEstreia("Hoje!");
@@ -98,10 +98,10 @@ public class Teste {
                 + "nois paga. Sapien in monti palavris qui num significa nadis i pareci "
                 + "latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.");
         filme.setDuracao(189);
-        filme.setIngresso(ingresso);    
-        
-        cadastrar.cadastrarFilme(filme);   
-        
+        filme.setIngresso(ingresso);
+
+        cadastrar.cadastrarFilme(filme);
+
         Peca peca = new Peca();
         peca.setNome("Hermanoteu Na Terra de Godah");
         peca.setGenero("Comédia");
@@ -126,11 +126,11 @@ public class Teste {
                 + "mé pra quem é amistosis quis leo. Manduma pindureta quium dia "
                 + "nois paga. Sapien in monti palavris qui num significa nadis i pareci "
                 + "latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.");
-        
+
         Show show = new Show();
         show.setNome("Rock In Rio");
         show.setEstilo("Rock");
-        show.setDataEvento(date);        
+        show.setDataEvento(date);
         show.setArtista("Vários Artistas");
         show.setAmbiente(ambiente);
         show.setContatos(contatos);
@@ -150,7 +150,7 @@ public class Teste {
                 + "mé pra quem é amistosis quis leo. Manduma pindureta quium dia "
                 + "nois paga. Sapien in monti palavris qui num significa nadis i pareci "
                 + "latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.");
-        
+
         cadastrar.listarEventos();
 
         Rectangle rectangle = new Rectangle(PageSize.A3);
@@ -159,12 +159,13 @@ public class Teste {
 
         try {
             pdfCreator.gerarPlanfletoEsporte(esporte);
-            pdfCreator.gerarPlanfletoFilme(filme);            
+            pdfCreator.gerarPlanfletoFilme(filme);
             pdfCreator.gerarPlanfletoPeca(peca);
             pdfCreator.gerarPlanfletoShow(show);
+            cadastrar.irURL(pdfCreator.getDiretorioPrincipal());
             JOptionPane.showMessageDialog(null, "Arquivo gerado com com sucesso!");
         } catch (DocumentException | IOException de) {
             JOptionPane.showMessageDialog(null, de.getMessage());
-        }        
+        }
     }
 }
