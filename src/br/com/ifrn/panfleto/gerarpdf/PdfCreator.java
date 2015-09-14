@@ -24,30 +24,32 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Date;
 
 public class PdfCreator extends PdfPageEventHelper {
 
-    private Date date;
     private Document document;
     private Rectangle rectangle;
 
+    private final String diretorioPrincipal = "Eventos";    
     private final String pathImageEsporteLogo = "src/imagens/esporteLogo.png";
     private final String pathImageFilmeLogo = "src/imagens/filmeLogo.png";
     private final String pathImagePecaLogo = "src/imagens/pecaLogo.png";
     private final String pathImageShowLogo = "src/imagens/showLogo.png";
     private final String pathImageFooter = "src/imagens/logoFooter_181x75.png";
+    private File file = new File(diretorioPrincipal);
 
-    public PdfCreator(Rectangle rectangle, Date dataEvento, BaseColor baseColor) {
+    public PdfCreator(Rectangle rectangle, BaseColor baseColor) {
         this.rectangle = rectangle;
-        rectangle.setBackgroundColor(baseColor);       
-        this.date = dataEvento;
-    }        
+        rectangle.setBackgroundColor(baseColor);
+        if(!file.exists())
+            file.mkdir();                
+    }
 
     public void gerarPlanfletoEsporte(Esporte esporte) throws DocumentException, IOException, Exception {
         document = new Document(rectangle);
-        
+
         Image imageLogo = Image.getInstance(pathImageEsporteLogo);
         Image imageLogoFooter = Image.getInstance(pathImageFooter);
 
@@ -55,9 +57,9 @@ public class PdfCreator extends PdfPageEventHelper {
         FormatarTempo formatarTempo = new FormatarTempo();
 
         PdfWriter pfWriter;
-        pfWriter = PdfWriter.getInstance(document, new FileOutputStream(esporte.getNome()));
+        pfWriter = PdfWriter.getInstance(document, new FileOutputStream(diretorioPrincipal+"/"+esporte.getNome()));
         adicionarRodape(document, pfWriter, imageLogoFooter, esporte.getContatos().toString());
-        
+
         document.open();
         adicionarLogo(document, imageLogo);
 
@@ -80,7 +82,7 @@ public class PdfCreator extends PdfPageEventHelper {
 
     public void gerarPlanfletoFilme(Filme filme) throws DocumentException, BadElementException, FileNotFoundException, IOException, Exception {
         document = new Document(rectangle);
-        
+
         Image imageLogo = Image.getInstance(pathImageFilmeLogo);
         Image imageLogoFooter = Image.getInstance(pathImageFooter);
 
@@ -88,7 +90,7 @@ public class PdfCreator extends PdfPageEventHelper {
         FormatarTempo formatarTempo = new FormatarTempo();
 
         PdfWriter pfWriter;
-        pfWriter = PdfWriter.getInstance(document, new FileOutputStream(filme.getNome()));
+        pfWriter = PdfWriter.getInstance(document, new FileOutputStream(diretorioPrincipal+"/"+filme.getNome()));
         adicionarRodape(document, pfWriter, imageLogoFooter, filme.getContatos().toString());
 
         document.open();
@@ -113,7 +115,7 @@ public class PdfCreator extends PdfPageEventHelper {
 
     public void gerarPlanfletoPeca(Peca peca) throws DocumentException, FileNotFoundException, BadElementException, IOException, Exception {
         document = new Document(rectangle);
-        
+
         Image imageLogo = Image.getInstance(pathImagePecaLogo);
         Image imageLogoFooter = Image.getInstance(pathImageFooter);
 
@@ -121,7 +123,7 @@ public class PdfCreator extends PdfPageEventHelper {
         FormatarTempo formatarTempo = new FormatarTempo();
 
         PdfWriter pfWriter;
-        pfWriter = PdfWriter.getInstance(document, new FileOutputStream(peca.getNome()));
+        pfWriter = PdfWriter.getInstance(document, new FileOutputStream(diretorioPrincipal+"/"+peca.getNome()));
         adicionarRodape(document, pfWriter, imageLogoFooter, peca.getContatos().toString());
 
         document.open();
@@ -145,7 +147,7 @@ public class PdfCreator extends PdfPageEventHelper {
 
     public void gerarPlanfletoShow(Show show) throws DocumentException, FileNotFoundException, BadElementException, IOException, Exception {
         document = new Document(rectangle);
-        
+
         Image imageLogo = Image.getInstance(pathImageShowLogo);
         Image imageLogoFooter = Image.getInstance(pathImageFooter);
 
@@ -153,7 +155,7 @@ public class PdfCreator extends PdfPageEventHelper {
         FormatarTempo formatarTempo = new FormatarTempo();
 
         PdfWriter pfWriter;
-        pfWriter = PdfWriter.getInstance(document, new FileOutputStream(show.getNome()));
+        pfWriter = PdfWriter.getInstance(document, new FileOutputStream(diretorioPrincipal+"/"+show.getNome()));
         adicionarRodape(document, pfWriter, imageLogoFooter, show.getContatos().toString());
 
         document.open();

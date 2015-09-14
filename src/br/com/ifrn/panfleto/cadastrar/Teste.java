@@ -155,7 +155,7 @@ public class Teste {
 
         Rectangle rectangle = new Rectangle(PageSize.A3);
 
-        PdfCreator pdfCreator = new PdfCreator(rectangle, date, BaseColor.WHITE);
+        PdfCreator pdfCreator = new PdfCreator(rectangle, BaseColor.WHITE);
 
         try {
             pdfCreator.gerarPlanfletoEsporte(esporte);
