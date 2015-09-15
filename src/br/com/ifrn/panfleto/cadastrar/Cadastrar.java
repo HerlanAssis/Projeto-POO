@@ -85,6 +85,22 @@ public class Cadastrar implements FormalizarEvento {
         }
     }
 
+    public ArrayList<Esporte> getEsporte() {
+        return esporte;
+    }
+
+    public ArrayList<Filme> getFilme() {
+        return filme;
+    }
+
+    public ArrayList<Peca> getPeca() {
+        return peca;
+    }
+
+    public ArrayList<Show> getShow() {
+        return show;
+    }        
+
     public void irURL(String URL) throws IOException {
         String text, text2;
         text = System.getProperty("os.name");

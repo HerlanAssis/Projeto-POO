@@ -161,9 +161,8 @@ public class Teste {
             pdfCreator.gerarPlanfletoEsporte(esporte);
             pdfCreator.gerarPlanfletoFilme(filme);
             pdfCreator.gerarPlanfletoPeca(peca);
-            pdfCreator.gerarPlanfletoShow(show);
-            cadastrar.irURL(pdfCreator.getDiretorioPrincipal());
-            JOptionPane.showMessageDialog(null, "Arquivo gerado com com sucesso!");
+            pdfCreator.gerarPlanfletoShow(show);            
+            JOptionPane.showMessageDialog(null, "Arquivo gerado com sucesso!");
         } catch (DocumentException | IOException de) {
             JOptionPane.showMessageDialog(null, de.getMessage());
         }

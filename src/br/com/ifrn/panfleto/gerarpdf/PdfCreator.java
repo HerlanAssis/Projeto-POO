@@ -32,7 +32,7 @@ public class PdfCreator extends PdfPageEventHelper {
     private Document document;
     private Rectangle rectangle;
 
-    private final String diretorioPrincipal = "Eventos";    
+    public static final String diretorioPrincipal = "Eventos";    
     private final String pathImageEsporteLogo = "src/imagens/esporteLogo.png";
     private final String pathImageFilmeLogo = "src/imagens/filmeLogo.png";
     private final String pathImagePecaLogo = "src/imagens/pecaLogo.png";
@@ -44,7 +44,7 @@ public class PdfCreator extends PdfPageEventHelper {
         this.rectangle = rectangle;
         rectangle.setBackgroundColor(baseColor);
         if(!file.exists())
-            file.mkdir();                
+            file.mkdir();           
     }
 
     public void gerarPlanfletoEsporte(Esporte esporte) throws DocumentException, IOException, Exception {
@@ -257,9 +257,5 @@ public class PdfCreator extends PdfPageEventHelper {
         }
 
         document.add(table);
-    }
-
-    public String getDiretorioPrincipal() {
-        return diretorioPrincipal;
-    }        
+    }   
 }
