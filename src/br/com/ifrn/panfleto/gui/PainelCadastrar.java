@@ -5,8 +5,13 @@
  */
 package br.com.ifrn.panfleto.gui;
 
+import br.com.ifrn.panfleto.utilitario.AbrirPasta;
 import java.awt.CardLayout;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -19,10 +24,55 @@ public class PainelCadastrar extends javax.swing.JFrame {
      */
     public PainelCadastrar() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
-      
+
+    private final int Esporte = 1;
+    private final int Filme = 2;
+    private final int Peca = 3;
+    private final int Show = 4;
+    private int variavelControle = 0;
+
     public JPanel getPainelPrincipal() {
         return PainelPrincipal;
+    }
+
+    public void mudarPainel(String x) {
+        CardLayout layout = (CardLayout) PainelPrincipal.getLayout();
+        layout.show(PainelPrincipal, x);
+    }
+
+    public void limparCampo(JTextArea jTextArea) {
+        jTextArea.setText("");
+    }
+
+    public void limparText(JTextField jTextField) {
+        jTextField.setText("");
+    }
+
+    public void controlePainelCadastrar() {
+        comboxCadastrarEvento.setSelectedIndex(0);
+        comboxGerarPdfEvento.setSelectedIndex(0);
+    }
+
+    public void setVariavelControle(int variavelControle) {
+        this.variavelControle = variavelControle;
+    }
+
+    public void qualVoltar() {
+        if (this.variavelControle == 1) {
+            mudarPainel("painelEsporte");
+        } else if (this.variavelControle == 2) {
+            mudarPainel("painelFilme");
+        } else if (this.variavelControle == 3) {
+            mudarPainel("painelPeca");
+        } else if (this.variavelControle == 4) {
+            mudarPainel("painelShow");
+        }
+    }
+    
+    public boolean validarFormularioText(JTextArea jTextArea){
+        return !jTextArea.equals("");
     }
 
     /**
@@ -35,13 +85,121 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private void initComponents() {
 
         PainelPrincipal = new javax.swing.JPanel();
-        PainelCadastrar = new javax.swing.JPanel();
-        labelCadastrarEvento1 = new javax.swing.JLabel();
-        comboxCadastrarEvento1 = new javax.swing.JComboBox();
-        labelGerarPdfCadastrar1 = new javax.swing.JLabel();
-        comboxGerarPdfEvento1 = new javax.swing.JComboBox();
-        btnGerarPdfOk1 = new javax.swing.JButton();
-        btnCadastrarEventoOk1 = new javax.swing.JButton();
+        painelCadastrar = new javax.swing.JPanel();
+        labelCadastrarEvento = new javax.swing.JLabel();
+        comboxCadastrarEvento = new javax.swing.JComboBox();
+        labelGerarPdfCadastrar = new javax.swing.JLabel();
+        comboxGerarPdfEvento = new javax.swing.JComboBox();
+        btnGerarPdfOk = new javax.swing.JButton();
+        btnCadastrarEventoOk = new javax.swing.JButton();
+        painelEsporte = new javax.swing.JPanel();
+        labelNomeEsporte = new javax.swing.JLabel();
+        btnAvançarEsporte = new javax.swing.JButton();
+        txtNomeEsporte = new javax.swing.JTextField();
+        labelEquipeEsporte = new javax.swing.JLabel();
+        btnVoltarEsporte = new javax.swing.JButton();
+        labelTituloCadastrarEsporte = new javax.swing.JLabel();
+        cadastrarEquipeEsporteScroll1 = new javax.swing.JScrollPane();
+        campoCadastrarEquipeEsporte = new javax.swing.JTextArea();
+        painelFilme = new javax.swing.JPanel();
+        labelCadastrarFilme = new javax.swing.JLabel();
+        labelNomeFilme = new javax.swing.JLabel();
+        labelGeneroFilme = new javax.swing.JLabel();
+        labelCensuraFilme = new javax.swing.JLabel();
+        txtCensuraFilme = new javax.swing.JTextField();
+        txtGeneroFilme = new javax.swing.JTextField();
+        txtNomeFilme = new javax.swing.JTextField();
+        btnVoltarFilme = new javax.swing.JButton();
+        btnAvançarFilme = new javax.swing.JButton();
+        painelShow = new javax.swing.JPanel();
+        btnVoltarShow = new javax.swing.JButton();
+        btnAvançarShow = new javax.swing.JButton();
+        labelCadastrarShow = new javax.swing.JLabel();
+        labelNomeShow = new javax.swing.JLabel();
+        txtNomeShow = new javax.swing.JTextField();
+        txtArtistaShow = new javax.swing.JTextField();
+        labelArtistaShow = new javax.swing.JLabel();
+        labelEstiloShow = new javax.swing.JLabel();
+        txtEstilhoShow = new javax.swing.JTextField();
+        painelPeca = new javax.swing.JPanel();
+        labelCadastrarPeca = new javax.swing.JLabel();
+        labelNomePeca = new javax.swing.JLabel();
+        labelCompanhiaPeca = new javax.swing.JLabel();
+        labelGeneroPeca = new javax.swing.JLabel();
+        labelCensuraPeca = new javax.swing.JLabel();
+        txtCensuraPeca = new javax.swing.JTextField();
+        txtGeneroPeca = new javax.swing.JTextField();
+        txtCompanhiaPeca = new javax.swing.JTextField();
+        btnVoltarPeca = new javax.swing.JButton();
+        btnAvançarPeca = new javax.swing.JButton();
+        txtNomePeca = new javax.swing.JTextField();
+        painelDetalheEvento = new javax.swing.JPanel();
+        labelDetalhesEvento = new javax.swing.JLabel();
+        labelSinopseEvento = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        campoSinopseEvento = new javax.swing.JTextArea();
+        labelDescricaoEvento = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        campoDescricaoEvento = new javax.swing.JTextArea();
+        btnVoltarAmbiente2 = new javax.swing.JButton();
+        btnAvançarAmbiente2 = new javax.swing.JButton();
+        labelDuracaoEvento = new javax.swing.JLabel();
+        labelDataHoraEvento = new javax.swing.JLabel();
+        txtDuracaoEvento = new javax.swing.JTextField();
+        formatedDataHoraEvento = new javax.swing.JFormattedTextField();
+        painelAmbiente = new javax.swing.JPanel();
+        labelCadastrarAmbiente = new javax.swing.JLabel();
+        labelNomeAmbiente = new javax.swing.JLabel();
+        txtNomeAmbiente = new javax.swing.JTextField();
+        labelDescricaoAmbiente = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        campoDescricaoAmbiente = new javax.swing.JTextArea();
+        labelPontoReferenciaAmbiente = new javax.swing.JLabel();
+        txtPontoReferenciaAmbiente = new javax.swing.JTextField();
+        txtNomeSetorAmbiente = new javax.swing.JTextField();
+        labelSetorAmbiente = new javax.swing.JLabel();
+        txtCapacidadeSetorAmbiente = new javax.swing.JTextField();
+        labelCapacidadeAmbiente = new javax.swing.JLabel();
+        btnAvançarAmbiente = new javax.swing.JButton();
+        btnVoltarAmbiente = new javax.swing.JButton();
+        painelngresso = new javax.swing.JPanel();
+        labelngressoEvento = new javax.swing.JLabel();
+        labelValorIngresso = new javax.swing.JLabel();
+        labelQuantidadeIngresso = new javax.swing.JLabel();
+        labelPromocaoIngresso = new javax.swing.JLabel();
+        labelMensagemIngressoPromocao = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        campoMensagemPromocaoIngresso = new javax.swing.JTextArea();
+        txtQuantidadeIngressoEvento = new javax.swing.JTextField();
+        txtValorIngressoEvento = new javax.swing.JTextField();
+        labelQuantidadeDisponivelPromocaoIngresso = new javax.swing.JLabel();
+        txtQuantudadeDisponivelPromocaoIngresso = new javax.swing.JTextField();
+        txtlValorDescontoPromocaoIngresso = new javax.swing.JTextField();
+        labelValorDescontoPromocaoIngresso = new javax.swing.JLabel();
+        btnVoltarIngressoEvento = new javax.swing.JButton();
+        btnAvançarIngressoEvento = new javax.swing.JButton();
+        painelContato = new javax.swing.JPanel();
+        labelContatoEvento = new javax.swing.JLabel();
+        labelNomeContato = new javax.swing.JLabel();
+        labelTelefoneContato = new javax.swing.JLabel();
+        labelEmailContato = new javax.swing.JLabel();
+        labelEnderecoContato = new javax.swing.JLabel();
+        txtEmailContato = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        campoEnderecoContato = new javax.swing.JTextArea();
+        txtTelefoneContato = new javax.swing.JTextField();
+        txtNomeContato = new javax.swing.JTextField();
+        btnVoltarContato = new javax.swing.JButton();
+        btnConcluirContato = new javax.swing.JButton();
+        painelGerarPdf = new javax.swing.JPanel();
+        comboxListaEventoPDF = new javax.swing.JComboBox();
+        btnSelecionarDataHoraPainelGerarPdf = new javax.swing.JButton();
+        btnMenuPrincipalGerarPdf = new javax.swing.JButton();
+        comboxSelecionarTamanhoPaginaPainelGerarPdf = new javax.swing.JComboBox();
+        btnSelecionarTamanhoPaginaPainelGerarPdf = new javax.swing.JButton();
+        comboxSelecionarCorPainelGerarPdf = new javax.swing.JComboBox();
+        btnSelecionarCorPainelGerarPdf = new javax.swing.JButton();
+        btnGerarPdfPainelGerarPdf = new javax.swing.JButton();
         menuPainelCadastrar = new javax.swing.JMenuBar();
         subMenuPainelCadastrar = new javax.swing.JMenu();
         itamAbrirPastaSubMenuPainelCadastrar = new javax.swing.JMenuItem();
@@ -52,82 +210,1091 @@ public class PainelCadastrar extends javax.swing.JFrame {
 
         PainelPrincipal.setLayout(new java.awt.CardLayout());
 
-        labelCadastrarEvento1.setText("Cadasrtrar Evento");
+        labelCadastrarEvento.setText("Cadastrar Evento");
 
-        comboxCadastrarEvento1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Esporte", "Filme", "Peça", "Show" }));
-        comboxCadastrarEvento1.addActionListener(new java.awt.event.ActionListener() {
+        comboxCadastrarEvento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Esporte", "Filme", "Peça", "Show" }));
+        comboxCadastrarEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboxCadastrarEvento1ActionPerformed(evt);
+                comboxCadastrarEventoActionPerformed(evt);
             }
         });
 
-        labelGerarPdfCadastrar1.setText("Gerar PDF");
+        labelGerarPdfCadastrar.setText("Gerar PDF");
 
-        comboxGerarPdfEvento1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Esporte", "Filme", "Peça", "Show" }));
+        comboxGerarPdfEvento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Esporte", "Filme", "Peça", "Show" }));
 
-        btnGerarPdfOk1.setText("OK");
-        btnGerarPdfOk1.addActionListener(new java.awt.event.ActionListener() {
+        btnGerarPdfOk.setText("OK");
+        btnGerarPdfOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerarPdfOk1ActionPerformed(evt);
+                btnGerarPdfOkActionPerformed(evt);
             }
         });
 
-        btnCadastrarEventoOk1.setText("OK");
-        btnCadastrarEventoOk1.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrarEventoOk.setText("OK");
+        btnCadastrarEventoOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarEventoOk1ActionPerformed(evt);
+                btnCadastrarEventoOkActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout PainelCadastrarLayout = new javax.swing.GroupLayout(PainelCadastrar);
-        PainelCadastrar.setLayout(PainelCadastrarLayout);
-        PainelCadastrarLayout.setHorizontalGroup(
-            PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout painelCadastrarLayout = new javax.swing.GroupLayout(painelCadastrar);
+        painelCadastrar.setLayout(painelCadastrarLayout);
+        painelCadastrarLayout.setHorizontalGroup(
+            painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 678, Short.MAX_VALUE)
-            .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PainelCadastrarLayout.createSequentialGroup()
+            .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(painelCadastrarLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(labelGerarPdfCadastrar1)
-                        .addGroup(PainelCadastrarLayout.createSequentialGroup()
-                            .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(labelCadastrarEvento1)
-                                .addComponent(comboxCadastrarEvento1, 0, 191, Short.MAX_VALUE)
-                                .addComponent(comboxGerarPdfEvento1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(labelGerarPdfCadastrar)
+                        .addGroup(painelCadastrarLayout.createSequentialGroup()
+                            .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(labelCadastrarEvento)
+                                .addComponent(comboxCadastrarEvento, 0, 191, Short.MAX_VALUE)
+                                .addComponent(comboxGerarPdfEvento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGap(29, 29, 29)
-                            .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnCadastrarEventoOk1)
-                                .addComponent(btnGerarPdfOk1))))
+                            .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnCadastrarEventoOk)
+                                .addComponent(btnGerarPdfOk))))
                     .addContainerGap(392, Short.MAX_VALUE)))
         );
-        PainelCadastrarLayout.setVerticalGroup(
-            PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
-            .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PainelCadastrarLayout.createSequentialGroup()
+        painelCadastrarLayout.setVerticalGroup(
+            painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 398, Short.MAX_VALUE)
+            .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(painelCadastrarLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(labelCadastrarEvento1)
+                    .addComponent(labelCadastrarEvento)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(comboxCadastrarEvento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCadastrarEventoOk1))
+                    .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(comboxCadastrarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCadastrarEventoOk))
                     .addGap(65, 65, 65)
-                    .addComponent(labelGerarPdfCadastrar1)
+                    .addComponent(labelGerarPdfCadastrar)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(PainelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(comboxGerarPdfEvento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnGerarPdfOk1))
-                    .addContainerGap(179, Short.MAX_VALUE)))
+                    .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(comboxGerarPdfEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGerarPdfOk))
+                    .addContainerGap(217, Short.MAX_VALUE)))
         );
 
-        PainelPrincipal.add(PainelCadastrar, "card2");
+        PainelPrincipal.add(painelCadastrar, "painelCadastrar");
+
+        labelNomeEsporte.setText("Nome: ");
+
+        btnAvançarEsporte.setText("Avançar");
+        btnAvançarEsporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvançarEsporteActionPerformed(evt);
+            }
+        });
+
+        txtNomeEsporte.setText("Digite o nome da equipe: ");
+        txtNomeEsporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNomeEsporteMouseClicked(evt);
+            }
+        });
+
+        labelEquipeEsporte.setText("Equipe: ");
+
+        btnVoltarEsporte.setText("Voltar");
+        btnVoltarEsporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarEsporteActionPerformed(evt);
+            }
+        });
+
+        labelTituloCadastrarEsporte.setText("Cadastrar Esporte");
+
+        campoCadastrarEquipeEsporte.setColumns(20);
+        campoCadastrarEquipeEsporte.setRows(5);
+        campoCadastrarEquipeEsporte.setText("Digite o nome dos mebros da equipe sepadados por \";\"");
+        campoCadastrarEquipeEsporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoCadastrarEquipeEsporteMouseClicked(evt);
+            }
+        });
+        cadastrarEquipeEsporteScroll1.setViewportView(campoCadastrarEquipeEsporte);
+
+        javax.swing.GroupLayout painelEsporteLayout = new javax.swing.GroupLayout(painelEsporte);
+        painelEsporte.setLayout(painelEsporteLayout);
+        painelEsporteLayout.setHorizontalGroup(
+            painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelEsporteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelEsporteLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVoltarEsporte))
+                    .addGroup(painelEsporteLayout.createSequentialGroup()
+                        .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelTituloCadastrarEsporte)
+                            .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(painelEsporteLayout.createSequentialGroup()
+                                    .addComponent(labelNomeEsporte)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtNomeEsporte))
+                                .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelEquipeEsporte)
+                                    .addComponent(cadastrarEquipeEsporteScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 111, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAvançarEsporte)
+                .addContainerGap())
+        );
+        painelEsporteLayout.setVerticalGroup(
+            painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelEsporteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelTituloCadastrarEsporte)
+                .addGap(18, 18, 18)
+                .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNomeEsporte)
+                    .addComponent(txtNomeEsporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addComponent(labelEquipeEsporte)
+                .addGap(18, 18, 18)
+                .addComponent(cadastrarEquipeEsporteScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelEsporteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVoltarEsporte)
+                    .addComponent(btnAvançarEsporte))
+                .addContainerGap())
+        );
+
+        PainelPrincipal.add(painelEsporte, "painelEsporte");
+
+        labelCadastrarFilme.setText("Cadastrar Filme");
+
+        labelNomeFilme.setText("Nome: ");
+
+        labelGeneroFilme.setText("Genêro: ");
+
+        labelCensuraFilme.setText("Censura: ");
+
+        txtCensuraFilme.setText("Censura do filme: ");
+        txtCensuraFilme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCensuraFilmeMouseClicked(evt);
+            }
+        });
+
+        txtGeneroFilme.setText("Genêro do filme:");
+        txtGeneroFilme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtGeneroFilmeMouseClicked(evt);
+            }
+        });
+
+        txtNomeFilme.setText("Nome do filme: ");
+        txtNomeFilme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNomeFilmeMouseClicked(evt);
+            }
+        });
+
+        btnVoltarFilme.setText("Voltar");
+        btnVoltarFilme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarFilmeActionPerformed(evt);
+            }
+        });
+
+        btnAvançarFilme.setText("Avançar");
+        btnAvançarFilme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvançarFilmeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelFilmeLayout = new javax.swing.GroupLayout(painelFilme);
+        painelFilme.setLayout(painelFilmeLayout);
+        painelFilmeLayout.setHorizontalGroup(
+            painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelFilmeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(painelFilmeLayout.createSequentialGroup()
+                        .addComponent(labelCensuraFilme)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCensuraFilme))
+                    .addComponent(labelCadastrarFilme)
+                    .addGroup(painelFilmeLayout.createSequentialGroup()
+                        .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelGeneroFilme)
+                            .addComponent(labelNomeFilme))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNomeFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtGeneroFilme))))
+                .addContainerGap(378, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFilmeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltarFilme)
+                .addGap(18, 18, 18)
+                .addComponent(btnAvançarFilme)
+                .addContainerGap())
+        );
+        painelFilmeLayout.setVerticalGroup(
+            painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelFilmeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelCadastrarFilme)
+                .addGap(18, 18, 18)
+                .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNomeFilme)
+                    .addComponent(txtNomeFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelGeneroFilme)
+                    .addComponent(txtGeneroFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCensuraFilme)
+                    .addComponent(txtCensuraFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+                .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAvançarFilme)
+                    .addComponent(btnVoltarFilme))
+                .addContainerGap())
+        );
+
+        PainelPrincipal.add(painelFilme, "painelFilme");
+
+        btnVoltarShow.setText("Voltar");
+        btnVoltarShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarShowActionPerformed(evt);
+            }
+        });
+
+        btnAvançarShow.setText("Avançar");
+        btnAvançarShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvançarShowActionPerformed(evt);
+            }
+        });
+
+        labelCadastrarShow.setText("Cadastrar Show");
+
+        labelNomeShow.setText("Nome: ");
+
+        txtNomeShow.setText("Nome Show: ");
+        txtNomeShow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNomeShowMouseClicked(evt);
+            }
+        });
+        txtNomeShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeShowActionPerformed(evt);
+            }
+        });
+
+        txtArtistaShow.setText("Nome Artista: ");
+        txtArtistaShow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtArtistaShowMouseClicked(evt);
+            }
+        });
+        txtArtistaShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtArtistaShowActionPerformed(evt);
+            }
+        });
+
+        labelArtistaShow.setText("Artista: ");
+
+        labelEstiloShow.setText("Estilo: ");
+
+        txtEstilhoShow.setText("Estilo Show: ");
+        txtEstilhoShow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtEstilhoShowMouseClicked(evt);
+            }
+        });
+        txtEstilhoShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEstilhoShowActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelShowLayout = new javax.swing.GroupLayout(painelShow);
+        painelShow.setLayout(painelShowLayout);
+        painelShowLayout.setHorizontalGroup(
+            painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelShowLayout.createSequentialGroup()
+                .addContainerGap(481, Short.MAX_VALUE)
+                .addComponent(btnVoltarShow)
+                .addGap(18, 18, 18)
+                .addComponent(btnAvançarShow)
+                .addContainerGap())
+            .addGroup(painelShowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelShowLayout.createSequentialGroup()
+                        .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelNomeShow)
+                            .addComponent(labelArtistaShow)
+                            .addComponent(labelEstiloShow))
+                        .addGap(20, 20, 20)
+                        .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNomeShow)
+                            .addComponent(txtArtistaShow, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(txtEstilhoShow)))
+                    .addComponent(labelCadastrarShow))
+                .addContainerGap(396, Short.MAX_VALUE))
+        );
+        painelShowLayout.setVerticalGroup(
+            painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelShowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelCadastrarShow)
+                .addGap(18, 18, 18)
+                .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNomeShow)
+                    .addComponent(txtNomeShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelArtistaShow)
+                    .addComponent(txtArtistaShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelEstiloShow)
+                    .addComponent(txtEstilhoShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
+                .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAvançarShow)
+                    .addComponent(btnVoltarShow))
+                .addContainerGap())
+        );
+
+        PainelPrincipal.add(painelShow, "painelShow");
+
+        labelCadastrarPeca.setText("Cadastrar Peça");
+
+        labelNomePeca.setText("Nome: ");
+
+        labelCompanhiaPeca.setText("Companhia: ");
+
+        labelGeneroPeca.setText("Genêro: ");
+
+        labelCensuraPeca.setText("Censura: ");
+
+        txtCensuraPeca.setText("Censura da pela: ");
+        txtCensuraPeca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCensuraPecaMouseClicked(evt);
+            }
+        });
+
+        txtGeneroPeca.setText("Genêro da peça: ");
+        txtGeneroPeca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtGeneroPecaMouseClicked(evt);
+            }
+        });
+
+        txtCompanhiaPeca.setText("Companhia da peça: ");
+        txtCompanhiaPeca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCompanhiaPecaMouseClicked(evt);
+            }
+        });
+
+        btnVoltarPeca.setText("Voltar");
+        btnVoltarPeca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarPecaActionPerformed(evt);
+            }
+        });
+
+        btnAvançarPeca.setText("Avançar");
+        btnAvançarPeca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvançarPecaActionPerformed(evt);
+            }
+        });
+
+        txtNomePeca.setText("Companhia da peça: ");
+        txtNomePeca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNomePecaMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelPecaLayout = new javax.swing.GroupLayout(painelPeca);
+        painelPeca.setLayout(painelPecaLayout);
+        painelPecaLayout.setHorizontalGroup(
+            painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelPecaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelCadastrarPeca)
+                    .addGroup(painelPecaLayout.createSequentialGroup()
+                        .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelCompanhiaPeca)
+                            .addComponent(labelGeneroPeca)
+                            .addComponent(labelCensuraPeca)
+                            .addComponent(labelNomePeca))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCompanhiaPeca, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                            .addComponent(txtGeneroPeca)
+                            .addComponent(txtCensuraPeca)
+                            .addComponent(txtNomePeca, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))))
+                .addContainerGap(385, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPecaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltarPeca)
+                .addGap(18, 18, 18)
+                .addComponent(btnAvançarPeca)
+                .addContainerGap())
+        );
+        painelPecaLayout.setVerticalGroup(
+            painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelPecaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelCadastrarPeca)
+                .addGap(18, 18, 18)
+                .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNomePeca)
+                    .addComponent(txtNomePeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCompanhiaPeca)
+                    .addComponent(txtCompanhiaPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelGeneroPeca)
+                    .addComponent(txtGeneroPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCensuraPeca)
+                    .addComponent(txtCensuraPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAvançarPeca)
+                    .addComponent(btnVoltarPeca))
+                .addContainerGap())
+        );
+
+        PainelPrincipal.add(painelPeca, "painelPeca");
+
+        labelDetalhesEvento.setText("Detalhes do Evento");
+
+        labelSinopseEvento.setText("Sinospse: ");
+
+        campoSinopseEvento.setColumns(20);
+        campoSinopseEvento.setRows(5);
+        campoSinopseEvento.setText("Digite aqui a sinopse");
+        campoSinopseEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoSinopseEventoMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(campoSinopseEvento);
+
+        labelDescricaoEvento.setText("Descrição: ");
+
+        campoDescricaoEvento.setColumns(20);
+        campoDescricaoEvento.setRows(5);
+        campoDescricaoEvento.setText("Digite aqui a descrição");
+        campoDescricaoEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoDescricaoEventoMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(campoDescricaoEvento);
+
+        btnVoltarAmbiente2.setText("Voltar");
+        btnVoltarAmbiente2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarAmbiente2ActionPerformed(evt);
+            }
+        });
+
+        btnAvançarAmbiente2.setText("Avançar");
+        btnAvançarAmbiente2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvançarAmbiente2ActionPerformed(evt);
+            }
+        });
+
+        labelDuracaoEvento.setText("Duração: ");
+
+        labelDataHoraEvento.setText("Data e Hora do Evento:");
+
+        txtDuracaoEvento.setText("Duração do evento");
+        txtDuracaoEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDuracaoEventoMouseClicked(evt);
+            }
+        });
+
+        try {
+            formatedDataHoraEvento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/#### ##:##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        formatedDataHoraEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formatedDataHoraEventoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelDetalheEventoLayout = new javax.swing.GroupLayout(painelDetalheEvento);
+        painelDetalheEvento.setLayout(painelDetalheEventoLayout);
+        painelDetalheEventoLayout.setHorizontalGroup(
+            painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDetalheEventoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .addComponent(labelDetalhesEvento)
+                    .addComponent(labelDescricaoEvento)
+                    .addComponent(labelSinopseEvento)
+                    .addComponent(jScrollPane3))
+                .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(painelDetalheEventoLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelDuracaoEvento)
+                            .addComponent(labelDataHoraEvento)))
+                    .addGroup(painelDetalheEventoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDuracaoEvento))
+                    .addGroup(painelDetalheEventoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(formatedDataHoraEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelDetalheEventoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltarAmbiente2)
+                .addGap(18, 18, 18)
+                .addComponent(btnAvançarAmbiente2)
+                .addContainerGap())
+        );
+        painelDetalheEventoLayout.setVerticalGroup(
+            painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelDetalheEventoLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(labelDetalhesEvento)
+                .addGap(18, 18, 18)
+                .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelSinopseEvento)
+                    .addComponent(labelDuracaoEvento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelDetalheEventoLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelDescricaoEvento)
+                            .addComponent(labelDataHoraEvento)))
+                    .addComponent(txtDuracaoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(formatedDataHoraEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAvançarAmbiente2)
+                    .addComponent(btnVoltarAmbiente2))
+                .addContainerGap())
+        );
+
+        PainelPrincipal.add(painelDetalheEvento, "painelDetalheEvento");
+
+        labelCadastrarAmbiente.setText("Cadastrar Ambiente");
+
+        labelNomeAmbiente.setText("Nome Ambiente: ");
+
+        txtNomeAmbiente.setText("Nome do Ambiente: ");
+        txtNomeAmbiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNomeAmbienteMouseClicked(evt);
+            }
+        });
+
+        labelDescricaoAmbiente.setText("Descrição: ");
+
+        campoDescricaoAmbiente.setColumns(20);
+        campoDescricaoAmbiente.setRows(5);
+        campoDescricaoAmbiente.setText("Digite aqui os detalhes do ambiente");
+        campoDescricaoAmbiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoDescricaoAmbienteMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(campoDescricaoAmbiente);
+
+        labelPontoReferenciaAmbiente.setText("Ponto de Referência: ");
+
+        txtPontoReferenciaAmbiente.setText("Ponto de Referência: ");
+        txtPontoReferenciaAmbiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPontoReferenciaAmbienteMouseClicked(evt);
+            }
+        });
+
+        txtNomeSetorAmbiente.setText("Nome do Setor:");
+        txtNomeSetorAmbiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNomeSetorAmbienteMouseClicked(evt);
+            }
+        });
+
+        labelSetorAmbiente.setText("Setor: ");
+
+        txtCapacidadeSetorAmbiente.setText("Capacidade: ");
+        txtCapacidadeSetorAmbiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCapacidadeSetorAmbienteMouseClicked(evt);
+            }
+        });
+
+        labelCapacidadeAmbiente.setText("Capacidade: ");
+
+        btnAvançarAmbiente.setText("Avançar");
+        btnAvançarAmbiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvançarAmbienteActionPerformed(evt);
+            }
+        });
+
+        btnVoltarAmbiente.setText("Voltar");
+        btnVoltarAmbiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarAmbienteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelAmbienteLayout = new javax.swing.GroupLayout(painelAmbiente);
+        painelAmbiente.setLayout(painelAmbienteLayout);
+        painelAmbienteLayout.setHorizontalGroup(
+            painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelAmbienteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltarAmbiente)
+                .addGap(18, 18, 18)
+                .addComponent(btnAvançarAmbiente)
+                .addContainerGap())
+            .addGroup(painelAmbienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelAmbienteLayout.createSequentialGroup()
+                        .addComponent(labelSetorAmbiente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNomeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelCapacidadeAmbiente)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtCapacidadeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(painelAmbienteLayout.createSequentialGroup()
+                        .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(painelAmbienteLayout.createSequentialGroup()
+                                .addComponent(labelPontoReferenciaAmbiente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPontoReferenciaAmbiente))
+                            .addGroup(painelAmbienteLayout.createSequentialGroup()
+                                .addComponent(labelNomeAmbiente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNomeAmbiente))
+                            .addGroup(painelAmbienteLayout.createSequentialGroup()
+                                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelDescricaoAmbiente)
+                                    .addComponent(labelCadastrarAmbiente))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
+        );
+        painelAmbienteLayout.setVerticalGroup(
+            painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelAmbienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelCadastrarAmbiente)
+                .addGap(18, 18, 18)
+                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNomeAmbiente)
+                    .addComponent(txtNomeAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(labelDescricaoAmbiente)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelPontoReferenciaAmbiente)
+                    .addComponent(txtPontoReferenciaAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelSetorAmbiente)
+                    .addComponent(labelCapacidadeAmbiente)
+                    .addComponent(txtNomeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCapacidadeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAvançarAmbiente)
+                    .addComponent(btnVoltarAmbiente))
+                .addContainerGap())
+        );
+
+        PainelPrincipal.add(painelAmbiente, "painelAmbiente");
+
+        labelngressoEvento.setText("Ingresso");
+
+        labelValorIngresso.setText("Valor: ");
+
+        labelQuantidadeIngresso.setText("Quantidade: ");
+
+        labelPromocaoIngresso.setText("Promoção");
+
+        labelMensagemIngressoPromocao.setText("Mensagem: ");
+
+        campoMensagemPromocaoIngresso.setColumns(20);
+        campoMensagemPromocaoIngresso.setRows(5);
+        campoMensagemPromocaoIngresso.setText("Mensagem Promocional");
+        campoMensagemPromocaoIngresso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoMensagemPromocaoIngressoMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(campoMensagemPromocaoIngresso);
+
+        txtQuantidadeIngressoEvento.setText("Quantidade: ");
+        txtQuantidadeIngressoEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtQuantidadeIngressoEventoMouseClicked(evt);
+            }
+        });
+
+        txtValorIngressoEvento.setText("Valor: ");
+        txtValorIngressoEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtValorIngressoEventoMouseClicked(evt);
+            }
+        });
+
+        labelQuantidadeDisponivelPromocaoIngresso.setText("Quantidade Disponivél: ");
+
+        txtQuantudadeDisponivelPromocaoIngresso.setText("Quantidade Disponivél");
+        txtQuantudadeDisponivelPromocaoIngresso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtQuantudadeDisponivelPromocaoIngressoMouseClicked(evt);
+            }
+        });
+
+        txtlValorDescontoPromocaoIngresso.setText("Valor de Desconto");
+        txtlValorDescontoPromocaoIngresso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtlValorDescontoPromocaoIngressoMouseClicked(evt);
+            }
+        });
+
+        labelValorDescontoPromocaoIngresso.setText("Valor de Desconto: ");
+
+        btnVoltarIngressoEvento.setText("Voltar");
+        btnVoltarIngressoEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarIngressoEventoActionPerformed(evt);
+            }
+        });
+
+        btnAvançarIngressoEvento.setText("Avançar");
+        btnAvançarIngressoEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvançarIngressoEventoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelngressoLayout = new javax.swing.GroupLayout(painelngresso);
+        painelngresso.setLayout(painelngressoLayout);
+        painelngressoLayout.setHorizontalGroup(
+            painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelngressoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelngressoLayout.createSequentialGroup()
+                        .addGroup(painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelMensagemIngressoPromocao)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelValorDescontoPromocaoIngresso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtlValorDescontoPromocaoIngresso)
+                            .addComponent(txtQuantudadeDisponivelPromocaoIngresso)
+                            .addComponent(labelQuantidadeDisponivelPromocaoIngresso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(124, 124, 124))
+                    .addGroup(painelngressoLayout.createSequentialGroup()
+                        .addGroup(painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painelngressoLayout.createSequentialGroup()
+                                .addGroup(painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelValorIngresso)
+                                    .addComponent(labelQuantidadeIngresso))
+                                .addGap(31, 31, 31)
+                                .addGroup(painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtQuantidadeIngressoEvento)
+                                    .addComponent(txtValorIngressoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(labelngressoEvento)
+                            .addComponent(labelPromocaoIngresso))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelngressoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltarIngressoEvento)
+                .addGap(18, 18, 18)
+                .addComponent(btnAvançarIngressoEvento)
+                .addContainerGap())
+        );
+        painelngressoLayout.setVerticalGroup(
+            painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelngressoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelngressoEvento)
+                .addGap(18, 18, 18)
+                .addGroup(painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelValorIngresso)
+                    .addComponent(txtValorIngressoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelQuantidadeIngresso)
+                    .addComponent(txtQuantidadeIngressoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(labelPromocaoIngresso)
+                .addGap(18, 18, 18)
+                .addGroup(painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelMensagemIngressoPromocao)
+                    .addComponent(labelQuantidadeDisponivelPromocaoIngresso))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(painelngressoLayout.createSequentialGroup()
+                        .addComponent(txtQuantudadeDisponivelPromocaoIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelValorDescontoPromocaoIngresso)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtlValorDescontoPromocaoIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAvançarIngressoEvento)
+                    .addComponent(btnVoltarIngressoEvento))
+                .addContainerGap())
+        );
+
+        PainelPrincipal.add(painelngresso, "painelIngresso");
+
+        labelContatoEvento.setText("Contato");
+
+        labelNomeContato.setText("Nome: ");
+
+        labelTelefoneContato.setText("Telefone: ");
+
+        labelEmailContato.setText("Email: ");
+
+        labelEnderecoContato.setText("Endereço: ");
+
+        txtEmailContato.setText("Email: ");
+        txtEmailContato.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtEmailContatoMouseClicked(evt);
+            }
+        });
+
+        campoEnderecoContato.setColumns(20);
+        campoEnderecoContato.setRows(5);
+        campoEnderecoContato.setText("Exemp: Avenida Deputado Patricio de Figuererdo Neto, 469 - Cascalho, CEP: 59965000 - Alexandria/RN");
+        campoEnderecoContato.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoEnderecoContatoMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(campoEnderecoContato);
+
+        txtTelefoneContato.setText("Telefone: ");
+        txtTelefoneContato.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTelefoneContatoMouseClicked(evt);
+            }
+        });
+
+        txtNomeContato.setText("Nome: ");
+        txtNomeContato.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNomeContatoMouseClicked(evt);
+            }
+        });
+
+        btnVoltarContato.setText("Voltar");
+        btnVoltarContato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarContatoActionPerformed(evt);
+            }
+        });
+
+        btnConcluirContato.setText("Concluir");
+        btnConcluirContato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConcluirContatoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelContatoLayout = new javax.swing.GroupLayout(painelContato);
+        painelContato.setLayout(painelContatoLayout);
+        painelContatoLayout.setHorizontalGroup(
+            painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelContatoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelContatoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVoltarContato)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnConcluirContato))
+                    .addComponent(jScrollPane4)
+                    .addGroup(painelContatoLayout.createSequentialGroup()
+                        .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelEnderecoContato)
+                            .addComponent(labelContatoEvento))
+                        .addGap(0, 579, Short.MAX_VALUE))
+                    .addGroup(painelContatoLayout.createSequentialGroup()
+                        .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelTelefoneContato)
+                            .addComponent(labelEmailContato))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEmailContato)
+                            .addComponent(txtTelefoneContato)))
+                    .addGroup(painelContatoLayout.createSequentialGroup()
+                        .addComponent(labelNomeContato)
+                        .addGap(40, 40, 40)
+                        .addComponent(txtNomeContato)))
+                .addContainerGap())
+        );
+        painelContatoLayout.setVerticalGroup(
+            painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelContatoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelContatoEvento)
+                .addGap(18, 18, 18)
+                .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNomeContato)
+                    .addComponent(txtNomeContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelTelefoneContato)
+                    .addComponent(txtTelefoneContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelEmailContato)
+                    .addComponent(txtEmailContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(labelEnderecoContato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConcluirContato)
+                    .addComponent(btnVoltarContato))
+                .addContainerGap())
+        );
+
+        PainelPrincipal.add(painelContato, "painelContato");
+
+        comboxListaEventoPDF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Evento/Data Inclusão" }));
+        comboxListaEventoPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboxListaEventoPDFActionPerformed(evt);
+            }
+        });
+
+        btnSelecionarDataHoraPainelGerarPdf.setText("OK");
+
+        btnMenuPrincipalGerarPdf.setText("Menu Principal");
+        btnMenuPrincipalGerarPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuPrincipalGerarPdfActionPerformed(evt);
+            }
+        });
+
+        comboxSelecionarTamanhoPaginaPainelGerarPdf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tamanho da Página: A1", "Tamanho da Página: A2", "Tamanho da Página: A3", "Tamanho da Página: A4", " " }));
+
+        btnSelecionarTamanhoPaginaPainelGerarPdf.setText("OK");
+
+        comboxSelecionarCorPainelGerarPdf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cor: Banco", "Cor: Preto", "Cor: Azul", "Cor: Cinza" }));
+
+        btnSelecionarCorPainelGerarPdf.setText("OK");
+
+        btnGerarPdfPainelGerarPdf.setText("Gerar PDF!");
+
+        javax.swing.GroupLayout painelGerarPdfLayout = new javax.swing.GroupLayout(painelGerarPdf);
+        painelGerarPdf.setLayout(painelGerarPdfLayout);
+        painelGerarPdfLayout.setHorizontalGroup(
+            painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelGerarPdfLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelGerarPdfLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnMenuPrincipalGerarPdf))
+                    .addGroup(painelGerarPdfLayout.createSequentialGroup()
+                        .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(comboxSelecionarCorPainelGerarPdf, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboxSelecionarTamanhoPaginaPainelGerarPdf, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboxListaEventoPDF, javax.swing.GroupLayout.Alignment.LEADING, 0, 240, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSelecionarDataHoraPainelGerarPdf)
+                            .addComponent(btnSelecionarTamanhoPaginaPainelGerarPdf)
+                            .addComponent(btnSelecionarCorPainelGerarPdf))
+                        .addGap(40, 40, 40)
+                        .addComponent(btnGerarPdfPainelGerarPdf)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        painelGerarPdfLayout.setVerticalGroup(
+            painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelGerarPdfLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(painelGerarPdfLayout.createSequentialGroup()
+                        .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(comboxSelecionarTamanhoPaginaPainelGerarPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSelecionarTamanhoPaginaPainelGerarPdf))
+                        .addGap(18, 18, 18)
+                        .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(comboxSelecionarCorPainelGerarPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSelecionarCorPainelGerarPdf))
+                        .addGap(18, 18, 18)
+                        .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(comboxListaEventoPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSelecionarDataHoraPainelGerarPdf)))
+                    .addComponent(btnGerarPdfPainelGerarPdf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addComponent(btnMenuPrincipalGerarPdf)
+                .addContainerGap())
+        );
+
+        PainelPrincipal.add(painelGerarPdf, "painelGerarPdf");
 
         subMenuPainelCadastrar.setText("Arquivo");
 
         itamAbrirPastaSubMenuPainelCadastrar.setText("Abrir Pasta");
+        itamAbrirPastaSubMenuPainelCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itamAbrirPastaSubMenuPainelCadastrarActionPerformed(evt);
+            }
+        });
         subMenuPainelCadastrar.add(itamAbrirPastaSubMenuPainelCadastrar);
 
         itamSairSubMenuPainelCadastrar.setText("Sair");
+        itamSairSubMenuPainelCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itamSairSubMenuPainelCadastrarActionPerformed(evt);
+            }
+        });
         subMenuPainelCadastrar.add(itamSairSubMenuPainelCadastrar);
 
         menuPainelCadastrar.add(subMenuPainelCadastrar);
@@ -154,17 +1321,272 @@ public class PainelCadastrar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboxCadastrarEvento1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxCadastrarEvento1ActionPerformed
+    private void comboxCadastrarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxCadastrarEventoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_comboxCadastrarEvento1ActionPerformed
+    }//GEN-LAST:event_comboxCadastrarEventoActionPerformed
 
-    private void btnGerarPdfOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPdfOk1ActionPerformed
+    private void btnGerarPdfOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPdfOkActionPerformed
+        if (comboxGerarPdfEvento.getSelectedItem().equals("Esporte")) {
+
+        } else if (comboxGerarPdfEvento.getSelectedItem().equals("Filme")) {
+
+        } else if (comboxGerarPdfEvento.getSelectedItem().equals("Peça")) {
+
+        } else if (comboxGerarPdfEvento.getSelectedItem().equals("Show")) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+        }
+    }//GEN-LAST:event_btnGerarPdfOkActionPerformed
+
+    private void btnCadastrarEventoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarEventoOkActionPerformed
+        if (comboxCadastrarEvento.getSelectedItem().equals("Esporte")) {
+            mudarPainel("painelEsporte");
+        } else if (comboxCadastrarEvento.getSelectedItem().equals("Filme")) {
+            mudarPainel("painelFilme");
+        } else if (comboxCadastrarEvento.getSelectedItem().equals("Peça")) {
+            mudarPainel("painelPeca");
+        } else if (comboxCadastrarEvento.getSelectedItem().equals("Show")) {
+            mudarPainel("painelShow");
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+        }
+    }//GEN-LAST:event_btnCadastrarEventoOkActionPerformed
+
+    private void itamAbrirPastaSubMenuPainelCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itamAbrirPastaSubMenuPainelCadastrarActionPerformed
+        AbrirPasta abrirPasta = new AbrirPasta();
+        try {
+            abrirPasta.irURL();
+        } catch (IOException ex) {
+            JOptionPane.showConfirmDialog(null, "Erro, Verifique seu Gerenciador de Arquivo!");
+        }
+    }//GEN-LAST:event_itamAbrirPastaSubMenuPainelCadastrarActionPerformed
+
+    private void itamSairSubMenuPainelCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itamSairSubMenuPainelCadastrarActionPerformed
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja Sair? ");
+        if (opcao == 0) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_itamSairSubMenuPainelCadastrarActionPerformed
+
+    public void mudarParaPainelDetalheEvento() {
+        mudarPainel("painelDetalheEvento");
+    }
+
+    private void btnVoltarEsporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarEsporteActionPerformed
+        mudarPainel("painelCadastrar");
+        controlePainelCadastrar();
+    }//GEN-LAST:event_btnVoltarEsporteActionPerformed
+
+    private void txtNomeEsporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeEsporteMouseClicked
+        limparText(txtNomeEsporte);
+    }//GEN-LAST:event_txtNomeEsporteMouseClicked
+
+    private void campoCadastrarEquipeEsporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoCadastrarEquipeEsporteMouseClicked
+        limparCampo(campoCadastrarEquipeEsporte);
+    }//GEN-LAST:event_campoCadastrarEquipeEsporteMouseClicked
+
+    private void btnVoltarFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarFilmeActionPerformed
+        mudarPainel("painelCadastrar");
+        controlePainelCadastrar();
+    }//GEN-LAST:event_btnVoltarFilmeActionPerformed
+
+    private void btnVoltarShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarShowActionPerformed
+        mudarPainel("painelCadastrar");
+        controlePainelCadastrar();
+    }//GEN-LAST:event_btnVoltarShowActionPerformed
+
+    private void btnVoltarPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarPecaActionPerformed
+        mudarPainel("painelCadastrar");
+        controlePainelCadastrar();
+    }//GEN-LAST:event_btnVoltarPecaActionPerformed
+
+    private void txtNomeFilmeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeFilmeMouseClicked
+        limparText(txtNomeFilme);
+    }//GEN-LAST:event_txtNomeFilmeMouseClicked
+
+    private void txtGeneroFilmeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtGeneroFilmeMouseClicked
+        limparText(txtGeneroFilme);
+    }//GEN-LAST:event_txtGeneroFilmeMouseClicked
+
+    private void txtCensuraFilmeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCensuraFilmeMouseClicked
+        limparText(txtCensuraFilme);
+    }//GEN-LAST:event_txtCensuraFilmeMouseClicked
+
+    private void txtNomeShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeShowActionPerformed
+        //
+    }//GEN-LAST:event_txtNomeShowActionPerformed
+
+    private void txtArtistaShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtArtistaShowActionPerformed
+        //
+    }//GEN-LAST:event_txtArtistaShowActionPerformed
+
+    private void txtEstilhoShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstilhoShowActionPerformed
+        //
+    }//GEN-LAST:event_txtEstilhoShowActionPerformed
+
+    private void txtNomeShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeShowMouseClicked
+        limparText(txtNomeShow);
+    }//GEN-LAST:event_txtNomeShowMouseClicked
+
+    private void txtArtistaShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtArtistaShowMouseClicked
+        limparText(txtArtistaShow);
+    }//GEN-LAST:event_txtArtistaShowMouseClicked
+
+    private void txtEstilhoShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEstilhoShowMouseClicked
+        limparText(txtEstilhoShow);
+    }//GEN-LAST:event_txtEstilhoShowMouseClicked
+
+    private void txtCompanhiaPecaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCompanhiaPecaMouseClicked
+        limparText(txtCompanhiaPeca);
+    }//GEN-LAST:event_txtCompanhiaPecaMouseClicked
+
+    private void txtGeneroPecaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtGeneroPecaMouseClicked
+        limparText(txtGeneroPeca);
+    }//GEN-LAST:event_txtGeneroPecaMouseClicked
+
+    private void txtCensuraPecaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCensuraPecaMouseClicked
+        limparText(txtCensuraPeca);
+    }//GEN-LAST:event_txtCensuraPecaMouseClicked
+
+    private void txtNomePecaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomePecaMouseClicked
+        limparText(txtNomePeca);
+    }//GEN-LAST:event_txtNomePecaMouseClicked
+
+    private void btnAvançarEsporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvançarEsporteActionPerformed
+        setVariavelControle(Esporte);
+        mudarParaPainelDetalheEvento();
+        controlePainelCadastrar();
+    }//GEN-LAST:event_btnAvançarEsporteActionPerformed
+
+    private void btnAvançarPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvançarPecaActionPerformed
+        setVariavelControle(Peca);
+        mudarParaPainelDetalheEvento();
+    }//GEN-LAST:event_btnAvançarPecaActionPerformed
+
+    private void btnAvançarShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvançarShowActionPerformed
+        setVariavelControle(Show);
+        mudarParaPainelDetalheEvento();
+    }//GEN-LAST:event_btnAvançarShowActionPerformed
+
+    private void btnAvançarFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvançarFilmeActionPerformed
+        setVariavelControle(Filme);
+        mudarParaPainelDetalheEvento();
+    }//GEN-LAST:event_btnAvançarFilmeActionPerformed
+
+    private void btnVoltarAmbiente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarAmbiente2ActionPerformed
+        qualVoltar();
+    }//GEN-LAST:event_btnVoltarAmbiente2ActionPerformed
+
+    private void btnVoltarIngressoEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarIngressoEventoActionPerformed
+        mudarPainel("painelAmbiente");
+    }//GEN-LAST:event_btnVoltarIngressoEventoActionPerformed
+
+    private void formatedDataHoraEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatedDataHoraEventoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGerarPdfOk1ActionPerformed
+    }//GEN-LAST:event_formatedDataHoraEventoActionPerformed
 
-    private void btnCadastrarEventoOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarEventoOk1ActionPerformed
-        
-    }//GEN-LAST:event_btnCadastrarEventoOk1ActionPerformed
+    private void campoSinopseEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoSinopseEventoMouseClicked
+        limparCampo(campoSinopseEvento);
+    }//GEN-LAST:event_campoSinopseEventoMouseClicked
+
+    private void campoDescricaoEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoDescricaoEventoMouseClicked
+        limparCampo(campoDescricaoEvento);
+    }//GEN-LAST:event_campoDescricaoEventoMouseClicked
+
+    private void txtDuracaoEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDuracaoEventoMouseClicked
+        limparText(txtDuracaoEvento);
+    }//GEN-LAST:event_txtDuracaoEventoMouseClicked
+
+    private void txtValorIngressoEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtValorIngressoEventoMouseClicked
+        limparText(txtValorIngressoEvento);
+    }//GEN-LAST:event_txtValorIngressoEventoMouseClicked
+
+    private void txtQuantidadeIngressoEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuantidadeIngressoEventoMouseClicked
+        limparText(txtQuantidadeIngressoEvento);
+    }//GEN-LAST:event_txtQuantidadeIngressoEventoMouseClicked
+
+    private void campoMensagemPromocaoIngressoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoMensagemPromocaoIngressoMouseClicked
+        limparCampo(campoMensagemPromocaoIngresso);
+    }//GEN-LAST:event_campoMensagemPromocaoIngressoMouseClicked
+
+    private void txtQuantudadeDisponivelPromocaoIngressoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuantudadeDisponivelPromocaoIngressoMouseClicked
+        limparText(txtQuantudadeDisponivelPromocaoIngresso);
+    }//GEN-LAST:event_txtQuantudadeDisponivelPromocaoIngressoMouseClicked
+
+    private void txtlValorDescontoPromocaoIngressoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtlValorDescontoPromocaoIngressoMouseClicked
+        limparText(txtlValorDescontoPromocaoIngresso);
+    }//GEN-LAST:event_txtlValorDescontoPromocaoIngressoMouseClicked
+
+    private void btnAvançarAmbiente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvançarAmbiente2ActionPerformed
+        mudarPainel("painelAmbiente");
+    }//GEN-LAST:event_btnAvançarAmbiente2ActionPerformed
+
+    private void txtNomeContatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeContatoMouseClicked
+        limparText(txtNomeContato);
+    }//GEN-LAST:event_txtNomeContatoMouseClicked
+
+    private void txtTelefoneContatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTelefoneContatoMouseClicked
+        limparText(txtTelefoneContato);
+    }//GEN-LAST:event_txtTelefoneContatoMouseClicked
+
+    private void txtEmailContatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailContatoMouseClicked
+        limparText(txtEmailContato);
+    }//GEN-LAST:event_txtEmailContatoMouseClicked
+
+    private void campoEnderecoContatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoEnderecoContatoMouseClicked
+        limparCampo(campoEnderecoContato);
+    }//GEN-LAST:event_campoEnderecoContatoMouseClicked
+
+    private void btnVoltarContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarContatoActionPerformed
+        mudarPainel("painelIngresso");
+    }//GEN-LAST:event_btnVoltarContatoActionPerformed
+
+    private void btnAvançarIngressoEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvançarIngressoEventoActionPerformed
+        mudarPainel("painelContato");
+    }//GEN-LAST:event_btnAvançarIngressoEventoActionPerformed
+
+    private void btnConcluirContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirContatoActionPerformed
+        JOptionPane.showMessageDialog(null, "Cadastrado Com Sucesso!");
+        mudarPainel("painelCadastrar");
+        ///Metodo de Cadastrar
+    }//GEN-LAST:event_btnConcluirContatoActionPerformed
+
+    private void btnVoltarAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarAmbienteActionPerformed
+        mudarParaPainelDetalheEvento();
+    }//GEN-LAST:event_btnVoltarAmbienteActionPerformed
+
+    private void btnAvançarAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvançarAmbienteActionPerformed
+        mudarPainel("painelIngresso");
+    }//GEN-LAST:event_btnAvançarAmbienteActionPerformed
+
+    private void txtNomeAmbienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeAmbienteMouseClicked
+        limparText(txtNomeAmbiente);
+    }//GEN-LAST:event_txtNomeAmbienteMouseClicked
+
+    private void campoDescricaoAmbienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoDescricaoAmbienteMouseClicked
+        limparCampo(campoDescricaoAmbiente);
+    }//GEN-LAST:event_campoDescricaoAmbienteMouseClicked
+
+    private void txtPontoReferenciaAmbienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPontoReferenciaAmbienteMouseClicked
+        limparText(txtPontoReferenciaAmbiente);
+    }//GEN-LAST:event_txtPontoReferenciaAmbienteMouseClicked
+
+    private void txtNomeSetorAmbienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeSetorAmbienteMouseClicked
+        limparText(txtNomeSetorAmbiente);
+    }//GEN-LAST:event_txtNomeSetorAmbienteMouseClicked
+
+    private void txtCapacidadeSetorAmbienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCapacidadeSetorAmbienteMouseClicked
+        limparText(txtCapacidadeSetorAmbiente);
+    }//GEN-LAST:event_txtCapacidadeSetorAmbienteMouseClicked
+
+    private void comboxListaEventoPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxListaEventoPDFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboxListaEventoPDFActionPerformed
+
+    private void btnMenuPrincipalGerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalGerarPdfActionPerformed
+        mudarPainel("painelCadastrar");
+    }//GEN-LAST:event_btnMenuPrincipalGerarPdfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,17 +1624,125 @@ public class PainelCadastrar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PainelCadastrar;
     private javax.swing.JPanel PainelPrincipal;
-    private javax.swing.JButton btnCadastrarEventoOk1;
-    private javax.swing.JButton btnGerarPdfOk1;
-    private javax.swing.JComboBox comboxCadastrarEvento1;
-    private javax.swing.JComboBox comboxGerarPdfEvento1;
+    private javax.swing.JButton btnAvançarAmbiente;
+    private javax.swing.JButton btnAvançarAmbiente2;
+    private javax.swing.JButton btnAvançarEsporte;
+    private javax.swing.JButton btnAvançarFilme;
+    private javax.swing.JButton btnAvançarIngressoEvento;
+    private javax.swing.JButton btnAvançarPeca;
+    private javax.swing.JButton btnAvançarShow;
+    private javax.swing.JButton btnCadastrarEventoOk;
+    private javax.swing.JButton btnConcluirContato;
+    private javax.swing.JButton btnGerarPdfOk;
+    private javax.swing.JButton btnGerarPdfPainelGerarPdf;
+    private javax.swing.JButton btnMenuPrincipalGerarPdf;
+    private javax.swing.JButton btnSelecionarCorPainelGerarPdf;
+    private javax.swing.JButton btnSelecionarDataHoraPainelGerarPdf;
+    private javax.swing.JButton btnSelecionarTamanhoPaginaPainelGerarPdf;
+    private javax.swing.JButton btnVoltarAmbiente;
+    private javax.swing.JButton btnVoltarAmbiente2;
+    private javax.swing.JButton btnVoltarContato;
+    private javax.swing.JButton btnVoltarEsporte;
+    private javax.swing.JButton btnVoltarFilme;
+    private javax.swing.JButton btnVoltarIngressoEvento;
+    private javax.swing.JButton btnVoltarPeca;
+    private javax.swing.JButton btnVoltarShow;
+    private javax.swing.JScrollPane cadastrarEquipeEsporteScroll1;
+    private javax.swing.JTextArea campoCadastrarEquipeEsporte;
+    private javax.swing.JTextArea campoDescricaoAmbiente;
+    private javax.swing.JTextArea campoDescricaoEvento;
+    private javax.swing.JTextArea campoEnderecoContato;
+    private javax.swing.JTextArea campoMensagemPromocaoIngresso;
+    private javax.swing.JTextArea campoSinopseEvento;
+    private javax.swing.JComboBox comboxCadastrarEvento;
+    private javax.swing.JComboBox comboxGerarPdfEvento;
+    private javax.swing.JComboBox comboxListaEventoPDF;
+    private javax.swing.JComboBox comboxSelecionarCorPainelGerarPdf;
+    private javax.swing.JComboBox comboxSelecionarTamanhoPaginaPainelGerarPdf;
+    private javax.swing.JFormattedTextField formatedDataHoraEvento;
     private javax.swing.JMenuItem itamAbrirPastaSubMenuPainelCadastrar;
     private javax.swing.JMenuItem itamSairSubMenuPainelCadastrar;
-    private javax.swing.JLabel labelCadastrarEvento1;
-    private javax.swing.JLabel labelGerarPdfCadastrar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JLabel labelArtistaShow;
+    private javax.swing.JLabel labelCadastrarAmbiente;
+    private javax.swing.JLabel labelCadastrarEvento;
+    private javax.swing.JLabel labelCadastrarFilme;
+    private javax.swing.JLabel labelCadastrarPeca;
+    private javax.swing.JLabel labelCadastrarShow;
+    private javax.swing.JLabel labelCapacidadeAmbiente;
+    private javax.swing.JLabel labelCensuraFilme;
+    private javax.swing.JLabel labelCensuraPeca;
+    private javax.swing.JLabel labelCompanhiaPeca;
+    private javax.swing.JLabel labelContatoEvento;
+    private javax.swing.JLabel labelDataHoraEvento;
+    private javax.swing.JLabel labelDescricaoAmbiente;
+    private javax.swing.JLabel labelDescricaoEvento;
+    private javax.swing.JLabel labelDetalhesEvento;
+    private javax.swing.JLabel labelDuracaoEvento;
+    private javax.swing.JLabel labelEmailContato;
+    private javax.swing.JLabel labelEnderecoContato;
+    private javax.swing.JLabel labelEquipeEsporte;
+    private javax.swing.JLabel labelEstiloShow;
+    private javax.swing.JLabel labelGeneroFilme;
+    private javax.swing.JLabel labelGeneroPeca;
+    private javax.swing.JLabel labelGerarPdfCadastrar;
+    private javax.swing.JLabel labelMensagemIngressoPromocao;
+    private javax.swing.JLabel labelNomeAmbiente;
+    private javax.swing.JLabel labelNomeContato;
+    private javax.swing.JLabel labelNomeEsporte;
+    private javax.swing.JLabel labelNomeFilme;
+    private javax.swing.JLabel labelNomePeca;
+    private javax.swing.JLabel labelNomeShow;
+    private javax.swing.JLabel labelPontoReferenciaAmbiente;
+    private javax.swing.JLabel labelPromocaoIngresso;
+    private javax.swing.JLabel labelQuantidadeDisponivelPromocaoIngresso;
+    private javax.swing.JLabel labelQuantidadeIngresso;
+    private javax.swing.JLabel labelSetorAmbiente;
+    private javax.swing.JLabel labelSinopseEvento;
+    private javax.swing.JLabel labelTelefoneContato;
+    private javax.swing.JLabel labelTituloCadastrarEsporte;
+    private javax.swing.JLabel labelValorDescontoPromocaoIngresso;
+    private javax.swing.JLabel labelValorIngresso;
+    private javax.swing.JLabel labelngressoEvento;
     private javax.swing.JMenuBar menuPainelCadastrar;
+    private javax.swing.JPanel painelAmbiente;
+    private javax.swing.JPanel painelCadastrar;
+    private javax.swing.JPanel painelContato;
+    private javax.swing.JPanel painelDetalheEvento;
+    private javax.swing.JPanel painelEsporte;
+    private javax.swing.JPanel painelFilme;
+    private javax.swing.JPanel painelGerarPdf;
+    private javax.swing.JPanel painelPeca;
+    private javax.swing.JPanel painelShow;
+    private javax.swing.JPanel painelngresso;
     private javax.swing.JMenu subMenuPainelCadastrar;
+    private javax.swing.JTextField txtArtistaShow;
+    private javax.swing.JTextField txtCapacidadeSetorAmbiente;
+    private javax.swing.JTextField txtCensuraFilme;
+    private javax.swing.JTextField txtCensuraPeca;
+    private javax.swing.JTextField txtCompanhiaPeca;
+    private javax.swing.JTextField txtDuracaoEvento;
+    private javax.swing.JTextField txtEmailContato;
+    private javax.swing.JTextField txtEstilhoShow;
+    private javax.swing.JTextField txtGeneroFilme;
+    private javax.swing.JTextField txtGeneroPeca;
+    private javax.swing.JTextField txtNomeAmbiente;
+    private javax.swing.JTextField txtNomeContato;
+    private javax.swing.JTextField txtNomeEsporte;
+    private javax.swing.JTextField txtNomeFilme;
+    private javax.swing.JTextField txtNomePeca;
+    private javax.swing.JTextField txtNomeSetorAmbiente;
+    private javax.swing.JTextField txtNomeShow;
+    private javax.swing.JTextField txtPontoReferenciaAmbiente;
+    private javax.swing.JTextField txtQuantidadeIngressoEvento;
+    private javax.swing.JTextField txtQuantudadeDisponivelPromocaoIngresso;
+    private javax.swing.JTextField txtTelefoneContato;
+    private javax.swing.JTextField txtValorIngressoEvento;
+    private javax.swing.JTextField txtlValorDescontoPromocaoIngresso;
     // End of variables declaration//GEN-END:variables
 }
