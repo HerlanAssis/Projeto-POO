@@ -6,21 +6,33 @@
 package br.com.ifrn.panfleto.gui;
 
 import br.com.ifrn.panfleto.utilitario.abrirPasta;
+import java.awt.CardLayout;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
  * @author herlan
  */
-public class GerarPangletoEvento extends javax.swing.JFrame {
-    
+public class GerarPanfletoEvento extends javax.swing.JFrame {
+
     /**
      * Creates new form GerarPangletoEvento
      */
-    public GerarPangletoEvento() {
-        initComponents();
-    }       
+    private GerarPanfletoEvento gerarPangletoEvento;            
+    public GerarPanfletoEvento() {
+        initComponents();                
+        this.setSize(700, 700);        
+    }        
+
+    public GerarPanfletoEvento getGerarPangletoEvento() {
+        return gerarPangletoEvento;
+    }
+
+    public JPanel getPainelEsporte() {
+        return painelEsporte;
+    }        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,7 +48,7 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
         labelCadastrarEvento = new javax.swing.JLabel();
         comboxCadastrarEvento = new javax.swing.JComboBox();
         btnCadastrarEventoOk = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        labelGerarPdfCadastrar = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         btnGerarPdfOk = new javax.swing.JButton();
         painelEsporte = new javax.swing.JPanel();
@@ -156,12 +168,22 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
         comboxCadastrarEvento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Esporte", "Filme", "Peça", "Show" }));
 
         btnCadastrarEventoOk.setText("OK");
+        btnCadastrarEventoOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarEventoOkActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setText("Gerar PDF");
+        labelGerarPdfCadastrar.setText("Gerar PDF");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Esporte", "Filme", "Peça", "Show" }));
 
         btnGerarPdfOk.setText("OK");
+        btnGerarPdfOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarPdfOkActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelCadastrarLayout = new javax.swing.GroupLayout(painelCadastrar);
         painelCadastrar.setLayout(painelCadastrarLayout);
@@ -170,7 +192,7 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
             .addGroup(painelCadastrarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(labelGerarPdfCadastrar)
                     .addGroup(painelCadastrarLayout.createSequentialGroup()
                         .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(labelCadastrarEvento)
@@ -192,7 +214,7 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
                     .addComponent(comboxCadastrarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastrarEventoOk))
                 .addGap(65, 65, 65)
-                .addComponent(jLabel1)
+                .addComponent(labelGerarPdfCadastrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -962,6 +984,36 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_subMenuSairActionPerformed
 
+    private void btnCadastrarEventoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarEventoOkActionPerformed
+        if (comboxCadastrarEvento.getSelectedItem().equals("Esporte")) {
+            CardLayout cardLayout = (CardLayout) PainelPrincipal.getLayout();            
+            this.add(painelEsporte);
+            System.out.println(getPainelEsporte().getName());
+        } else if (comboxCadastrarEvento.getSelectedItem().equals("Filme")) {
+            
+        } else if (comboxCadastrarEvento.getSelectedItem().equals("Peça")) {
+
+        } else if (comboxCadastrarEvento.getSelectedItem().equals("Show")) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item!!");
+        }
+    }//GEN-LAST:event_btnCadastrarEventoOkActionPerformed
+
+    private void btnGerarPdfOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPdfOkActionPerformed
+        if (comboxCadastrarEvento.getSelectedItem().equals("Esporte")) {
+
+        } else if (comboxCadastrarEvento.getSelectedItem().equals("Filme")) {
+
+        } else if (comboxCadastrarEvento.getSelectedItem().equals("Peça")) {
+
+        } else if (comboxCadastrarEvento.getSelectedItem().equals("Show")) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item!!");
+        }
+    }//GEN-LAST:event_btnGerarPdfOkActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -979,20 +1031,21 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GerarPangletoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerarPanfletoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GerarPangletoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerarPanfletoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GerarPangletoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerarPanfletoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GerarPangletoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerarPanfletoEvento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GerarPangletoEvento().setVisible(true);
+                new GerarPanfletoEvento().setVisible(true);
             }
         });
     }
@@ -1030,7 +1083,6 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField formatedDataHoraEvento;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1060,6 +1112,7 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
     private javax.swing.JLabel labelEstiloShow;
     private javax.swing.JLabel labelGeneroFilme;
     private javax.swing.JLabel labelGeneroPeca;
+    private javax.swing.JLabel labelGerarPdfCadastrar;
     private javax.swing.JLabel labelMensagemIngressoPromocao;
     private javax.swing.JLabel labelNomeAmbiente;
     private javax.swing.JLabel labelNomeContato;
