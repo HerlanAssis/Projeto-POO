@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[674, 381]"/>
+    </Property>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="labelNomePeca" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <Component id="txtNomePeca" min="-2" pref="180" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="labelCompanhiaPeca" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelGeneroPeca" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelCensuraPeca" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtCompanhiaPeca" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtGeneroPeca" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtCemsuraPeca" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="labelCadastrarPeca" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="181" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnVoltarAmbiente" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnAvançarAmbiente" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="labelCadastrarPeca" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="labelNomePeca" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNomePeca" alignment="0" min="-2" pref="19" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelCompanhiaPeca" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCompanhiaPeca" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelGeneroPeca" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtGeneroPeca" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelCensuraPeca" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCemsuraPeca" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="169" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnAvançarAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnVoltarAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="labelCadastrarPeca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cadastrar Pe&#xe7;a"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelNomePeca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nome: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelCompanhiaPeca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Companhia: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelGeneroPeca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gen&#xea;ro: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelCensuraPeca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Censura: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtCemsuraPeca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Censura da pela: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtGeneroPeca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gen&#xea;ro da pe&#xe7;a: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtCompanhiaPeca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Companhia da pe&#xe7;a: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNomePeca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nome da pe&#xe7;a: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnVoltarAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Voltar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAvan&#xe7;arAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Avan&#xe7;ar"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

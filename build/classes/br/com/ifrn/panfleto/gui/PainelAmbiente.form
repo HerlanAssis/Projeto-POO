@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[674, 381]"/>
+    </Property>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnVoltarAmbiente" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnAvançarAmbiente" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="labelSetorAmbiente" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtNomeSetorAmbiente" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="labelCapacidadeAmbiente" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Component id="txtCapacidadeSetorAmbiente" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="labelPontoReferenciaAmbiente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtPontoReferenciaAmbiente" pref="290" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="labelNomeAmbiente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtNomeAmbiente" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelDescricaoAmbiente" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelCadastrarAmbiente" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="labelCadastrarAmbiente" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelNomeAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNomeAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="labelDescricaoAmbiente" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelPontoReferenciaAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPontoReferenciaAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelSetorAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelCapacidadeAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNomeSetorAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCapacidadeSetorAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnAvançarAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnVoltarAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="labelCadastrarAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cadastrar Ambiente"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelNomeAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nome Ambiente: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNomeAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nome do Ambiente: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelDescricaoAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o: "/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="campoDescricaoAmbiente">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="labelPontoReferenciaAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ponto de Refer&#xea;ncia: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPontoReferenciaAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ponto de Refer&#xea;ncia: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelSetorAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Setor: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNomeSetorAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nome do Setor:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelCapacidadeAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Capacidade: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtCapacidadeSetorAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Capacidade: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnVoltarAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Voltar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAvan&#xe7;arAmbiente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Avan&#xe7;ar"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
