@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
  * @author herlan
  */
 public class GerarPangletoEvento extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form GerarPangletoEvento
      */
     public GerarPangletoEvento() {
         initComponents();
-    }
+    }       
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,6 +46,8 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
         labelEquipeEsporte = new javax.swing.JLabel();
         labelNomeEsporte = new javax.swing.JLabel();
         txtNomeEsporte = new javax.swing.JTextField();
+        btnAvancarEsporte = new javax.swing.JButton();
+        btnVoltarEsporte = new javax.swing.JButton();
         painelFilme = new javax.swing.JPanel();
         labelCadastrarFilme = new javax.swing.JLabel();
         labelNomeFilme = new javax.swing.JLabel();
@@ -54,6 +56,8 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
         txtGeneroFilme = new javax.swing.JTextField();
         labelCensuraFilme = new javax.swing.JLabel();
         txtCensuraFilme = new javax.swing.JTextField();
+        btnAvançarFilme = new javax.swing.JToggleButton();
+        btnVoltarFilme = new javax.swing.JButton();
         painelPeca = new javax.swing.JPanel();
         labelCadastrarPeca = new javax.swing.JLabel();
         labelNomePeca = new javax.swing.JLabel();
@@ -64,6 +68,8 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
         txtCompanhiaPeca = new javax.swing.JTextField();
         txtGeneroPeca = new javax.swing.JTextField();
         txtCemsuraPeca = new javax.swing.JTextField();
+        btnAvancarPeca = new javax.swing.JButton();
+        btnVoltarPeca = new javax.swing.JButton();
         painelShow = new javax.swing.JPanel();
         labelCadastrarShow = new javax.swing.JLabel();
         labelNomeShow = new javax.swing.JLabel();
@@ -72,6 +78,22 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
         txtNomeShow = new javax.swing.JTextField();
         txtArtistaShow = new javax.swing.JTextField();
         txtEstilhoShow = new javax.swing.JTextField();
+        btnAvancarShow = new javax.swing.JButton();
+        btnVoltarShow = new javax.swing.JButton();
+        painelDetalheEvento = new javax.swing.JPanel();
+        labelDetalhesEvento = new javax.swing.JLabel();
+        labelSinopseEvento = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        campoSinopseEvento = new javax.swing.JTextArea();
+        labelDescricaoEvento = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        campoDescricaoEvento = new javax.swing.JTextArea();
+        labelDuracaoEvento = new javax.swing.JLabel();
+        txtDuracaoExento = new javax.swing.JTextField();
+        labelDataHoraEvento = new javax.swing.JLabel();
+        formatedDataHoraEvento = new javax.swing.JFormattedTextField();
+        btnAvançarEvento = new javax.swing.JButton();
+        btnVoltarEvento = new javax.swing.JButton();
         painelAmbiente = new javax.swing.JPanel();
         labelCadastrarAmbiente = new javax.swing.JLabel();
         labelNomeAmbiente = new javax.swing.JLabel();
@@ -85,9 +107,41 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
         txtCapacidadeSetorAmbiente = new javax.swing.JTextField();
         txtNomeAmbiente = new javax.swing.JTextField();
         txtPontoReferenciaAmbiente = new javax.swing.JTextField();
+        btnAvançarAmbiente = new javax.swing.JButton();
+        btnVoltarAmbiente = new javax.swing.JButton();
         painelIngresso = new javax.swing.JPanel();
+        labelngressoEvento = new javax.swing.JLabel();
+        labelValorIngresso = new javax.swing.JLabel();
+        labelQuantidadeIngresso = new javax.swing.JLabel();
+        labelPromocaoIngresso = new javax.swing.JLabel();
+        labelMensagemIngressoPromocao = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        campoMensagemPromocaoIngresso = new javax.swing.JTextArea();
+        labelQuantidadeDisponivelPromocaoIngresso = new javax.swing.JLabel();
+        txtQuantudadeDisponivelPromocaoIngresso = new javax.swing.JTextField();
+        labelValorDescontoPromocaoIngresso = new javax.swing.JLabel();
+        txtlValorDescontoPromocaoIngresso = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        btnAvançarIngresso = new javax.swing.JButton();
+        btnVoltarIngresso = new javax.swing.JButton();
         painelContato = new javax.swing.JPanel();
+        labelContatoEvento = new javax.swing.JLabel();
+        labelNomeContato = new javax.swing.JLabel();
+        labelTelefoneContato = new javax.swing.JLabel();
+        labelEmailContato = new javax.swing.JLabel();
+        labelEnderecoContato = new javax.swing.JLabel();
+        txtNomeContato = new javax.swing.JTextField();
+        txtTelefoneContato = new javax.swing.JTextField();
+        txtEmailContato = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        campoEnderecoContato = new javax.swing.JTextArea();
+        btnAvançarContato = new javax.swing.JButton();
+        btnVoltarContato = new javax.swing.JButton();
         painelGerarPdf = new javax.swing.JPanel();
+        comboListaEventoPDF = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
+        btnMenuPrincipalGerarPdf = new javax.swing.JButton();
         menuPrincipal = new javax.swing.JMenuBar();
         menuPrincipal1 = new javax.swing.JMenu();
         subMenuAbrirPasta = new javax.swing.JMenuItem();
@@ -126,7 +180,7 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
                         .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCadastrarEventoOk)
                             .addComponent(btnGerarPdfOk))))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         painelCadastrarLayout.setVerticalGroup(
             painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,6 +215,10 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
 
         txtNomeEsporte.setText("Digite o nome da equipe: ");
 
+        btnAvancarEsporte.setText("Avançar");
+
+        btnVoltarEsporte.setText("Voltar");
+
         javax.swing.GroupLayout painelEsporteLayout = new javax.swing.GroupLayout(painelEsporte);
         painelEsporte.setLayout(painelEsporteLayout);
         painelEsporteLayout.setHorizontalGroup(
@@ -168,23 +226,34 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
             .addGroup(painelEsporteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cadastrarEquipeEsporteScroll)
+                    .addGroup(painelEsporteLayout.createSequentialGroup()
+                        .addComponent(cadastrarEquipeEsporteScroll)
+                        .addContainerGap())
                     .addGroup(painelEsporteLayout.createSequentialGroup()
                         .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelTituloCadastrarEsporte)
                             .addComponent(labelEquipeEsporte)
                             .addGroup(painelEsporteLayout.createSequentialGroup()
                                 .addComponent(labelNomeEsporte)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNomeEsporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 149, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(0, 194, Short.MAX_VALUE))
+                    .addGroup(painelEsporteLayout.createSequentialGroup()
+                        .addComponent(labelTituloCadastrarEsporte)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVoltarEsporte)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAvancarEsporte))))
         );
         painelEsporteLayout.setVerticalGroup(
             painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelEsporteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelTituloCadastrarEsporte)
+                .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelEsporteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelTituloCadastrarEsporte))
+                    .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAvancarEsporte)
+                        .addComponent(btnVoltarEsporte)))
                 .addGap(18, 18, 18)
                 .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNomeEsporte)
@@ -212,6 +281,10 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
 
         txtCensuraFilme.setText("Censura do filme: ");
 
+        btnAvançarFilme.setText("Avançar");
+
+        btnVoltarFilme.setText("Voltar");
+
         javax.swing.GroupLayout painelFilmeLayout = new javax.swing.GroupLayout(painelFilme);
         painelFilme.setLayout(painelFilmeLayout);
         painelFilmeLayout.setHorizontalGroup(
@@ -219,26 +292,38 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
             .addGroup(painelFilmeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelCadastrarFilme)
                     .addGroup(painelFilmeLayout.createSequentialGroup()
-                        .addComponent(labelGeneroFilme)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtGeneroFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painelFilmeLayout.createSequentialGroup()
+                                .addComponent(labelGeneroFilme)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtGeneroFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painelFilmeLayout.createSequentialGroup()
+                                .addComponent(labelNomeFilme)
+                                .addGap(30, 30, 30)
+                                .addComponent(txtNomeFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painelFilmeLayout.createSequentialGroup()
+                                .addComponent(labelCensuraFilme)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCensuraFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(224, Short.MAX_VALUE))
                     .addGroup(painelFilmeLayout.createSequentialGroup()
-                        .addComponent(labelNomeFilme)
-                        .addGap(30, 30, 30)
-                        .addComponent(txtNomeFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(painelFilmeLayout.createSequentialGroup()
-                        .addComponent(labelCensuraFilme)
+                        .addComponent(labelCadastrarFilme)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVoltarFilme)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCensuraFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(191, Short.MAX_VALUE))
+                        .addComponent(btnAvançarFilme))))
         );
         painelFilmeLayout.setVerticalGroup(
             painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelFilmeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelCadastrarFilme)
+                .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelFilmeLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelCadastrarFilme))
+                    .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAvançarFilme)
+                        .addComponent(btnVoltarFilme)))
                 .addGap(18, 18, 18)
                 .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNomeFilme)
@@ -274,6 +359,10 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
 
         txtCemsuraPeca.setText("Censura da pela: ");
 
+        btnAvancarPeca.setText("Avançar");
+
+        btnVoltarPeca.setText("Voltar");
+
         javax.swing.GroupLayout painelPecaLayout = new javax.swing.GroupLayout(painelPeca);
         painelPeca.setLayout(painelPecaLayout);
         painelPecaLayout.setHorizontalGroup(
@@ -281,28 +370,40 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
             .addGroup(painelPecaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelCadastrarPeca)
-                    .addGroup(painelPecaLayout.createSequentialGroup()
-                        .addComponent(labelNomePeca)
-                        .addGap(52, 52, 52)
-                        .addComponent(txtNomePeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelPecaLayout.createSequentialGroup()
                         .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelCompanhiaPeca)
-                            .addComponent(labelGeneroPeca)
-                            .addComponent(labelCensuraPeca))
+                            .addGroup(painelPecaLayout.createSequentialGroup()
+                                .addComponent(labelNomePeca)
+                                .addGap(52, 52, 52)
+                                .addComponent(txtNomePeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painelPecaLayout.createSequentialGroup()
+                                .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelCompanhiaPeca)
+                                    .addComponent(labelGeneroPeca)
+                                    .addComponent(labelCensuraPeca))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCemsuraPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtGeneroPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCompanhiaPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(184, Short.MAX_VALUE))
+                    .addGroup(painelPecaLayout.createSequentialGroup()
+                        .addComponent(labelCadastrarPeca)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVoltarPeca)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCemsuraPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGeneroPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCompanhiaPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(151, Short.MAX_VALUE))
+                        .addComponent(btnAvancarPeca))))
         );
         painelPecaLayout.setVerticalGroup(
             painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelPecaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelCadastrarPeca)
+                .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelPecaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelCadastrarPeca))
+                    .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAvancarPeca)
+                        .addComponent(btnVoltarPeca)))
                 .addGap(18, 18, 18)
                 .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNomePeca)
@@ -338,6 +439,10 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
 
         txtEstilhoShow.setText("Estilo Show: ");
 
+        btnAvancarShow.setText("Avançar");
+
+        btnVoltarShow.setText("Voltar");
+
         javax.swing.GroupLayout painelShowLayout = new javax.swing.GroupLayout(painelShow);
         painelShow.setLayout(painelShowLayout);
         painelShowLayout.setHorizontalGroup(
@@ -345,7 +450,6 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
             .addGroup(painelShowLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelCadastrarShow)
                     .addGroup(painelShowLayout.createSequentialGroup()
                         .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelNomeShow)
@@ -355,14 +459,25 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
                         .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEstilhoShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtArtistaShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNomeShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(218, Short.MAX_VALUE))
+                            .addComponent(txtNomeShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(251, Short.MAX_VALUE))
+                    .addGroup(painelShowLayout.createSequentialGroup()
+                        .addComponent(labelCadastrarShow)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVoltarShow)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAvancarShow))))
         );
         painelShowLayout.setVerticalGroup(
             painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelShowLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelCadastrarShow)
+                .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelShowLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelCadastrarShow))
+                    .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAvancarShow)
+                        .addComponent(btnVoltarShow)))
                 .addGap(18, 18, 18)
                 .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNomeShow)
@@ -379,6 +494,99 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
         );
 
         PainelPrincipal.add(painelShow, "card5");
+
+        labelDetalhesEvento.setText("Detalhes do Evento");
+
+        labelSinopseEvento.setText("Sinospse: ");
+
+        campoSinopseEvento.setColumns(20);
+        campoSinopseEvento.setRows(5);
+        jScrollPane2.setViewportView(campoSinopseEvento);
+
+        labelDescricaoEvento.setText("Descrição: ");
+
+        campoDescricaoEvento.setColumns(20);
+        campoDescricaoEvento.setRows(5);
+        jScrollPane3.setViewportView(campoDescricaoEvento);
+
+        labelDuracaoEvento.setText("Duração: ");
+
+        txtDuracaoExento.setText("Duração");
+
+        labelDataHoraEvento.setText("Data e Hora do Evento:");
+
+        try {
+            formatedDataHoraEvento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/#### ##:##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        btnAvançarEvento.setText("Avançar");
+
+        btnVoltarEvento.setText("Voltar");
+
+        javax.swing.GroupLayout painelDetalheEventoLayout = new javax.swing.GroupLayout(painelDetalheEvento);
+        painelDetalheEvento.setLayout(painelDetalheEventoLayout);
+        painelDetalheEventoLayout.setHorizontalGroup(
+            painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDetalheEventoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelDetalheEventoLayout.createSequentialGroup()
+                        .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelDetalhesEvento)
+                            .addComponent(labelDescricaoEvento)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDuracaoExento)
+                            .addGroup(painelDetalheEventoLayout.createSequentialGroup()
+                                .addComponent(labelDataHoraEvento)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(formatedDataHoraEvento)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelDetalheEventoLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnVoltarEvento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnAvançarEvento)))
+                        .addContainerGap())
+                    .addGroup(painelDetalheEventoLayout.createSequentialGroup()
+                        .addComponent(labelSinopseEvento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelDuracaoEvento)
+                        .addGap(112, 112, 112))))
+        );
+        painelDetalheEventoLayout.setVerticalGroup(
+            painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDetalheEventoLayout.createSequentialGroup()
+                .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelDetalheEventoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelDetalhesEvento))
+                    .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAvançarEvento)
+                        .addComponent(btnVoltarEvento)))
+                .addGap(18, 18, 18)
+                .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelSinopseEvento)
+                    .addComponent(labelDuracaoEvento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDuracaoExento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelDescricaoEvento)
+                    .addComponent(labelDataHoraEvento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(painelDetalheEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(formatedDataHoraEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        PainelPrincipal.add(painelDetalheEvento, "card11");
 
         labelCadastrarAmbiente.setText("Cadastrar Ambiente");
 
@@ -404,39 +612,55 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
 
         txtPontoReferenciaAmbiente.setText("Ponto de Referência: ");
 
+        btnAvançarAmbiente.setText("Avançar");
+
+        btnVoltarAmbiente.setText("Voltar");
+
         javax.swing.GroupLayout painelAmbienteLayout = new javax.swing.GroupLayout(painelAmbiente);
         painelAmbiente.setLayout(painelAmbienteLayout);
         painelAmbienteLayout.setHorizontalGroup(
             painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelAmbienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labelCadastrarAmbiente)
-                    .addComponent(labelDescricaoAmbiente)
+                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelAmbienteLayout.createSequentialGroup()
-                        .addComponent(labelPontoReferenciaAmbiente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPontoReferenciaAmbiente))
+                        .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelDescricaoAmbiente)
+                            .addGroup(painelAmbienteLayout.createSequentialGroup()
+                                .addComponent(labelPontoReferenciaAmbiente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPontoReferenciaAmbiente))
+                            .addGroup(painelAmbienteLayout.createSequentialGroup()
+                                .addComponent(labelSetorAmbiente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNomeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelCapacidadeAmbiente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCapacidadeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painelAmbienteLayout.createSequentialGroup()
+                                .addComponent(labelNomeAmbiente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNomeAmbiente))
+                            .addComponent(jScrollPane1))
+                        .addContainerGap(57, Short.MAX_VALUE))
                     .addGroup(painelAmbienteLayout.createSequentialGroup()
-                        .addComponent(labelSetorAmbiente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNomeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelCapacidadeAmbiente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCapacidadeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(painelAmbienteLayout.createSequentialGroup()
-                        .addComponent(labelNomeAmbiente)
+                        .addComponent(labelCadastrarAmbiente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVoltarAmbiente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNomeAmbiente))
-                    .addComponent(jScrollPane1))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addComponent(btnAvançarAmbiente))))
         );
         painelAmbienteLayout.setVerticalGroup(
             painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelAmbienteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelCadastrarAmbiente)
+                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelAmbienteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelCadastrarAmbiente))
+                    .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAvançarAmbiente)
+                        .addComponent(btnVoltarAmbiente)))
                 .addGap(18, 18, 18)
                 .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNomeAmbiente)
@@ -460,41 +684,227 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
 
         PainelPrincipal.add(painelAmbiente, "card6");
 
+        labelngressoEvento.setText("Ingresso");
+
+        labelValorIngresso.setText("Valor: ");
+
+        labelQuantidadeIngresso.setText("Quantidade: ");
+
+        labelPromocaoIngresso.setText("Promoção");
+
+        labelMensagemIngressoPromocao.setText("Mensagem: ");
+
+        campoMensagemPromocaoIngresso.setColumns(20);
+        campoMensagemPromocaoIngresso.setRows(5);
+        jScrollPane5.setViewportView(campoMensagemPromocaoIngresso);
+
+        labelQuantidadeDisponivelPromocaoIngresso.setText("Quantidade Disponivél: ");
+
+        txtQuantudadeDisponivelPromocaoIngresso.setText("Quantidade Disponivél");
+
+        labelValorDescontoPromocaoIngresso.setText("Valor de Desconto: ");
+
+        txtlValorDescontoPromocaoIngresso.setText("Valor de Desconto");
+
+        jTextField3.setText("Valor: ");
+
+        jTextField4.setText("Quantidade: ");
+
+        btnAvançarIngresso.setText("Avançar");
+
+        btnVoltarIngresso.setText("Voltar");
+
         javax.swing.GroupLayout painelIngressoLayout = new javax.swing.GroupLayout(painelIngresso);
         painelIngresso.setLayout(painelIngressoLayout);
         painelIngressoLayout.setHorizontalGroup(
             painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(painelIngressoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelIngressoLayout.createSequentialGroup()
+                        .addGroup(painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelMensagemIngressoPromocao)
+                            .addComponent(labelngressoEvento)
+                            .addComponent(labelPromocaoIngresso)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                        .addGroup(painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelIngressoLayout.createSequentialGroup()
+                                .addGroup(painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(labelQuantidadeDisponivelPromocaoIngresso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtQuantudadeDisponivelPromocaoIngresso)
+                                    .addComponent(labelValorDescontoPromocaoIngresso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtlValorDescontoPromocaoIngresso))
+                                .addGap(21, 21, 21))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelIngressoLayout.createSequentialGroup()
+                                .addComponent(btnVoltarIngresso)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAvançarIngresso))))
+                    .addGroup(painelIngressoLayout.createSequentialGroup()
+                        .addGroup(painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelValorIngresso)
+                            .addComponent(labelQuantidadeIngresso))
+                        .addGap(31, 31, 31)
+                        .addGroup(painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField4)
+                            .addComponent(jTextField3))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         painelIngressoLayout.setVerticalGroup(
             painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(painelIngressoLayout.createSequentialGroup()
+                .addGroup(painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelIngressoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelngressoEvento))
+                    .addGroup(painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAvançarIngresso)
+                        .addComponent(btnVoltarIngresso)))
+                .addGap(18, 18, 18)
+                .addGroup(painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelValorIngresso)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelQuantidadeIngresso)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(labelPromocaoIngresso)
+                .addGap(18, 18, 18)
+                .addGroup(painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelMensagemIngressoPromocao)
+                    .addComponent(labelQuantidadeDisponivelPromocaoIngresso))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(painelIngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(painelIngressoLayout.createSequentialGroup()
+                        .addComponent(txtQuantudadeDisponivelPromocaoIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelValorDescontoPromocaoIngresso)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtlValorDescontoPromocaoIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         PainelPrincipal.add(painelIngresso, "card7");
+
+        labelContatoEvento.setText("Contato");
+
+        labelNomeContato.setText("Nome: ");
+
+        labelTelefoneContato.setText("Telefone: ");
+
+        labelEmailContato.setText("Email: ");
+
+        labelEnderecoContato.setText("Endereço: ");
+
+        txtNomeContato.setText("Nome: ");
+
+        txtTelefoneContato.setText("Telefone: ");
+
+        txtEmailContato.setText("Email: ");
+
+        campoEnderecoContato.setColumns(20);
+        campoEnderecoContato.setRows(5);
+        jScrollPane4.setViewportView(campoEnderecoContato);
+
+        btnAvançarContato.setText("Avançar");
+
+        btnVoltarContato.setText("Voltar");
 
         javax.swing.GroupLayout painelContatoLayout = new javax.swing.GroupLayout(painelContato);
         painelContato.setLayout(painelContatoLayout);
         painelContatoLayout.setHorizontalGroup(
             painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(painelContatoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelContatoLayout.createSequentialGroup()
+                        .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(painelContatoLayout.createSequentialGroup()
+                                .addComponent(labelNomeContato)
+                                .addGap(39, 39, 39)
+                                .addComponent(txtNomeContato))
+                            .addComponent(labelEnderecoContato)
+                            .addGroup(painelContatoLayout.createSequentialGroup()
+                                .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelTelefoneContato)
+                                    .addComponent(labelEmailContato))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEmailContato)
+                                    .addComponent(txtTelefoneContato)))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 90, Short.MAX_VALUE))
+                    .addGroup(painelContatoLayout.createSequentialGroup()
+                        .addComponent(labelContatoEvento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVoltarContato)))
+                .addGap(18, 18, 18)
+                .addComponent(btnAvançarContato))
         );
         painelContatoLayout.setVerticalGroup(
             painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(painelContatoLayout.createSequentialGroup()
+                .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelContatoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelContatoEvento))
+                    .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAvançarContato)
+                        .addComponent(btnVoltarContato)))
+                .addGap(18, 18, 18)
+                .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNomeContato)
+                    .addComponent(txtNomeContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelTelefoneContato)
+                    .addComponent(txtTelefoneContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelEmailContato)
+                    .addComponent(txtEmailContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(labelEnderecoContato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         PainelPrincipal.add(painelContato, "card10");
+
+        comboListaEventoPDF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione/Data Inclusão" }));
+
+        jButton1.setText("OK");
+
+        btnMenuPrincipalGerarPdf.setText("Menu Principal");
 
         javax.swing.GroupLayout painelGerarPdfLayout = new javax.swing.GroupLayout(painelGerarPdf);
         painelGerarPdf.setLayout(painelGerarPdfLayout);
         painelGerarPdfLayout.setHorizontalGroup(
             painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(painelGerarPdfLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(comboListaEventoPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(121, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelGerarPdfLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMenuPrincipalGerarPdf)
+                .addContainerGap())
         );
         painelGerarPdfLayout.setVerticalGroup(
             painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(painelGerarPdfLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboListaEventoPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
+                .addComponent(btnMenuPrincipalGerarPdf)
+                .addContainerGap())
         );
 
         PainelPrincipal.add(painelGerarPdf, "card8");
@@ -589,15 +999,45 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelPrincipal;
+    private javax.swing.JButton btnAvancarEsporte;
+    private javax.swing.JButton btnAvancarPeca;
+    private javax.swing.JButton btnAvancarShow;
+    private javax.swing.JButton btnAvançarAmbiente;
+    private javax.swing.JButton btnAvançarContato;
+    private javax.swing.JButton btnAvançarEvento;
+    private javax.swing.JToggleButton btnAvançarFilme;
+    private javax.swing.JButton btnAvançarIngresso;
     private javax.swing.JButton btnCadastrarEventoOk;
     private javax.swing.JButton btnGerarPdfOk;
+    private javax.swing.JButton btnMenuPrincipalGerarPdf;
+    private javax.swing.JButton btnVoltarAmbiente;
+    private javax.swing.JButton btnVoltarContato;
+    private javax.swing.JButton btnVoltarEsporte;
+    private javax.swing.JButton btnVoltarEvento;
+    private javax.swing.JButton btnVoltarFilme;
+    private javax.swing.JButton btnVoltarIngresso;
+    private javax.swing.JButton btnVoltarPeca;
+    private javax.swing.JButton btnVoltarShow;
     private javax.swing.JTextArea cadastrarEquipeEsporte;
     private javax.swing.JScrollPane cadastrarEquipeEsporteScroll;
     private javax.swing.JTextArea campoDescricaoAmbiente;
+    private javax.swing.JTextArea campoDescricaoEvento;
+    private javax.swing.JTextArea campoEnderecoContato;
+    private javax.swing.JTextArea campoMensagemPromocaoIngresso;
+    private javax.swing.JTextArea campoSinopseEvento;
+    private javax.swing.JComboBox comboListaEventoPDF;
     private javax.swing.JComboBox comboxCadastrarEvento;
+    private javax.swing.JFormattedTextField formatedDataHoraEvento;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel labelArtistaShow;
     private javax.swing.JLabel labelCadastrarAmbiente;
     private javax.swing.JLabel labelCadastrarEvento;
@@ -608,24 +1048,42 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
     private javax.swing.JLabel labelCensuraFilme;
     private javax.swing.JLabel labelCensuraPeca;
     private javax.swing.JLabel labelCompanhiaPeca;
+    private javax.swing.JLabel labelContatoEvento;
+    private javax.swing.JLabel labelDataHoraEvento;
     private javax.swing.JLabel labelDescricaoAmbiente;
+    private javax.swing.JLabel labelDescricaoEvento;
+    private javax.swing.JLabel labelDetalhesEvento;
+    private javax.swing.JLabel labelDuracaoEvento;
+    private javax.swing.JLabel labelEmailContato;
+    private javax.swing.JLabel labelEnderecoContato;
     private javax.swing.JLabel labelEquipeEsporte;
     private javax.swing.JLabel labelEstiloShow;
     private javax.swing.JLabel labelGeneroFilme;
     private javax.swing.JLabel labelGeneroPeca;
+    private javax.swing.JLabel labelMensagemIngressoPromocao;
     private javax.swing.JLabel labelNomeAmbiente;
+    private javax.swing.JLabel labelNomeContato;
     private javax.swing.JLabel labelNomeEsporte;
     private javax.swing.JLabel labelNomeFilme;
     private javax.swing.JLabel labelNomePeca;
     private javax.swing.JLabel labelNomeShow;
     private javax.swing.JLabel labelPontoReferenciaAmbiente;
+    private javax.swing.JLabel labelPromocaoIngresso;
+    private javax.swing.JLabel labelQuantidadeDisponivelPromocaoIngresso;
+    private javax.swing.JLabel labelQuantidadeIngresso;
     private javax.swing.JLabel labelSetorAmbiente;
+    private javax.swing.JLabel labelSinopseEvento;
+    private javax.swing.JLabel labelTelefoneContato;
     private javax.swing.JLabel labelTituloCadastrarEsporte;
+    private javax.swing.JLabel labelValorDescontoPromocaoIngresso;
+    private javax.swing.JLabel labelValorIngresso;
+    private javax.swing.JLabel labelngressoEvento;
     private javax.swing.JMenuBar menuPrincipal;
     private javax.swing.JMenu menuPrincipal1;
     private javax.swing.JPanel painelAmbiente;
     private javax.swing.JPanel painelCadastrar;
     private javax.swing.JPanel painelContato;
+    private javax.swing.JPanel painelDetalheEvento;
     private javax.swing.JPanel painelEsporte;
     private javax.swing.JPanel painelFilme;
     private javax.swing.JPanel painelGerarPdf;
@@ -639,15 +1097,21 @@ public class GerarPangletoEvento extends javax.swing.JFrame {
     private javax.swing.JTextField txtCemsuraPeca;
     private javax.swing.JTextField txtCensuraFilme;
     private javax.swing.JTextField txtCompanhiaPeca;
+    private javax.swing.JTextField txtDuracaoExento;
+    private javax.swing.JTextField txtEmailContato;
     private javax.swing.JTextField txtEstilhoShow;
     private javax.swing.JTextField txtGeneroFilme;
     private javax.swing.JTextField txtGeneroPeca;
     private javax.swing.JTextField txtNomeAmbiente;
+    private javax.swing.JTextField txtNomeContato;
     private javax.swing.JTextField txtNomeEsporte;
     private javax.swing.JTextField txtNomeFilme;
     private javax.swing.JTextField txtNomePeca;
     private javax.swing.JTextField txtNomeSetorAmbiente;
     private javax.swing.JTextField txtNomeShow;
     private javax.swing.JTextField txtPontoReferenciaAmbiente;
+    private javax.swing.JTextField txtQuantudadeDisponivelPromocaoIngresso;
+    private javax.swing.JTextField txtTelefoneContato;
+    private javax.swing.JTextField txtlValorDescontoPromocaoIngresso;
     // End of variables declaration//GEN-END:variables
 }
