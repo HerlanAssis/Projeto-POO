@@ -8,21 +8,47 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Arquivo"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subMenuPainelCadastrarActionPerformed"/>
+          </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="itamAbrirPastaSubMenuPainelCadastrar">
+            <MenuItem class="javax.swing.JMenuItem" name="itemMenuPrincipalArquivoSubMenuPainelCadastrar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Menu Principal"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuPrincipalArquivoSubMenuPainelCadastrarActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemAbrirPastaSubMenuPainelCadastrar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Abrir Pasta"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itamAbrirPastaSubMenuPainelCadastrarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAbrirPastaSubMenuPainelCadastrarActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itamSairSubMenuPainelCadastrar">
+            <MenuItem class="javax.swing.JMenuItem" name="itemSairSubMenuPainelCadastrar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itamSairSubMenuPainelCadastrarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemSairSubMenuPainelCadastrarActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="subMenuPainelSobre">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sobre"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="itemSobreSubMenuPainelCadastrar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sobre"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemSobreSubMenuPainelCadastrarActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -86,7 +112,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="678" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="763" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -105,14 +131,14 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="392" max="32767" attributes="0"/>
+                          <EmptySpace pref="477" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="413" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="473" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -129,7 +155,7 @@
                               <Component id="comboxGerarPdfEvento" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnGerarPdfOk" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="232" max="32767" attributes="0"/>
+                          <EmptySpace pref="292" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -225,7 +251,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="111" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="196" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -244,7 +270,7 @@
                           <Component id="labelNomeEsporte" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNomeEsporte" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="114" max="32767" attributes="0"/>
+                      <EmptySpace pref="174" max="32767" attributes="0"/>
                       <Component id="labelEquipeEsporte" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cadastrarEquipeEsporteScroll1" min="-2" pref="129" max="-2" attributes="0"/>
@@ -332,34 +358,43 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="labelCensuraFilme" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtCensuraFilme" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="btnVoltarFilme" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnAvançarFilme" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="labelCadastrarFilme" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="labelGeneroFilme" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelNomeFilme" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="labelCensuraFilme" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtCensuraFilme" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="labelCadastrarFilme" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="labelGeneroFilme" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="labelNomeFilme" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtNomeFilme" min="-2" pref="209" max="-2" attributes="0"/>
+                                          <Component id="txtGeneroFilme" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="labelEstreiaFilme" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtEstreiaFilme" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtNomeFilme" min="-2" pref="209" max="-2" attributes="0"/>
-                                  <Component id="txtGeneroFilme" max="32767" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="0" pref="451" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="378" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnVoltarFilme" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnAvançarFilme" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -384,7 +419,12 @@
                           <Component id="labelCensuraFilme" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCensuraFilme" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="238" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="labelEstreiaFilme" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtEstreiaFilme" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="261" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAvançarFilme" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnVoltarFilme" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -455,6 +495,20 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvan&#xe7;arFilmeActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JLabel" name="labelEstreiaFilme">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Estreia: "/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtEstreiaFilme">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Digite o dia de estreia"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtEstreiaFilmeMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEstreiaFilmeActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="painelShow">
@@ -468,7 +522,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="481" max="32767" attributes="0"/>
+                      <EmptySpace pref="566" max="32767" attributes="0"/>
                       <Component id="btnVoltarShow" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnAvançarShow" min="-2" max="-2" attributes="0"/>
@@ -492,7 +546,7 @@
                           </Group>
                           <Component id="labelCadastrarShow" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="396" max="32767" attributes="0"/>
+                      <EmptySpace pref="481" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -516,7 +570,7 @@
                           <Component id="labelEstiloShow" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtEstilhoShow" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="244" max="32767" attributes="0"/>
+                      <EmptySpace pref="304" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAvançarShow" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnVoltarShow" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -622,7 +676,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="385" max="32767" attributes="0"/>
+                      <EmptySpace pref="470" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -658,7 +712,7 @@
                           <Component id="labelCensuraPeca" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCensuraPeca" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="199" max="32767" attributes="0"/>
+                      <EmptySpace pref="259" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAvançarPeca" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnVoltarPeca" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -955,8 +1009,7 @@
                                       <Component id="txtNomeAmbiente" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jScrollPane6" pref="276" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" pref="193" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Component id="btnVoltarAmbiente" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btnAvançarAmbiente" min="-2" max="-2" attributes="0"/>
@@ -980,8 +1033,9 @@
                               <Component id="labelCapacidadeAmbiente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Component id="txtCapacidadeSetorAmbiente" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="387" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="jScrollPane6" alignment="0" pref="751" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -1014,20 +1068,14 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="labelEnderecoAmbiente" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="btnAvançarAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnVoltarAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jScrollPane6" min="-2" pref="57" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jScrollPane6" min="-2" pref="57" max="-2" attributes="0"/>
+                      <EmptySpace pref="61" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnAvançarAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnVoltarAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1148,6 +1196,9 @@
                     <Property name="rows" type="int" value="5"/>
                     <Property name="text" type="java.lang.String" value="Endere&#xe7;o do ambiente: "/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="campoEnderecoAmbienteMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1376,29 +1427,29 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnConcluirContato" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="labelEnderecoContato" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelContatoEvento" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="579" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jScrollPane4" alignment="0" pref="739" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="labelTelefoneContato" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelEmailContato" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtEmailContato" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtTelefoneContato" alignment="0" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtEmailContato" max="32767" attributes="0"/>
+                                  <Component id="txtTelefoneContato" pref="577" max="32767" attributes="0"/>
                               </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelEnderecoContato" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelContatoEvento" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="labelNomeContato" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="txtNomeContato" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="txtNomeContato" min="-2" pref="577" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1429,7 +1480,7 @@
                       <Component id="labelEnderecoContato" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="106" max="32767" attributes="0"/>
+                      <EmptySpace pref="181" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnConcluirContato" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnVoltarContato" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1552,7 +1603,7 @@
                                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="291" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="380" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -1590,7 +1641,7 @@
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="comboxListaEventoPDF" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="194" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="254" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1602,9 +1653,7 @@
             <Component class="javax.swing.JComboBox" name="comboxListaEventoPDF">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="1">
-                    <StringItem index="0" value="Evento/Data Inclus&#xe3;o"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
@@ -1641,11 +1690,19 @@
             <Component class="javax.swing.JComboBox" name="comboxSelecionarCorPainelGerarPdf">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Banco"/>
+                  <StringArray count="12">
+                    <StringItem index="0" value="Branco"/>
                     <StringItem index="1" value="Preto"/>
                     <StringItem index="2" value="Azul"/>
-                    <StringItem index="3" value="Cinza"/>
+                    <StringItem index="3" value="Cinza Escuro"/>
+                    <StringItem index="4" value="Cinza"/>
+                    <StringItem index="5" value="Cinza Claro"/>
+                    <StringItem index="6" value="Magenta"/>
+                    <StringItem index="7" value="Laranja"/>
+                    <StringItem index="8" value="Rosa"/>
+                    <StringItem index="9" value="Vermelho"/>
+                    <StringItem index="10" value="Amarelo"/>
+                    <StringItem index="11" value="Cyan"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -1672,6 +1729,138 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Evento/Data Inclus&#xe3;o: "/>
               </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="painelSobre">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="painelSobre"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane7" pref="739" max="32767" attributes="0"/>
+                          <Component id="jScrollPane8" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelComponenteSobre" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelAgradecimentosSobre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelSobreSoftwareSobre" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane9" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="btnSobreMenuPrincipal" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="labelComponenteSobre" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="labelAgradecimentosSobre" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jScrollPane8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="labelSobreSoftwareSobre" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jScrollPane9" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="61" max="32767" attributes="0"/>
+                      <Component id="btnSobreMenuPrincipal" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="labelComponenteSobre">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Componentes: "/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane7">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="campoComponenteSobre">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="Herlan Assis Pereira da Silva - Aluno do 2&#xba; Per&#xed;odo de An&#xe1;lise e Desenvolvimento de Sistemas.&#xa;&#xa;Franklin Ven&#xe2;ncio da Silva Rocha - Aluno do 2&#xba; Per&#xed;odo de An&#xe1;lise e Desenvolvimento de Sistemas."/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="labelAgradecimentosSobre">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Agradecimentos: "/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane8">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="campoAgradecimentoSobre">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="Agradecemos a todos os professores do Curso Superior de An&#xe1;lise e Deselvolvimento pela sua ajuda e dedica&#xe7;&#xe3;o&#xa;em nos ensinar a &quot;arte da cria&#xe7;&#xe3;o&quot;."/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="labelSobreSoftwareSobre">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sobre o software: "/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane9">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="campoSobreSofwareSobre">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="Vers&#xe3;o de Teste 1.0&#xa;&#xa;Este software tem como fun&#xe7;&#xe3;o gerar modelos pronto em pdf com base nas informa&#xe7;&#xf5;es dadas pelo usu&#xe1;rio no&#xa;momento do cadastro."/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JButton" name="btnSobreMenuPrincipal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Menu Principal"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSobreMenuPrincipalActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -2,8 +2,13 @@ package br.com.ifrn.panfleto.cadastrar;
 
 import br.com.ifrn.panfleto.FormalizarEvento;
 import br.com.ifrn.panfleto.envento.*;
+import br.com.ifrn.panfleto.gerarpdf.PdfCreator;
+import br.com.ifrn.panfleto.utilitario.AbrirPasta;
+import br.com.ifrn.panfleto.utilitario.FormatarData;
+import com.itextpdf.text.BaseColor;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Cadastrar implements FormalizarEvento {
 
@@ -12,6 +17,9 @@ public class Cadastrar implements FormalizarEvento {
     private ArrayList<Filme> filme;
     private ArrayList<Peca> peca;
     private ArrayList<Show> show;
+    private final AbrirPasta abrirPasta = new AbrirPasta();
+    private final FormatarData formatarData = new FormatarData();
+    private PdfCreator pdfCreator;
     private static Cadastrar uniqueInstance;
 
     private Cadastrar() {
@@ -20,6 +28,14 @@ public class Cadastrar implements FormalizarEvento {
         peca = new ArrayList<>();
         show = new ArrayList<>();
     }
+
+    public PdfCreator getPdfCreator() {
+        return pdfCreator;
+    }
+
+    public void setPdfCreator(PdfCreator pdfCreator) {
+        this.pdfCreator = pdfCreator;
+    }        
 
     public static Cadastrar getUniqueInstance() {
         if (uniqueInstance == null) {
@@ -99,23 +115,20 @@ public class Cadastrar implements FormalizarEvento {
     public ArrayList<Show> getShow() {
         return show;
     }        
-
-    public void irURL(String URL) throws IOException {
-        String text, text2;
-        text = System.getProperty("os.name");
-        text = text.toLowerCase();
-        text2 = URL;
-
-        if (text.contains("linux") && !text2.equals("")) {
-            Runtime.getRuntime().exec("caja " + URL); // Seu gerenciador de arquivos: konkeror (KDE), dolphin, nautilus (gnome) e etc  
-            /*} catch (IOException ex) {
-                System.out.println("Gerenciador de arquivos não instalado.");
-            }*/
-        } else if (text.contains("windows") && !text2.equals("")) {
-            Runtime.getRuntime().exec("explorer.exe " + URL); // A url, que no caso é C:/  
-            /*} catch (IOException ex) {
-                System.out.println("Desculpe, falha na execução dessa função!");
-            }*/
-        }
+    
+    public void abrirPasta() throws IOException{
+        abrirPasta.irURL();
+    }
+    
+    public String dateToString(Date date) throws Exception{
+        return formatarData.DateToString(date);        
+    }
+    
+    public Date stringToDate(String date) throws Exception{
+        return formatarData.StringToDate(date);
+    }
+    
+    public boolean validarData(String data) throws Exception {
+        return formatarData.ValidarData(data);
     }
 }

@@ -6,7 +6,7 @@ public class Ingresso extends Promoção {
     private int quantidade;        
 
     public double getValor() {
-        return valor - getValorDeDesconto();
+        return valor;
     }
 
     public void setValor(double valor) {

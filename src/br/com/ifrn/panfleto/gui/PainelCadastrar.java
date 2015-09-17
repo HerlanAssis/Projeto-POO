@@ -10,10 +10,11 @@ import br.com.ifrn.panfleto.Contatos;
 import br.com.ifrn.panfleto.Setor;
 import br.com.ifrn.panfleto.cadastrar.Cadastrar;
 import br.com.ifrn.panfleto.envento.Esporte;
+import br.com.ifrn.panfleto.envento.Filme;
+import br.com.ifrn.panfleto.envento.Peca;
+import br.com.ifrn.panfleto.envento.Show;
 import br.com.ifrn.panfleto.gerarpdf.PdfCreator;
 import br.com.ifrn.panfleto.ingresso.Ingresso;
-import br.com.ifrn.panfleto.utilitario.AbrirPasta;
-import br.com.ifrn.panfleto.utilitario.FormatarData;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Rectangle;
@@ -38,20 +39,33 @@ public class PainelCadastrar extends javax.swing.JFrame {
      */
     private Cadastrar cadastrar;
     private Esporte esporte;
-    private Date date;
-    private FormatarData formatarData;
+    private Filme filme;
+    private Peca peca;
+    private Show show;
+    private Date date;    
     private Ambiente ambiente;
     private Ingresso ingresso;
     private Setor setor;
     private Contatos contatos;
-    private PdfCreator pdfCreator;
 
-    public PainelCadastrar() {
+    //Possivél Implementação Manual para Validar Paineis
+//    private boolean validarEsporte = true;
+//    private boolean validarFilme = true;
+//    private boolean validarPeca = true;
+//    private boolean validarShow = true;
+//    private boolean validarDetalheEvento = true;
+//    private boolean validarAmbiente = true;
+//    private boolean validarIngresso = true;
+//    private boolean validarContato = true;
+//    private boolean validarGerarPdf = true;
+
+    public PainelCadastrar() {//Instanciando a classe principal cadastrar
         initComponents();
         this.setLocationRelativeTo(null);
         cadastrar = Cadastrar.getUniqueInstance();
     }
-
+    
+    
     private final int Esporte = 1;
     private final int Filme = 2;
     private final int Peca = 3;
@@ -127,7 +141,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
             return BaseColor.CYAN;
         }
 
-        return BaseColor.BLUE;
+        return BaseColor.WHITE;
     }
 
     public Rectangle tamanhoDaPagina() {
@@ -160,33 +174,32 @@ public class PainelCadastrar extends javax.swing.JFrame {
         return new Rectangle(PageSize.A4);
     }
 
-    public void gerarPdf() throws IOException, Exception {
-        pdfCreator = new PdfCreator(tamanhoDaPagina(), corPagina());
+    public void gerarPdf() throws IOException, Exception {        
+        cadastrar.setPdfCreator(new PdfCreator(tamanhoDaPagina(), corPagina()));
 
-        if (variavelControle == 1) {
-            for (int i = 0; i < cadastrar.getEsporte().size(); i++) {
-                comboxListaEventoPDF.getSelectedItem().equals(cadastrar.getEsporte().get(i).getNome()
-                        + formatarData.DateToString(cadastrar.getEsporte().get(i).getDataInclusao()));
-                pdfCreator.gerarPlanfletoEsporte(cadastrar.getEsporte().get(i));
-            }
-        } else if (variavelControle == 2) {
-
-        } else if (variavelControle == 3) {
-
-        } else if (variavelControle == 4) {
-
+        if (comboxGerarPdfEvento.getSelectedItem().equals("Esporte")) {
+            cadastrar.getPdfCreator().gerarPlanfletoEsporte(cadastrar.getEsporte().get(comboxListaEventoPDF.getSelectedIndex()));
+        
+        } else if (comboxGerarPdfEvento.getSelectedItem().equals("Filme")) {
+            cadastrar.getPdfCreator().gerarPlanfletoFilme(cadastrar.getFilme().get(comboxListaEventoPDF.getSelectedIndex()));
+        
+        } else if (comboxGerarPdfEvento.getSelectedItem().equals("Peça")) {
+            cadastrar.getPdfCreator().gerarPlanfletoPeca(cadastrar.getPeca().get(comboxListaEventoPDF.getSelectedIndex()));
+        
+        } else if (comboxGerarPdfEvento.getSelectedItem().equals("Show")) {
+            cadastrar.getPdfCreator().gerarPlanfletoShow(cadastrar.getShow().get(comboxListaEventoPDF.getSelectedIndex()));
         }
     }
 
     public Esporte cadastrarEsporte() throws Exception {
         date = new Date(System.currentTimeMillis());
-        formatarData = new FormatarData();
+        //formatarData = new FormatarData();
 
         esporte = new Esporte();
-        ambiente = new Ambiente();
-        setor = new Setor();
-        contatos = new Contatos();
-        ingresso = new Ingresso();
+//        ambiente = new Ambiente();
+//        setor = new Setor();
+//        contatos = new Contatos();
+//        ingresso = new Ingresso();
 
         esporte.setNome(txtNomeEsporte.getText());
         esporte.setEquipe(campoCadastrarEquipeEsporte.getText());
@@ -194,11 +207,119 @@ public class PainelCadastrar extends javax.swing.JFrame {
         esporte.setSinopse(campoSinopseEvento.getText());
         esporte.setDataInclusao(date);
 
-        if (formatarData.ValidarData(formatedDataHoraEvento.getText())) {
-            esporte.setDataEvento(formatarData.StringToDate(formatedDataHoraEvento.getText()));
+        if (cadastrar.validarData(formatedDataHoraEvento.getText())) {
+            esporte.setDataEvento(cadastrar.stringToDate(formatedDataHoraEvento.getText()));
         }
 
         esporte.setDuracao(Integer.parseInt(txtDuracaoEvento.getText()));
+
+//        ambiente.setNome(txtNomeAmbiente.getText());
+//        ambiente.setDescricao(campoDescricaoAmbiente.getText());
+//        ambiente.setEndereco(campoEnderecoAmbiente.getText());
+//        ambiente.setProntoReferencia(txtPontoReferenciaAmbiente.getText());
+//        setor.setNome(txtNomeSetorAmbiente.getText());
+//        setor.setCapacidade(Integer.parseInt(txtCapacidadeSetorAmbiente.getText()));
+//        ambiente.setSetor(setor);
+//
+//        ingresso.setMensagem(campoMensagemPromocaoIngresso.getText());
+//        ingresso.setQuantidade(Integer.parseInt(txtQuantidadeIngressoEvento.getText()));
+//        ingresso.setQuantidadeDisponivél(Integer.parseInt(txtQuantudadeDisponivelPromocaoIngresso.getText()));
+//        ingresso.setValor(Double.parseDouble(txtValorIngressoEvento.getText()));
+//        ingresso.setValorDeDesconto(Double.parseDouble(txtlValorDescontoPromocaoIngresso.getText()));
+//
+//        contatos.setNome(txtNomeContato.getText());
+//        contatos.setEmail(txtEmailContato.getText());
+//        contatos.setEndereco(campoEnderecoContato.getText());
+//        contatos.setTelefone(txtTelefoneContato.getText());
+        esporte.setAmbiente(getAmbiente());
+        esporte.setContatos(getContato());
+        esporte.setIngresso(getIngresso());
+
+        return esporte;
+    }
+
+    public Filme cadastrarFilme() throws Exception {
+        date = new Date(System.currentTimeMillis());
+        //formatarData = new FormatarData();
+
+        filme = new Filme();
+
+        filme.setNome(txtNomeFilme.getText());
+        filme.setGenero(txtGeneroFilme.getText());
+        filme.setEstreia(txtEstreiaFilme.getText());
+        filme.setCensura(Integer.parseInt(txtCensuraFilme.getText()));
+        filme.setDescricao(campoDescricaoAmbiente.getText());
+        filme.setSinopse(campoSinopseEvento.getText());
+        filme.setDataInclusao(date);
+
+        if (cadastrar.validarData(formatedDataHoraEvento.getText())) {
+            filme.setDataEvento(cadastrar.stringToDate(formatedDataHoraEvento.getText()));
+        }
+
+        filme.setDuracao(Integer.parseInt(txtDuracaoEvento.getText()));
+
+        filme.setAmbiente(getAmbiente());
+        filme.setContatos(getContato());
+        filme.setIngresso(getIngresso());
+
+        return filme;
+    }
+
+    public Peca cadastrarPeca() throws Exception {
+        date = new Date(System.currentTimeMillis());
+        //formatarData = new FormatarData();
+
+        peca = new Peca();
+
+        peca.setNome(txtNomePeca.getText());
+        peca.setGenero(txtGeneroPeca.getText());
+        peca.setCompanhia(txtCompanhiaPeca.getText());
+        peca.setCensura(Integer.parseInt(txtCensuraPeca.getText()));
+
+        peca.setDescricao(campoDescricaoAmbiente.getText());
+        peca.setSinopse(campoSinopseEvento.getText());
+        peca.setDataInclusao(date);
+
+        if (cadastrar.validarData(formatedDataHoraEvento.getText())) {
+            peca.setDataEvento(cadastrar.stringToDate(formatedDataHoraEvento.getText()));
+        }
+        peca.setDuracao(Integer.parseInt(txtDuracaoEvento.getText()));
+
+        peca.setAmbiente(getAmbiente());
+        peca.setContatos(getContato());
+        peca.setIngresso(getIngresso());
+
+        return peca;
+    }
+
+    public Show cadastrarShow() throws Exception {
+        date = new Date(System.currentTimeMillis());
+        //formatarData = new FormatarData();
+
+        show = new Show();
+        show.setNome(txtNomeShow.getText());
+        show.setEstilo(txtEstilhoShow.getText());
+        show.setArtista(txtArtistaShow.getText());
+
+        show.setDescricao(campoDescricaoAmbiente.getText());
+        show.setSinopse(campoSinopseEvento.getText());
+        show.setDataInclusao(date);
+
+        if (cadastrar.validarData(formatedDataHoraEvento.getText())) {
+            show.setDataEvento(cadastrar.stringToDate(formatedDataHoraEvento.getText()));
+        }
+        show.setDuracao(Integer.parseInt(txtDuracaoEvento.getText()));
+
+        show.setAmbiente(getAmbiente());
+        show.setContatos(getContato());
+        show.setIngresso(getIngresso());
+
+        return show;
+    }
+
+    public Ambiente getAmbiente() {
+        ambiente = new Ambiente();
+        setor = new Setor();
 
         ambiente.setNome(txtNomeAmbiente.getText());
         ambiente.setDescricao(campoDescricaoAmbiente.getText());
@@ -208,28 +329,35 @@ public class PainelCadastrar extends javax.swing.JFrame {
         setor.setCapacidade(Integer.parseInt(txtCapacidadeSetorAmbiente.getText()));
         ambiente.setSetor(setor);
 
+        return ambiente;
+    }
+
+    public Contatos getContato() {
+        contatos = new Contatos();
+
+        contatos.setNome(txtNomeContato.getText());
+        contatos.setEmail(txtEmailContato.getText());
+        contatos.setEndereco(campoEnderecoContato.getText());
+        contatos.setTelefone(txtTelefoneContato.getText());
+
+        return contatos;
+    }
+
+    public Ingresso getIngresso() {
+        ingresso = new Ingresso();
+
         ingresso.setMensagem(campoMensagemPromocaoIngresso.getText());
         ingresso.setQuantidade(Integer.parseInt(txtQuantidadeIngressoEvento.getText()));
         ingresso.setQuantidadeDisponivél(Integer.parseInt(txtQuantudadeDisponivelPromocaoIngresso.getText()));
         ingresso.setValor(Double.parseDouble(txtValorIngressoEvento.getText()));
         ingresso.setValorDeDesconto(Double.parseDouble(txtlValorDescontoPromocaoIngresso.getText()));
 
-        contatos.setNome(txtNomeContato.getName());
-        contatos.setEmail(txtEmailContato.getText());
-        contatos.setEndereco(campoEnderecoContato.getText());
-        contatos.setTelefone(txtTelefoneContato.getText());
-
-        esporte.setAmbiente(ambiente);
-        esporte.setContatos(contatos);
-        esporte.setIngresso(ingresso);
-
-        return esporte;
+        return ingresso;
     }
 
-    public void cadastrar() throws Exception {
-        cadastrar.cadastrarEsporte(cadastrarEsporte());
-    }
-
+//    public void cadastrar() throws Exception {
+//        cadastrar.cadastrarEsporte(cadastrarEsporte());
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -266,6 +394,8 @@ public class PainelCadastrar extends javax.swing.JFrame {
         txtNomeFilme = new javax.swing.JTextField();
         btnVoltarFilme = new javax.swing.JButton();
         btnAvançarFilme = new javax.swing.JButton();
+        labelEstreiaFilme = new javax.swing.JLabel();
+        txtEstreiaFilme = new javax.swing.JTextField();
         painelShow = new javax.swing.JPanel();
         btnVoltarShow = new javax.swing.JButton();
         btnAvançarShow = new javax.swing.JButton();
@@ -358,10 +488,24 @@ public class PainelCadastrar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        painelSobre = new javax.swing.JPanel();
+        labelComponenteSobre = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        campoComponenteSobre = new javax.swing.JTextArea();
+        labelAgradecimentosSobre = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        campoAgradecimentoSobre = new javax.swing.JTextArea();
+        labelSobreSoftwareSobre = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        campoSobreSofwareSobre = new javax.swing.JTextArea();
+        btnSobreMenuPrincipal = new javax.swing.JButton();
         menuPainelCadastrar = new javax.swing.JMenuBar();
         subMenuPainelCadastrar = new javax.swing.JMenu();
-        itamAbrirPastaSubMenuPainelCadastrar = new javax.swing.JMenuItem();
-        itamSairSubMenuPainelCadastrar = new javax.swing.JMenuItem();
+        itemMenuPrincipalArquivoSubMenuPainelCadastrar = new javax.swing.JMenuItem();
+        itemAbrirPastaSubMenuPainelCadastrar = new javax.swing.JMenuItem();
+        itemSairSubMenuPainelCadastrar = new javax.swing.JMenuItem();
+        subMenuPainelSobre = new javax.swing.JMenu();
+        itemSobreSubMenuPainelCadastrar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -399,7 +543,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         painelCadastrar.setLayout(painelCadastrarLayout);
         painelCadastrarLayout.setHorizontalGroup(
             painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
+            .addGap(0, 763, Short.MAX_VALUE)
             .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(painelCadastrarLayout.createSequentialGroup()
                     .addContainerGap()
@@ -414,11 +558,11 @@ public class PainelCadastrar extends javax.swing.JFrame {
                             .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnCadastrarEventoOk)
                                 .addComponent(btnGerarPdfOk))))
-                    .addContainerGap(392, Short.MAX_VALUE)))
+                    .addContainerGap(477, Short.MAX_VALUE)))
         );
         painelCadastrarLayout.setVerticalGroup(
             painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+            .addGap(0, 473, Short.MAX_VALUE)
             .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(painelCadastrarLayout.createSequentialGroup()
                     .addContainerGap()
@@ -433,7 +577,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                     .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(comboxGerarPdfEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnGerarPdfOk))
-                    .addContainerGap(232, Short.MAX_VALUE)))
+                    .addContainerGap(292, Short.MAX_VALUE)))
         );
 
         PainelPrincipal.add(painelCadastrar, "painelCadastrar");
@@ -496,7 +640,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                                 .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labelEquipeEsporte)
                                     .addComponent(cadastrarEquipeEsporteScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 111, Short.MAX_VALUE)))
+                        .addGap(0, 196, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAvançarEsporte)
                 .addContainerGap())
@@ -510,7 +654,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                 .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNomeEsporte)
                     .addComponent(txtNomeEsporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addComponent(labelEquipeEsporte)
                 .addGap(18, 18, 18)
                 .addComponent(cadastrarEquipeEsporteScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -568,32 +712,52 @@ public class PainelCadastrar extends javax.swing.JFrame {
             }
         });
 
+        labelEstreiaFilme.setText("Estreia: ");
+
+        txtEstreiaFilme.setText("Digite o dia de estreia");
+        txtEstreiaFilme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtEstreiaFilmeMouseClicked(evt);
+            }
+        });
+        txtEstreiaFilme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEstreiaFilmeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelFilmeLayout = new javax.swing.GroupLayout(painelFilme);
         painelFilme.setLayout(painelFilmeLayout);
         painelFilmeLayout.setHorizontalGroup(
             painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelFilmeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFilmeLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVoltarFilme)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAvançarFilme))
                     .addGroup(painelFilmeLayout.createSequentialGroup()
-                        .addComponent(labelCensuraFilme)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCensuraFilme))
-                    .addComponent(labelCadastrarFilme)
-                    .addGroup(painelFilmeLayout.createSequentialGroup()
-                        .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelGeneroFilme)
-                            .addComponent(labelNomeFilme))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNomeFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGeneroFilme))))
-                .addContainerGap(378, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFilmeLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVoltarFilme)
-                .addGap(18, 18, 18)
-                .addComponent(btnAvançarFilme)
+                        .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(painelFilmeLayout.createSequentialGroup()
+                                .addComponent(labelCensuraFilme)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCensuraFilme))
+                            .addComponent(labelCadastrarFilme)
+                            .addGroup(painelFilmeLayout.createSequentialGroup()
+                                .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelGeneroFilme)
+                                    .addComponent(labelNomeFilme))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNomeFilme, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtGeneroFilme)))
+                            .addGroup(painelFilmeLayout.createSequentialGroup()
+                                .addComponent(labelEstreiaFilme)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtEstreiaFilme)))
+                        .addGap(0, 451, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         painelFilmeLayout.setVerticalGroup(
@@ -613,7 +777,11 @@ public class PainelCadastrar extends javax.swing.JFrame {
                 .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCensuraFilme)
                     .addComponent(txtCensuraFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelEstreiaFilme)
+                    .addComponent(txtEstreiaFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
                 .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAvançarFilme)
                     .addComponent(btnVoltarFilme))
@@ -685,7 +853,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         painelShowLayout.setHorizontalGroup(
             painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelShowLayout.createSequentialGroup()
-                .addContainerGap(481, Short.MAX_VALUE)
+                .addContainerGap(566, Short.MAX_VALUE)
                 .addComponent(btnVoltarShow)
                 .addGap(18, 18, 18)
                 .addComponent(btnAvançarShow)
@@ -704,7 +872,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                             .addComponent(txtArtistaShow, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                             .addComponent(txtEstilhoShow)))
                     .addComponent(labelCadastrarShow))
-                .addContainerGap(396, Short.MAX_VALUE))
+                .addContainerGap(481, Short.MAX_VALUE))
         );
         painelShowLayout.setVerticalGroup(
             painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -723,7 +891,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                 .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelEstiloShow)
                     .addComponent(txtEstilhoShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
                 .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAvançarShow)
                     .addComponent(btnVoltarShow))
@@ -804,7 +972,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                             .addComponent(txtGeneroPeca)
                             .addComponent(txtCensuraPeca)
                             .addComponent(txtNomePeca, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))))
-                .addContainerGap(385, Short.MAX_VALUE))
+                .addContainerGap(470, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPecaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVoltarPeca)
@@ -833,7 +1001,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                 .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCensuraPeca)
                     .addComponent(txtCensuraPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
                 .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAvançarPeca)
                     .addComponent(btnVoltarPeca))
@@ -1036,6 +1204,11 @@ public class PainelCadastrar extends javax.swing.JFrame {
         campoEnderecoAmbiente.setColumns(20);
         campoEnderecoAmbiente.setRows(5);
         campoEnderecoAmbiente.setText("Endereço do ambiente: ");
+        campoEnderecoAmbiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoEnderecoAmbienteMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(campoEnderecoAmbiente);
 
         javax.swing.GroupLayout painelAmbienteLayout = new javax.swing.GroupLayout(painelAmbiente);
@@ -1057,8 +1230,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtNomeAmbiente))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelAmbienteLayout.createSequentialGroup()
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                                .addGap(193, 193, 193)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btnVoltarAmbiente)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnAvançarAmbiente))
@@ -1077,7 +1249,8 @@ public class PainelCadastrar extends javax.swing.JFrame {
                         .addComponent(labelCapacidadeAmbiente)
                         .addGap(6, 6, 6)
                         .addComponent(txtCapacidadeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 387, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)))
         );
         painelAmbienteLayout.setVerticalGroup(
             painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1104,16 +1277,13 @@ public class PainelCadastrar extends javax.swing.JFrame {
                     .addComponent(txtCapacidadeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(labelEnderecoAmbiente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelAmbienteLayout.createSequentialGroup()
-                        .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAvançarAmbiente)
-                            .addComponent(btnVoltarAmbiente))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelAmbienteLayout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAvançarAmbiente)
+                    .addComponent(btnVoltarAmbiente))
+                .addContainerGap())
         );
 
         PainelPrincipal.add(painelAmbiente, "painelAmbiente");
@@ -1326,24 +1496,24 @@ public class PainelCadastrar extends javax.swing.JFrame {
                         .addComponent(btnVoltarContato)
                         .addGap(18, 18, 18)
                         .addComponent(btnConcluirContato))
-                    .addComponent(jScrollPane4)
-                    .addGroup(painelContatoLayout.createSequentialGroup()
-                        .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelEnderecoContato)
-                            .addComponent(labelContatoEvento))
-                        .addGap(0, 579, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
                     .addGroup(painelContatoLayout.createSequentialGroup()
                         .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelTelefoneContato)
                             .addComponent(labelEmailContato))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtEmailContato)
-                            .addComponent(txtTelefoneContato)))
+                            .addComponent(txtTelefoneContato, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)))
+                    .addGroup(painelContatoLayout.createSequentialGroup()
+                        .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelEnderecoContato)
+                            .addComponent(labelContatoEvento))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(painelContatoLayout.createSequentialGroup()
                         .addComponent(labelNomeContato)
-                        .addGap(40, 40, 40)
-                        .addComponent(txtNomeContato)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtNomeContato, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         painelContatoLayout.setVerticalGroup(
@@ -1367,7 +1537,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                 .addComponent(labelEnderecoContato)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
                 .addGroup(painelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConcluirContato)
                     .addComponent(btnVoltarContato))
@@ -1376,7 +1546,6 @@ public class PainelCadastrar extends javax.swing.JFrame {
 
         PainelPrincipal.add(painelContato, "painelContato");
 
-        comboxListaEventoPDF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Evento/Data Inclusão" }));
         comboxListaEventoPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboxListaEventoPDFActionPerformed(evt);
@@ -1392,7 +1561,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
 
         comboxSelecionarTamanhoPaginaPainelGerarPdf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A0", "A1", "A2", "A3", "A4", "A5", "B1", "B2", "B3", "B4", "B5" }));
 
-        comboxSelecionarCorPainelGerarPdf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Banco", "Preto", "Azul", "Cinza" }));
+        comboxSelecionarCorPainelGerarPdf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Branco", "Preto", "Azul", "Cinza Escuro", "Cinza", "Cinza Claro", "Magenta", "Laranja", "Rosa", "Vermelho", "Amarelo", "Cyan" }));
 
         btnGerarPdfPainelGerarPdf.setText("Gerar PDF!");
         btnGerarPdfPainelGerarPdf.addActionListener(new java.awt.event.ActionListener() {
@@ -1425,7 +1594,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                                 .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))
-                                .addGap(0, 291, Short.MAX_VALUE)))
+                                .addGap(0, 380, Short.MAX_VALUE)))
                         .addGap(12, 12, 12)
                         .addComponent(btnGerarPdfPainelGerarPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelGerarPdfLayout.createSequentialGroup()
@@ -1455,31 +1624,130 @@ public class PainelCadastrar extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(comboxListaEventoPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 194, Short.MAX_VALUE)))
+                        .addGap(0, 254, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         PainelPrincipal.add(painelGerarPdf, "painelGerarPdf");
 
+        labelComponenteSobre.setText("Componentes: ");
+
+        campoComponenteSobre.setEditable(false);
+        campoComponenteSobre.setColumns(20);
+        campoComponenteSobre.setRows(5);
+        campoComponenteSobre.setText("Herlan Assis Pereira da Silva - Aluno do 2º Período de Análise e Desenvolvimento de Sistemas.\n\nFranklin Venâncio da Silva Rocha - Aluno do 2º Período de Análise e Desenvolvimento de Sistemas.");
+        jScrollPane7.setViewportView(campoComponenteSobre);
+
+        labelAgradecimentosSobre.setText("Agradecimentos: ");
+
+        campoAgradecimentoSobre.setEditable(false);
+        campoAgradecimentoSobre.setColumns(20);
+        campoAgradecimentoSobre.setRows(5);
+        campoAgradecimentoSobre.setText("Agradecemos a todos os professores do Curso Superior de Análise e Deselvolvimento pela sua ajuda e dedicação\nem nos ensinar a \"arte da criação\".");
+        jScrollPane8.setViewportView(campoAgradecimentoSobre);
+
+        labelSobreSoftwareSobre.setText("Sobre o software: ");
+
+        campoSobreSofwareSobre.setEditable(false);
+        campoSobreSofwareSobre.setColumns(20);
+        campoSobreSofwareSobre.setRows(5);
+        campoSobreSofwareSobre.setText("Versão de Teste 1.0\n\nEste software tem como função gerar modelos pronto em pdf com base nas informações dadas pelo usuário no\nmomento do cadastro.");
+        jScrollPane9.setViewportView(campoSobreSofwareSobre);
+
+        btnSobreMenuPrincipal.setText("Menu Principal");
+        btnSobreMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSobreMenuPrincipalActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelSobreLayout = new javax.swing.GroupLayout(painelSobre);
+        painelSobre.setLayout(painelSobreLayout);
+        painelSobreLayout.setHorizontalGroup(
+            painelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelSobreLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8)
+                    .addGroup(painelSobreLayout.createSequentialGroup()
+                        .addGroup(painelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelComponenteSobre)
+                            .addComponent(labelAgradecimentosSobre)
+                            .addComponent(labelSobreSoftwareSobre))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane9)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelSobreLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSobreMenuPrincipal)))
+                .addContainerGap())
+        );
+        painelSobreLayout.setVerticalGroup(
+            painelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelSobreLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelComponenteSobre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(labelAgradecimentosSobre)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(labelSobreSoftwareSobre)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(btnSobreMenuPrincipal)
+                .addContainerGap())
+        );
+
+        PainelPrincipal.add(painelSobre, "painelSobre");
+
         subMenuPainelCadastrar.setText("Arquivo");
-
-        itamAbrirPastaSubMenuPainelCadastrar.setText("Abrir Pasta");
-        itamAbrirPastaSubMenuPainelCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        subMenuPainelCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itamAbrirPastaSubMenuPainelCadastrarActionPerformed(evt);
+                subMenuPainelCadastrarActionPerformed(evt);
             }
         });
-        subMenuPainelCadastrar.add(itamAbrirPastaSubMenuPainelCadastrar);
 
-        itamSairSubMenuPainelCadastrar.setText("Sair");
-        itamSairSubMenuPainelCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        itemMenuPrincipalArquivoSubMenuPainelCadastrar.setText("Menu Principal");
+        itemMenuPrincipalArquivoSubMenuPainelCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itamSairSubMenuPainelCadastrarActionPerformed(evt);
+                itemMenuPrincipalArquivoSubMenuPainelCadastrarActionPerformed(evt);
             }
         });
-        subMenuPainelCadastrar.add(itamSairSubMenuPainelCadastrar);
+        subMenuPainelCadastrar.add(itemMenuPrincipalArquivoSubMenuPainelCadastrar);
+
+        itemAbrirPastaSubMenuPainelCadastrar.setText("Abrir Pasta");
+        itemAbrirPastaSubMenuPainelCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAbrirPastaSubMenuPainelCadastrarActionPerformed(evt);
+            }
+        });
+        subMenuPainelCadastrar.add(itemAbrirPastaSubMenuPainelCadastrar);
+
+        itemSairSubMenuPainelCadastrar.setText("Sair");
+        itemSairSubMenuPainelCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSairSubMenuPainelCadastrarActionPerformed(evt);
+            }
+        });
+        subMenuPainelCadastrar.add(itemSairSubMenuPainelCadastrar);
 
         menuPainelCadastrar.add(subMenuPainelCadastrar);
+
+        subMenuPainelSobre.setText("Sobre");
+
+        itemSobreSubMenuPainelCadastrar.setText("Sobre");
+        itemSobreSubMenuPainelCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSobreSubMenuPainelCadastrarActionPerformed(evt);
+            }
+        });
+        subMenuPainelSobre.add(itemSobreSubMenuPainelCadastrar);
+
+        menuPainelCadastrar.add(subMenuPainelSobre);
 
         setJMenuBar(menuPainelCadastrar);
 
@@ -1508,22 +1776,48 @@ public class PainelCadastrar extends javax.swing.JFrame {
     }//GEN-LAST:event_comboxCadastrarEventoActionPerformed
 
     private void btnGerarPdfOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPdfOkActionPerformed
+        comboxListaEventoPDF.removeAllItems();
+
         if (comboxGerarPdfEvento.getSelectedItem().equals("Esporte")) {
             for (int i = 0; i < cadastrar.getEsporte().size(); i++) {
-                try {
+                try {                    
                     comboxListaEventoPDF.addItem(cadastrar.getEsporte().get(i).getNome()
-                            + formatarData.DateToString(cadastrar.getEsporte().get(i).getDataInclusao()));
+                            + cadastrar.dateToString(cadastrar.getEsporte().get(i).getDataInclusao()));
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar!");
+                }
+            }
+            mudarPainel("painelGerarPdf");
+        } else if (comboxGerarPdfEvento.getSelectedItem().equals("Filme")) {
+            for (int i = 0; i < cadastrar.getFilme().size(); i++) {
+                try {
+                    comboxListaEventoPDF.addItem(cadastrar.getFilme().get(i).getNome()
+                            + cadastrar.dateToString(cadastrar.getFilme().get(i).getDataInclusao()));
                 } catch (Exception ex) {
                     Logger.getLogger(PainelCadastrar.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                mudarPainel("painelGerarPdf");
             }
-        } else if (comboxGerarPdfEvento.getSelectedItem().equals("Filme")) {
-
+            mudarPainel("painelGerarPdf");
         } else if (comboxGerarPdfEvento.getSelectedItem().equals("Peça")) {
-
+            for (int i = 0; i < cadastrar.getPeca().size(); i++) {
+                try {
+                    comboxListaEventoPDF.addItem(cadastrar.getPeca().get(i).getNome()
+                            + cadastrar.dateToString(cadastrar.getPeca().get(i).getDataInclusao()));
+                } catch (Exception ex) {
+                    Logger.getLogger(PainelCadastrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            mudarPainel("painelGerarPdf");
         } else if (comboxGerarPdfEvento.getSelectedItem().equals("Show")) {
-
+            for (int i = 0; i < cadastrar.getPeca().size(); i++) {
+                try {
+                    comboxListaEventoPDF.addItem(cadastrar.getPeca().get(i).getNome()
+                            + cadastrar.dateToString(cadastrar.getPeca().get(i).getDataInclusao()));
+                } catch (Exception ex) {
+                    Logger.getLogger(PainelCadastrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            mudarPainel("painelGerarPdf");
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um item!");
         }
@@ -1543,21 +1837,21 @@ public class PainelCadastrar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCadastrarEventoOkActionPerformed
 
-    private void itamAbrirPastaSubMenuPainelCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itamAbrirPastaSubMenuPainelCadastrarActionPerformed
-        AbrirPasta abrirPasta = new AbrirPasta();
+    private void itemAbrirPastaSubMenuPainelCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAbrirPastaSubMenuPainelCadastrarActionPerformed
+        ///
         try {
-            abrirPasta.irURL();
+            cadastrar.abrirPasta();
         } catch (IOException ex) {
             JOptionPane.showConfirmDialog(null, "Erro, Verifique seu Gerenciador de Arquivo!");
         }
-    }//GEN-LAST:event_itamAbrirPastaSubMenuPainelCadastrarActionPerformed
+    }//GEN-LAST:event_itemAbrirPastaSubMenuPainelCadastrarActionPerformed
 
-    private void itamSairSubMenuPainelCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itamSairSubMenuPainelCadastrarActionPerformed
+    private void itemSairSubMenuPainelCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSairSubMenuPainelCadastrarActionPerformed
         int opcao = JOptionPane.showConfirmDialog(null, "Deseja Sair? ");
         if (opcao == 0) {
             System.exit(0);
         }
-    }//GEN-LAST:event_itamSairSubMenuPainelCadastrarActionPerformed
+    }//GEN-LAST:event_itemSairSubMenuPainelCadastrarActionPerformed
 
     public void mudarParaPainelDetalheEvento() {
         mudarPainel("painelDetalheEvento");
@@ -1645,8 +1939,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
 
     private void btnAvançarEsporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvançarEsporteActionPerformed
         setVariavelControle(Esporte);
-        mudarParaPainelDetalheEvento();
-        controlePainelCadastrar();
+        mudarParaPainelDetalheEvento();        
     }//GEN-LAST:event_btnAvançarEsporteActionPerformed
 
     private void btnAvançarPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvançarPecaActionPerformed
@@ -1712,40 +2005,9 @@ public class PainelCadastrar extends javax.swing.JFrame {
         mudarPainel("painelAmbiente");
     }//GEN-LAST:event_btnAvançarAmbiente2ActionPerformed
 
-    private void txtNomeContatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeContatoMouseClicked
-        limparText(txtNomeContato);
-    }//GEN-LAST:event_txtNomeContatoMouseClicked
-
-    private void txtTelefoneContatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTelefoneContatoMouseClicked
-        limparText(txtTelefoneContato);
-    }//GEN-LAST:event_txtTelefoneContatoMouseClicked
-
-    private void txtEmailContatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailContatoMouseClicked
-        limparText(txtEmailContato);
-    }//GEN-LAST:event_txtEmailContatoMouseClicked
-
-    private void campoEnderecoContatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoEnderecoContatoMouseClicked
-        limparCampo(campoEnderecoContato);
-    }//GEN-LAST:event_campoEnderecoContatoMouseClicked
-
-    private void btnVoltarContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarContatoActionPerformed
-        mudarPainel("painelIngresso");
-    }//GEN-LAST:event_btnVoltarContatoActionPerformed
-
     private void btnAvançarIngressoEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvançarIngressoEventoActionPerformed
         mudarPainel("painelContato");
     }//GEN-LAST:event_btnAvançarIngressoEventoActionPerformed
-
-    private void btnConcluirContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirContatoActionPerformed
-        try {
-            JOptionPane.showMessageDialog(null, "Cadastrado Com Sucesso!");
-            cadastrar.cadastrarEsporte(cadastrarEsporte());
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Dados Errados!");
-        }
-        mudarPainel("painelCadastrar");
-        ///Metodo de Cadastrar
-    }//GEN-LAST:event_btnConcluirContatoActionPerformed
 
     private void btnVoltarAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarAmbienteActionPerformed
         mudarParaPainelDetalheEvento();
@@ -1781,6 +2043,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
 
     private void btnMenuPrincipalGerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalGerarPdfActionPerformed
         mudarPainel("painelCadastrar");
+        controlePainelCadastrar();
     }//GEN-LAST:event_btnMenuPrincipalGerarPdfActionPerformed
 
     private void btnGerarPdfPainelGerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPdfPainelGerarPdfActionPerformed
@@ -1789,13 +2052,86 @@ public class PainelCadastrar extends javax.swing.JFrame {
             int opcao = JOptionPane.showConfirmDialog(null, "Arquivo Gerado Com Sucesso!"
                     + "\nDeseja Abrir a Pasta do Arquivo? ");
             if (opcao == 0) {
-                AbrirPasta abrirPasta = new AbrirPasta();
-                abrirPasta.irURL();
+                cadastrar.abrirPasta();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro!");
         }
     }//GEN-LAST:event_btnGerarPdfPainelGerarPdfActionPerformed
+
+    private void campoEnderecoAmbienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoEnderecoAmbienteMouseClicked
+        limparCampo(campoEnderecoAmbiente);
+    }//GEN-LAST:event_campoEnderecoAmbienteMouseClicked
+
+    private void btnConcluirContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirContatoActionPerformed
+        try {
+            if (comboxCadastrarEvento.getSelectedIndex() == 1) {
+                cadastrar.cadastrarEsporte(cadastrarEsporte());
+                JOptionPane.showMessageDialog(null, "Evento Esportivo Cadastrado!");
+            } else if (comboxCadastrarEvento.getSelectedItem().equals("Filme")) {
+                cadastrar.cadastrarFilme(cadastrarFilme());
+                JOptionPane.showMessageDialog(null, "Evento de Filme Cadastrado!");
+            } else if (comboxCadastrarEvento.getSelectedItem().equals("Peça")) {
+                cadastrar.cadastrarPeca(cadastrarPeca());
+                JOptionPane.showMessageDialog(null, "Evento de Peça Cadastrado!");
+            } else if (comboxCadastrarEvento.getSelectedItem().equals("Show")) {
+                cadastrar.cadastrarShow(cadastrarShow());
+                JOptionPane.showMessageDialog(null, "Evento de Show Cadastrado!");
+            }
+            //JOptionPane.showMessageDialog(null, "Cadastrado Com Sucesso!");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Dados Errados!");
+        }
+        mudarPainel("painelCadastrar");
+        controlePainelCadastrar();
+        ///Metodo de Cadastrar
+    }//GEN-LAST:event_btnConcluirContatoActionPerformed
+
+    private void btnVoltarContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarContatoActionPerformed
+        mudarPainel("painelIngresso");
+    }//GEN-LAST:event_btnVoltarContatoActionPerformed
+
+    private void txtNomeContatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeContatoMouseClicked
+        limparText(txtNomeContato);
+    }//GEN-LAST:event_txtNomeContatoMouseClicked
+
+    private void txtTelefoneContatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTelefoneContatoMouseClicked
+        limparText(txtTelefoneContato);
+    }//GEN-LAST:event_txtTelefoneContatoMouseClicked
+
+    private void campoEnderecoContatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoEnderecoContatoMouseClicked
+        limparCampo(campoEnderecoContato);
+    }//GEN-LAST:event_campoEnderecoContatoMouseClicked
+
+    private void txtEmailContatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailContatoMouseClicked
+        limparText(txtEmailContato);
+    }//GEN-LAST:event_txtEmailContatoMouseClicked
+
+    private void txtEstreiaFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstreiaFilmeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEstreiaFilmeActionPerformed
+
+    private void txtEstreiaFilmeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEstreiaFilmeMouseClicked
+        limparText(txtEstreiaFilme);
+    }//GEN-LAST:event_txtEstreiaFilmeMouseClicked
+
+    private void subMenuPainelCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuPainelCadastrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_subMenuPainelCadastrarActionPerformed
+
+    private void itemMenuPrincipalArquivoSubMenuPainelCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuPrincipalArquivoSubMenuPainelCadastrarActionPerformed
+        mudarPainel("painelCadastrar");
+        controlePainelCadastrar();
+    }//GEN-LAST:event_itemMenuPrincipalArquivoSubMenuPainelCadastrarActionPerformed
+
+    private void btnSobreMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSobreMenuPrincipalActionPerformed
+        mudarPainel("painelCadastrar");
+        controlePainelCadastrar();
+    }//GEN-LAST:event_btnSobreMenuPrincipalActionPerformed
+
+    private void itemSobreSubMenuPainelCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSobreSubMenuPainelCadastrarActionPerformed
+        mudarPainel("painelSobre");
+    }//GEN-LAST:event_itemSobreSubMenuPainelCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1846,6 +2182,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private javax.swing.JButton btnGerarPdfOk;
     private javax.swing.JButton btnGerarPdfPainelGerarPdf;
     private javax.swing.JButton btnMenuPrincipalGerarPdf;
+    private javax.swing.JButton btnSobreMenuPrincipal;
     private javax.swing.JButton btnVoltarAmbiente;
     private javax.swing.JButton btnVoltarAmbiente2;
     private javax.swing.JButton btnVoltarContato;
@@ -1855,21 +2192,26 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltarPeca;
     private javax.swing.JButton btnVoltarShow;
     private javax.swing.JScrollPane cadastrarEquipeEsporteScroll1;
+    private javax.swing.JTextArea campoAgradecimentoSobre;
     private javax.swing.JTextArea campoCadastrarEquipeEsporte;
+    private javax.swing.JTextArea campoComponenteSobre;
     private javax.swing.JTextArea campoDescricaoAmbiente;
     private javax.swing.JTextArea campoDescricaoEvento;
     private javax.swing.JTextArea campoEnderecoAmbiente;
     private javax.swing.JTextArea campoEnderecoContato;
     private javax.swing.JTextArea campoMensagemPromocaoIngresso;
     private javax.swing.JTextArea campoSinopseEvento;
+    private javax.swing.JTextArea campoSobreSofwareSobre;
     private javax.swing.JComboBox comboxCadastrarEvento;
     private javax.swing.JComboBox comboxGerarPdfEvento;
     private javax.swing.JComboBox comboxListaEventoPDF;
     private javax.swing.JComboBox comboxSelecionarCorPainelGerarPdf;
     private javax.swing.JComboBox comboxSelecionarTamanhoPaginaPainelGerarPdf;
     private javax.swing.JFormattedTextField formatedDataHoraEvento;
-    private javax.swing.JMenuItem itamAbrirPastaSubMenuPainelCadastrar;
-    private javax.swing.JMenuItem itamSairSubMenuPainelCadastrar;
+    private javax.swing.JMenuItem itemAbrirPastaSubMenuPainelCadastrar;
+    private javax.swing.JMenuItem itemMenuPrincipalArquivoSubMenuPainelCadastrar;
+    private javax.swing.JMenuItem itemSairSubMenuPainelCadastrar;
+    private javax.swing.JMenuItem itemSobreSubMenuPainelCadastrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1879,6 +2221,10 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JLabel labelAgradecimentosSobre;
     private javax.swing.JLabel labelArtistaShow;
     private javax.swing.JLabel labelCadastrarAmbiente;
     private javax.swing.JLabel labelCadastrarEvento;
@@ -1889,6 +2235,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private javax.swing.JLabel labelCensuraFilme;
     private javax.swing.JLabel labelCensuraPeca;
     private javax.swing.JLabel labelCompanhiaPeca;
+    private javax.swing.JLabel labelComponenteSobre;
     private javax.swing.JLabel labelContatoEvento;
     private javax.swing.JLabel labelDataHoraEvento;
     private javax.swing.JLabel labelDescricaoAmbiente;
@@ -1900,6 +2247,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private javax.swing.JLabel labelEnderecoContato;
     private javax.swing.JLabel labelEquipeEsporte;
     private javax.swing.JLabel labelEstiloShow;
+    private javax.swing.JLabel labelEstreiaFilme;
     private javax.swing.JLabel labelGeneroFilme;
     private javax.swing.JLabel labelGeneroPeca;
     private javax.swing.JLabel labelGerarPdfCadastrar;
@@ -1916,6 +2264,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private javax.swing.JLabel labelQuantidadeIngresso;
     private javax.swing.JLabel labelSetorAmbiente;
     private javax.swing.JLabel labelSinopseEvento;
+    private javax.swing.JLabel labelSobreSoftwareSobre;
     private javax.swing.JLabel labelTelefoneContato;
     private javax.swing.JLabel labelTituloCadastrarEsporte;
     private javax.swing.JLabel labelValorDescontoPromocaoIngresso;
@@ -1931,8 +2280,10 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private javax.swing.JPanel painelGerarPdf;
     private javax.swing.JPanel painelPeca;
     private javax.swing.JPanel painelShow;
+    private javax.swing.JPanel painelSobre;
     private javax.swing.JPanel painelngresso;
     private javax.swing.JMenu subMenuPainelCadastrar;
+    private javax.swing.JMenu subMenuPainelSobre;
     private javax.swing.JTextField txtArtistaShow;
     private javax.swing.JTextField txtCapacidadeSetorAmbiente;
     private javax.swing.JTextField txtCensuraFilme;
@@ -1941,6 +2292,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private javax.swing.JTextField txtDuracaoEvento;
     private javax.swing.JTextField txtEmailContato;
     private javax.swing.JTextField txtEstilhoShow;
+    private javax.swing.JTextField txtEstreiaFilme;
     private javax.swing.JTextField txtGeneroFilme;
     private javax.swing.JTextField txtGeneroPeca;
     private javax.swing.JTextField txtNomeAmbiente;

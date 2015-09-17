@@ -32,7 +32,7 @@ public class Promoção {
 
     @Override
     public String toString() {
-        return "\n" + getMensagem() + "\nQuantidade Disponivél: " + getQuantidadeDisponivél()
+        return "\n" + getMensagem() + "\nQuantidade Disponível: " + getQuantidadeDisponivél()
                 + "\nValor de Desconto R$: " + getValorDeDesconto();
     }
 
