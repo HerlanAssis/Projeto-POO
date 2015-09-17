@@ -1,5 +1,9 @@
 package br.com.ifrn.panfleto.cadastrar;
 
+/**
+ *Classe utilizada para testar a geração de pdf 
+ */
+
 import br.com.ifrn.panfleto.Ambiente;
 import br.com.ifrn.panfleto.Contatos;
 import br.com.ifrn.panfleto.Setor;

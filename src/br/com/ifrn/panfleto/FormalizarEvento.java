@@ -1,5 +1,9 @@
 package br.com.ifrn.panfleto;
 
+/**
+ * A interface Formalizar evento serve para ter um controle das principais funções da classe cadastrar. 
+ */
+
 import br.com.ifrn.panfleto.envento.*;
 
 public interface FormalizarEvento {

@@ -1,5 +1,9 @@
 package br.com.ifrn.panfleto.constantes;
 
+/**
+ *Modelos de fontes pré-definidas para utilizar no modelo pdf. 
+ */
+
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Font;
 

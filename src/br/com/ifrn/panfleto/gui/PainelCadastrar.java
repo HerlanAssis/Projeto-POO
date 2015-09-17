@@ -5,6 +5,12 @@
  */
 package br.com.ifrn.panfleto.gui;
 
+/**
+ * Está e a classe em que está contida a parte gráfica do codigo, foi-se
+ * utilizado o cardLayout para realizar assim o cadastro dos clientes. Ainda a
+ * bugs a serem corrigidos como o conteúdo dos paines e a validação de entredas,
+ * seja ela utilizando a hibernate ou outra API.
+ */
 import br.com.ifrn.panfleto.Ambiente;
 import br.com.ifrn.panfleto.Contatos;
 import br.com.ifrn.panfleto.Setor;
@@ -28,10 +34,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-/**
- *
- * @author herlan
- */
 public class PainelCadastrar extends javax.swing.JFrame {
 
     /**
@@ -42,7 +44,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private Filme filme;
     private Peca peca;
     private Show show;
-    private Date date;    
+    private Date date;
     private Ambiente ambiente;
     private Ingresso ingresso;
     private Setor setor;
@@ -58,14 +60,13 @@ public class PainelCadastrar extends javax.swing.JFrame {
 //    private boolean validarIngresso = true;
 //    private boolean validarContato = true;
 //    private boolean validarGerarPdf = true;
-
     public PainelCadastrar() {//Instanciando a classe principal cadastrar
         initComponents();
         this.setLocationRelativeTo(null);
         cadastrar = Cadastrar.getUniqueInstance();
     }
-    
-    
+
+    //Variavéis auxiliares para ajudar no retorno dos paineis
     private final int Esporte = 1;
     private final int Filme = 2;
     private final int Peca = 3;
@@ -76,19 +77,23 @@ public class PainelCadastrar extends javax.swing.JFrame {
         return PainelPrincipal;
     }
 
+    //Metodo usado para mudar de um painel para o outro no frame.
     public void mudarPainel(String x) {
         CardLayout layout = (CardLayout) PainelPrincipal.getLayout();
         layout.show(PainelPrincipal, x);
     }
 
+    //limpar campo ao clique do mouse
     public void limparCampo(JTextArea jTextArea) {
         jTextArea.setText("");
     }
 
+    //limpar textFiel ao clique do mouse
     public void limparText(JTextField jTextField) {
         jTextField.setText("");
     }
 
+    //setar o combobox do painel cadastrar para o indice inicial
     public void controlePainelCadastrar() {
         comboxCadastrarEvento.setSelectedIndex(0);
         comboxGerarPdfEvento.setSelectedIndex(0);
@@ -98,6 +103,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         this.variavelControle = variavelControle;
     }
 
+    //Auxiliar no retorno
     public void qualVoltar() {
         if (this.variavelControle == 1) {
             mudarPainel("painelEsporte");
@@ -110,10 +116,11 @@ public class PainelCadastrar extends javax.swing.JFrame {
         }
     }
 
-    public boolean validarFormularioText(JTextArea jTextArea) {
-        return !jTextArea.equals("");
-    }
-
+    //Possivél implementação manual para autenticar entradas
+//    public boolean validarFormularioText(JTextArea jTextArea) {
+//        return !jTextArea.equals("");
+//    }
+    //cor da pagina
     public BaseColor corPagina() {
         if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Branco")) {
             return BaseColor.WHITE;
@@ -144,6 +151,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         return BaseColor.WHITE;
     }
 
+    //tamanho da pagina
     public Rectangle tamanhoDaPagina() {
         if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("A0")) {
             return new Rectangle(PageSize.A0);
@@ -171,35 +179,35 @@ public class PainelCadastrar extends javax.swing.JFrame {
             return new Rectangle(PageSize.B5);
         }
 
+        //caso erro, retorna o tamanho a4 como padrao
         return new Rectangle(PageSize.A4);
     }
 
-    public void gerarPdf() throws IOException, Exception {        
+    //metodo responsavél por gerar o pdf dos eventos
+    public void gerarPdf() throws IOException, Exception {
+        //cria o modelo básico, tamanho e cor da pagina.
         cadastrar.setPdfCreator(new PdfCreator(tamanhoDaPagina(), corPagina()));
 
+        //faz a seleção de qual evento será gerado e captura o indice do combobox
         if (comboxGerarPdfEvento.getSelectedItem().equals("Esporte")) {
             cadastrar.getPdfCreator().gerarPlanfletoEsporte(cadastrar.getEsporte().get(comboxListaEventoPDF.getSelectedIndex()));
-        
+
         } else if (comboxGerarPdfEvento.getSelectedItem().equals("Filme")) {
             cadastrar.getPdfCreator().gerarPlanfletoFilme(cadastrar.getFilme().get(comboxListaEventoPDF.getSelectedIndex()));
-        
+
         } else if (comboxGerarPdfEvento.getSelectedItem().equals("Peça")) {
             cadastrar.getPdfCreator().gerarPlanfletoPeca(cadastrar.getPeca().get(comboxListaEventoPDF.getSelectedIndex()));
-        
+
         } else if (comboxGerarPdfEvento.getSelectedItem().equals("Show")) {
             cadastrar.getPdfCreator().gerarPlanfletoShow(cadastrar.getShow().get(comboxListaEventoPDF.getSelectedIndex()));
         }
     }
 
+    //Cadastra os dados no evento esporte
     public Esporte cadastrarEsporte() throws Exception {
-        date = new Date(System.currentTimeMillis());
-        //formatarData = new FormatarData();
+        date = new Date(System.currentTimeMillis());        
 
         esporte = new Esporte();
-//        ambiente = new Ambiente();
-//        setor = new Setor();
-//        contatos = new Contatos();
-//        ingresso = new Ingresso();
 
         esporte.setNome(txtNomeEsporte.getText());
         esporte.setEquipe(campoCadastrarEquipeEsporte.getText());
@@ -213,24 +221,6 @@ public class PainelCadastrar extends javax.swing.JFrame {
 
         esporte.setDuracao(Integer.parseInt(txtDuracaoEvento.getText()));
 
-//        ambiente.setNome(txtNomeAmbiente.getText());
-//        ambiente.setDescricao(campoDescricaoAmbiente.getText());
-//        ambiente.setEndereco(campoEnderecoAmbiente.getText());
-//        ambiente.setProntoReferencia(txtPontoReferenciaAmbiente.getText());
-//        setor.setNome(txtNomeSetorAmbiente.getText());
-//        setor.setCapacidade(Integer.parseInt(txtCapacidadeSetorAmbiente.getText()));
-//        ambiente.setSetor(setor);
-//
-//        ingresso.setMensagem(campoMensagemPromocaoIngresso.getText());
-//        ingresso.setQuantidade(Integer.parseInt(txtQuantidadeIngressoEvento.getText()));
-//        ingresso.setQuantidadeDisponivél(Integer.parseInt(txtQuantudadeDisponivelPromocaoIngresso.getText()));
-//        ingresso.setValor(Double.parseDouble(txtValorIngressoEvento.getText()));
-//        ingresso.setValorDeDesconto(Double.parseDouble(txtlValorDescontoPromocaoIngresso.getText()));
-//
-//        contatos.setNome(txtNomeContato.getText());
-//        contatos.setEmail(txtEmailContato.getText());
-//        contatos.setEndereco(campoEnderecoContato.getText());
-//        contatos.setTelefone(txtTelefoneContato.getText());
         esporte.setAmbiente(getAmbiente());
         esporte.setContatos(getContato());
         esporte.setIngresso(getIngresso());
@@ -238,6 +228,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         return esporte;
     }
 
+    //Cadastra os dados no evento filme
     public Filme cadastrarFilme() throws Exception {
         date = new Date(System.currentTimeMillis());
         //formatarData = new FormatarData();
@@ -265,6 +256,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         return filme;
     }
 
+    //Cadastra os dados no evento peça
     public Peca cadastrarPeca() throws Exception {
         date = new Date(System.currentTimeMillis());
         //formatarData = new FormatarData();
@@ -291,7 +283,8 @@ public class PainelCadastrar extends javax.swing.JFrame {
 
         return peca;
     }
-
+    
+    //Cadastra os dados no evento show
     public Show cadastrarShow() throws Exception {
         date = new Date(System.currentTimeMillis());
         //formatarData = new FormatarData();
@@ -317,6 +310,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         return show;
     }
 
+    //Faz o reuso de linhas de codigos do tipo ambiente
     public Ambiente getAmbiente() {
         ambiente = new Ambiente();
         setor = new Setor();
@@ -332,6 +326,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         return ambiente;
     }
 
+    //Faz o reuso de linhas de codigos do tipo contato
     public Contatos getContato() {
         contatos = new Contatos();
 
@@ -343,6 +338,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         return contatos;
     }
 
+    //Faz o reuso de linhas de codigos do tipo ingresso
     public Ingresso getIngresso() {
         ingresso = new Ingresso();
 
@@ -355,9 +351,6 @@ public class PainelCadastrar extends javax.swing.JFrame {
         return ingresso;
     }
 
-//    public void cadastrar() throws Exception {
-//        cadastrar.cadastrarEsporte(cadastrarEsporte());
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1380,11 +1373,11 @@ public class PainelCadastrar extends javax.swing.JFrame {
                                     .addComponent(labelQuantidadeIngresso))
                                 .addGap(31, 31, 31)
                                 .addGroup(painelngressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtQuantidadeIngressoEvento)
-                                    .addComponent(txtValorIngressoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtValorIngressoEvento)
+                                    .addComponent(txtQuantidadeIngressoEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)))
                             .addComponent(labelngressoEvento)
                             .addComponent(labelPromocaoIngresso))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(456, 529, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelngressoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVoltarIngressoEvento)
@@ -1776,8 +1769,10 @@ public class PainelCadastrar extends javax.swing.JFrame {
     }//GEN-LAST:event_comboxCadastrarEventoActionPerformed
 
     private void btnGerarPdfOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPdfOkActionPerformed
+        //limpa o combox para inserir todos os valores
         comboxListaEventoPDF.removeAllItems();
 
+        //inserindo valores
         if (comboxGerarPdfEvento.getSelectedItem().equals("Esporte")) {
             for (int i = 0; i < cadastrar.getEsporte().size(); i++) {
                 try {                    
@@ -1811,7 +1806,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         } else if (comboxGerarPdfEvento.getSelectedItem().equals("Show")) {
             for (int i = 0; i < cadastrar.getPeca().size(); i++) {
                 try {
-                    comboxListaEventoPDF.addItem(cadastrar.getPeca().get(i).getNome()
+                    comboxListaEventoPDF.addItem(cadastrar.getShow().get(i).getNome()
                             + cadastrar.dateToString(cadastrar.getPeca().get(i).getDataInclusao()));
                 } catch (Exception ex) {
                     Logger.getLogger(PainelCadastrar.class.getName()).log(Level.SEVERE, null, ex);
@@ -1823,6 +1818,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGerarPdfOkActionPerformed
 
+    //tomada de decisão do painel cadastrar
     private void btnCadastrarEventoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarEventoOkActionPerformed
         if (comboxCadastrarEvento.getSelectedItem().equals("Esporte")) {
             mudarPainel("painelEsporte");
@@ -1838,7 +1834,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarEventoOkActionPerformed
 
     private void itemAbrirPastaSubMenuPainelCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAbrirPastaSubMenuPainelCadastrarActionPerformed
-        ///
+        //abrir pasta onde contem os pdf
         try {
             cadastrar.abrirPasta();
         } catch (IOException ex) {
@@ -1846,6 +1842,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_itemAbrirPastaSubMenuPainelCadastrarActionPerformed
 
+    //confirmar o botão sair
     private void itemSairSubMenuPainelCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSairSubMenuPainelCadastrarActionPerformed
         int opcao = JOptionPane.showConfirmDialog(null, "Deseja Sair? ");
         if (opcao == 0) {
@@ -1939,7 +1936,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
 
     private void btnAvançarEsporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvançarEsporteActionPerformed
         setVariavelControle(Esporte);
-        mudarParaPainelDetalheEvento();        
+        mudarParaPainelDetalheEvento();
     }//GEN-LAST:event_btnAvançarEsporteActionPerformed
 
     private void btnAvançarPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvançarPecaActionPerformed
@@ -2063,6 +2060,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         limparCampo(campoEnderecoAmbiente);
     }//GEN-LAST:event_campoEnderecoAmbienteMouseClicked
 
+    //Aviso ao concluir um cadastro
     private void btnConcluirContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirContatoActionPerformed
         try {
             if (comboxCadastrarEvento.getSelectedIndex() == 1) {

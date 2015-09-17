@@ -1,5 +1,9 @@
 package br.com.ifrn.panfleto;
 
+/*
+**A classe ambiente armazena o local do evento em questão juntamenta com seu endereço
+*/
+
 public class Ambiente {
     
     private String nome;

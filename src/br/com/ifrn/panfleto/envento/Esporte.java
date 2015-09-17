@@ -1,8 +1,8 @@
 package br.com.ifrn.panfleto.envento;
 
-/*
-Esta classe cria o evendo do tipo esporte
-*/
+/**
+ * Esta classe herda da classe evento e cria um evento do tipo esporte, com atributos especifícos.
+ */
 
 import br.com.ifrn.panfleto.Evento;
 

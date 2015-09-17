@@ -5,6 +5,9 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
 
+/**
+ * Classe responsavél por gerar o rodapé do documento através do evendo onEndPage do pdfPageHelper
+ */
 public class EventTable extends PdfPageEventHelper{
 
     protected PdfPTable footer;

@@ -3,6 +3,9 @@ package br.com.ifrn.panfleto.utilitario;
 import br.com.ifrn.panfleto.gerarpdf.PdfCreator;
 import java.io.IOException;
 
+/**
+ * Abrir pasta no linux e no windows, mais antes e preciso informar o seu gerenciador de arquivos
+ */
 public class AbrirPasta {
     public void irURL() throws IOException {
         String text, text2;

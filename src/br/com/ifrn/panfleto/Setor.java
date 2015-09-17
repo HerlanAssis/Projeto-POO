@@ -1,5 +1,9 @@
 package br.com.ifrn.panfleto;
 
+/**
+ * A classe setor serve para complementar a informação contida da classe ambiente.
+ */
+
 public class Setor {
 
     private String nome;

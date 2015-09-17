@@ -1,5 +1,10 @@
 package br.com.ifrn.panfleto;
 
+/*
+**A classe Evento Serve de classe pai para os outros subEventos, ou seja, ela armazena as informações
+**em comum de todos os eventos a serem utilizados.
+*/
+
 import br.com.ifrn.panfleto.ingresso.Ingresso;
 import java.util.Date;
 

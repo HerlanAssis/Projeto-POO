@@ -1,5 +1,9 @@
 package br.com.ifrn.panfleto.envento;
 
+/**
+ * Esta classe herda da classe evento e cria um evento do tipo shoe, com atributos especifícos.
+ */
+
 import br.com.ifrn.panfleto.Evento;
 
 public class Show extends Evento{

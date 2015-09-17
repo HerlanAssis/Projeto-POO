@@ -1,11 +1,16 @@
 package br.com.ifrn.panfleto.cadastrar;
 
+/**
+ *A classe cadastrar tem a função de servir de ponte entre o frame e as classes auxiliares
+ * utilizando também a opcao de referência única ela funciona como uma espécie de "contole remoto"
+ * entre a interface e as demais classes.
+ */
+
 import br.com.ifrn.panfleto.FormalizarEvento;
 import br.com.ifrn.panfleto.envento.*;
 import br.com.ifrn.panfleto.gerarpdf.PdfCreator;
 import br.com.ifrn.panfleto.utilitario.AbrirPasta;
 import br.com.ifrn.panfleto.utilitario.FormatarData;
-import com.itextpdf.text.BaseColor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;

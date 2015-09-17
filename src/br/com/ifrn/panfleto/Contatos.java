@@ -1,5 +1,9 @@
 package br.com.ifrn.panfleto;
 
+/*
+**A classe contato armazenas as informações que serão utilizadas no rodapé do documento pdf
+*/
+
 public class Contatos {
     private String nome;
     private String endereco;

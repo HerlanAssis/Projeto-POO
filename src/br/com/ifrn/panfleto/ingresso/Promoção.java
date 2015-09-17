@@ -1,5 +1,7 @@
 package br.com.ifrn.panfleto.ingresso;
-
+/**
+ *Esta classe e pai da classe ingresso e tem atributos basicos para o modelo de ingresso nos eventos. 
+ */
 public class Promoção {
 
     private String mensagem;

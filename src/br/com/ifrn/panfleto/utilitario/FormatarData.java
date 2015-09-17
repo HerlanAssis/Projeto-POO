@@ -5,6 +5,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ *Classe responsavél pelo controle de data do programa. Realiza conversões das datas.
+ */
 public class FormatarData {
 
     final private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -31,7 +34,7 @@ public class FormatarData {
         } catch (Exception e) {
             throw e;
         }
-        return "Data do Evento: " + data;
+        return " - Data da inclusão: " + data;
     }
 
     public boolean ValidarData(String data) throws Exception {
