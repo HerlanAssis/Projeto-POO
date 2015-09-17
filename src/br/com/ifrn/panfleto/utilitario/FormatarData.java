@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FormatarData {
-    
+
     final private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     public Date StringToDate(String data) throws Exception {
@@ -25,7 +25,7 @@ public class FormatarData {
     }
 
     public String DateToString(Date date) throws Exception {
-        String data = "";       
+        String data = "";
         try {
             data = simpleDateFormat.format(date);
         } catch (Exception e) {
@@ -34,7 +34,7 @@ public class FormatarData {
         return "Data do Evento: " + data;
     }
 
-    public boolean ValidarData(String data) throws Exception {        
+    public boolean ValidarData(String data) throws Exception {
         DateFormat df = simpleDateFormat;
         df.setLenient(false); // aqui o pulo do gato  
         try {
@@ -45,4 +45,11 @@ public class FormatarData {
             return false;
         }
     }
+
+    private String getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
 }

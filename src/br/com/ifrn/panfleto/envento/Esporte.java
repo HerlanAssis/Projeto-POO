@@ -7,7 +7,7 @@ Esta classe cria o evendo do tipo esporte
 import br.com.ifrn.panfleto.Evento;
 
 public class Esporte extends Evento {
-
+    
     private String nome;
     private String equipe;
 

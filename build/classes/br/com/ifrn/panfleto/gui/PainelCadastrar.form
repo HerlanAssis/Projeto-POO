@@ -112,7 +112,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="398" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="413" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -129,7 +129,7 @@
                               <Component id="comboxGerarPdfEvento" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnGerarPdfOk" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="217" max="32767" attributes="0"/>
+                          <EmptySpace pref="232" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -244,7 +244,7 @@
                           <Component id="labelNomeEsporte" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNomeEsporte" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="99" max="32767" attributes="0"/>
+                      <EmptySpace pref="114" max="32767" attributes="0"/>
                       <Component id="labelEquipeEsporte" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cadastrarEquipeEsporteScroll1" min="-2" pref="129" max="-2" attributes="0"/>
@@ -384,7 +384,7 @@
                           <Component id="labelCensuraFilme" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCensuraFilme" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="223" max="32767" attributes="0"/>
+                      <EmptySpace pref="238" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAvançarFilme" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnVoltarFilme" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -516,7 +516,7 @@
                           <Component id="labelEstiloShow" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtEstilhoShow" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="229" max="32767" attributes="0"/>
+                      <EmptySpace pref="244" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAvançarShow" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnVoltarShow" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -658,7 +658,7 @@
                           <Component id="labelCensuraPeca" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCensuraPeca" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="184" max="32767" attributes="0"/>
+                      <EmptySpace pref="199" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAvançarPeca" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnVoltarPeca" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -938,27 +938,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnVoltarAmbiente" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnAvançarAmbiente" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="labelSetorAmbiente" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtNomeSetorAmbiente" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="labelCapacidadeAmbiente" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                              <Component id="txtCapacidadeSetorAmbiente" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -971,15 +954,33 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="txtNomeAmbiente" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jScrollPane6" pref="276" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="193" max="-2" attributes="0"/>
+                                      <Component id="btnVoltarAmbiente" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btnAvançarAmbiente" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="labelDescricaoAmbiente" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="labelCadastrarAmbiente" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="labelEnderecoAmbiente" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="labelSetorAmbiente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtNomeSetorAmbiente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="labelCapacidadeAmbiente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              <Component id="txtCapacidadeSetorAmbiente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -1011,12 +1012,22 @@
                           <Component id="txtNomeSetorAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCapacidadeSetorAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="labelEnderecoAmbiente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnAvançarAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnVoltarAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnAvançarAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnVoltarAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jScrollPane6" min="-2" pref="57" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1119,6 +1130,27 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVoltarAmbienteActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JLabel" name="labelEnderecoAmbiente">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Endere&#xe7;o: "/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane6">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="campoEnderecoAmbiente">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="Endere&#xe7;o do ambiente: "/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="painelngresso">
@@ -1504,7 +1536,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
@@ -1512,21 +1544,25 @@
                               <Component id="btnMenuPrincipalGerarPdf" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="comboxSelecionarCorPainelGerarPdf" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="comboxSelecionarTamanhoPaginaPainelGerarPdf" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="comboxListaEventoPDF" alignment="0" pref="240" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnSelecionarDataHoraPainelGerarPdf" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnSelecionarTamanhoPaginaPainelGerarPdf" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnSelecionarCorPainelGerarPdf" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="comboxSelecionarTamanhoPaginaPainelGerarPdf" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="comboxSelecionarCorPainelGerarPdf" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="291" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="btnGerarPdfPainelGerarPdf" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="btnGerarPdfPainelGerarPdf" min="-2" pref="198" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="comboxListaEventoPDF" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1536,27 +1572,27 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="comboxSelecionarTamanhoPaginaPainelGerarPdf" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnSelecionarTamanhoPaginaPainelGerarPdf" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="comboxSelecionarCorPainelGerarPdf" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnSelecionarCorPainelGerarPdf" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="comboxListaEventoPDF" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnSelecionarDataHoraPainelGerarPdf" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnGerarPdfPainelGerarPdf" min="-2" pref="109" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnMenuPrincipalGerarPdf" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="btnGerarPdfPainelGerarPdf" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="comboxSelecionarTamanhoPaginaPainelGerarPdf" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="comboxSelecionarCorPainelGerarPdf" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="comboxListaEventoPDF" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="194" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="238" max="32767" attributes="0"/>
-                      <Component id="btnMenuPrincipalGerarPdf" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1575,11 +1611,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboxListaEventoPDFActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnSelecionarDataHoraPainelGerarPdf">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="OK"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="btnMenuPrincipalGerarPdf">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Menu Principal"/>
@@ -1591,41 +1622,55 @@
             <Component class="javax.swing.JComboBox" name="comboxSelecionarTamanhoPaginaPainelGerarPdf">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
-                    <StringItem index="0" value="Tamanho da P&#xe1;gina: A1"/>
-                    <StringItem index="1" value="Tamanho da P&#xe1;gina: A2"/>
-                    <StringItem index="2" value="Tamanho da P&#xe1;gina: A3"/>
-                    <StringItem index="3" value="Tamanho da P&#xe1;gina: A4"/>
-                    <StringItem index="4" value=" "/>
+                  <StringArray count="11">
+                    <StringItem index="0" value="A0"/>
+                    <StringItem index="1" value="A1"/>
+                    <StringItem index="2" value="A2"/>
+                    <StringItem index="3" value="A3"/>
+                    <StringItem index="4" value="A4"/>
+                    <StringItem index="5" value="A5"/>
+                    <StringItem index="6" value="B1"/>
+                    <StringItem index="7" value="B2"/>
+                    <StringItem index="8" value="B3"/>
+                    <StringItem index="9" value="B4"/>
+                    <StringItem index="10" value="B5"/>
                   </StringArray>
                 </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnSelecionarTamanhoPaginaPainelGerarPdf">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="OK"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="comboxSelecionarCorPainelGerarPdf">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
-                    <StringItem index="0" value="Cor: Banco"/>
-                    <StringItem index="1" value="Cor: Preto"/>
-                    <StringItem index="2" value="Cor: Azul"/>
-                    <StringItem index="3" value="Cor: Cinza"/>
+                    <StringItem index="0" value="Banco"/>
+                    <StringItem index="1" value="Preto"/>
+                    <StringItem index="2" value="Azul"/>
+                    <StringItem index="3" value="Cinza"/>
                   </StringArray>
                 </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnSelecionarCorPainelGerarPdf">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="OK"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnGerarPdfPainelGerarPdf">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gerar PDF!"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGerarPdfPainelGerarPdfActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tamanho da P&#xe1;gina: "/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cor: "/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Evento/Data Inclus&#xe3;o: "/>
               </Properties>
             </Component>
           </SubComponents>

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class Cadastrar implements FormalizarEvento {
 
     //Locais
-
     private ArrayList<Esporte> esporte;
     private ArrayList<Filme> filme;
     private ArrayList<Peca> peca;

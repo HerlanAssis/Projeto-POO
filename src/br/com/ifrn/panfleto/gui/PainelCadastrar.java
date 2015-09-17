@@ -5,9 +5,23 @@
  */
 package br.com.ifrn.panfleto.gui;
 
+import br.com.ifrn.panfleto.Ambiente;
+import br.com.ifrn.panfleto.Contatos;
+import br.com.ifrn.panfleto.Setor;
+import br.com.ifrn.panfleto.cadastrar.Cadastrar;
+import br.com.ifrn.panfleto.envento.Esporte;
+import br.com.ifrn.panfleto.gerarpdf.PdfCreator;
+import br.com.ifrn.panfleto.ingresso.Ingresso;
 import br.com.ifrn.panfleto.utilitario.AbrirPasta;
+import br.com.ifrn.panfleto.utilitario.FormatarData;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Rectangle;
 import java.awt.CardLayout;
 import java.io.IOException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -22,9 +36,20 @@ public class PainelCadastrar extends javax.swing.JFrame {
     /**
      * Creates new form PainelCadastrar
      */
+    private Cadastrar cadastrar;
+    private Esporte esporte;
+    private Date date;
+    private FormatarData formatarData;
+    private Ambiente ambiente;
+    private Ingresso ingresso;
+    private Setor setor;
+    private Contatos contatos;
+    private PdfCreator pdfCreator;
+
     public PainelCadastrar() {
         initComponents();
         this.setLocationRelativeTo(null);
+        cadastrar = Cadastrar.getUniqueInstance();
     }
 
     private final int Esporte = 1;
@@ -70,9 +95,139 @@ public class PainelCadastrar extends javax.swing.JFrame {
             mudarPainel("painelShow");
         }
     }
-    
-    public boolean validarFormularioText(JTextArea jTextArea){
+
+    public boolean validarFormularioText(JTextArea jTextArea) {
         return !jTextArea.equals("");
+    }
+
+    public BaseColor corPagina() {
+        if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Branco")) {
+            return BaseColor.WHITE;
+        } else if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Preto")) {
+            return BaseColor.BLACK;
+        } else if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Azul")) {
+            return BaseColor.BLUE;
+        } else if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Cinza Escuro")) {
+            return BaseColor.DARK_GRAY;
+        } else if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Cinza")) {
+            return BaseColor.GRAY;
+        } else if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Cinza Claro")) {
+            return BaseColor.LIGHT_GRAY;
+        } else if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Magenta")) {
+            return BaseColor.MAGENTA;
+        } else if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Laranja")) {
+            return BaseColor.ORANGE;
+        } else if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Rosa")) {
+            return BaseColor.PINK;
+        } else if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Vermlho")) {
+            return BaseColor.RED;
+        } else if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Amarero")) {
+            return BaseColor.YELLOW;
+        } else if (comboxSelecionarCorPainelGerarPdf.getSelectedItem().equals("Cyan")) {
+            return BaseColor.CYAN;
+        }
+
+        return BaseColor.BLUE;
+    }
+
+    public Rectangle tamanhoDaPagina() {
+        if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("A0")) {
+            return new Rectangle(PageSize.A0);
+        } else if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("A1")) {
+            return new Rectangle(PageSize.A1);
+        } else if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("A2")) {
+            return new Rectangle(PageSize.A2);
+        } else if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("A3")) {
+            return new Rectangle(PageSize.A3);
+        } else if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("A4")) {
+            return new Rectangle(PageSize.A4);
+        } else if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("A5")) {
+            return new Rectangle(PageSize.A5);
+        } else if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("B0")) {
+            return new Rectangle(PageSize.B0);
+        } else if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("B1")) {
+            return new Rectangle(PageSize.B1);
+        } else if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("B2")) {
+            return new Rectangle(PageSize.B2);
+        } else if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("B3")) {
+            return new Rectangle(PageSize.B3);
+        } else if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("B4")) {
+            return new Rectangle(PageSize.B4);
+        } else if (comboxSelecionarTamanhoPaginaPainelGerarPdf.getSelectedItem().equals("B5")) {
+            return new Rectangle(PageSize.B5);
+        }
+
+        return new Rectangle(PageSize.A4);
+    }
+
+    public void gerarPdf() throws IOException, Exception {
+        pdfCreator = new PdfCreator(tamanhoDaPagina(), corPagina());
+
+        if (variavelControle == 1) {
+            for (int i = 0; i < cadastrar.getEsporte().size(); i++) {
+                comboxListaEventoPDF.getSelectedItem().equals(cadastrar.getEsporte().get(i).getNome()
+                        + formatarData.DateToString(cadastrar.getEsporte().get(i).getDataInclusao()));
+                pdfCreator.gerarPlanfletoEsporte(cadastrar.getEsporte().get(i));
+            }
+        } else if (variavelControle == 2) {
+
+        } else if (variavelControle == 3) {
+
+        } else if (variavelControle == 4) {
+
+        }
+    }
+
+    public Esporte cadastrarEsporte() throws Exception {
+        date = new Date(System.currentTimeMillis());
+        formatarData = new FormatarData();
+
+        esporte = new Esporte();
+        ambiente = new Ambiente();
+        setor = new Setor();
+        contatos = new Contatos();
+        ingresso = new Ingresso();
+
+        esporte.setNome(txtNomeEsporte.getText());
+        esporte.setEquipe(campoCadastrarEquipeEsporte.getText());
+        esporte.setDescricao(campoDescricaoAmbiente.getText());
+        esporte.setSinopse(campoSinopseEvento.getText());
+        esporte.setDataInclusao(date);
+
+        if (formatarData.ValidarData(formatedDataHoraEvento.getText())) {
+            esporte.setDataEvento(formatarData.StringToDate(formatedDataHoraEvento.getText()));
+        }
+
+        esporte.setDuracao(Integer.parseInt(txtDuracaoEvento.getText()));
+
+        ambiente.setNome(txtNomeAmbiente.getText());
+        ambiente.setDescricao(campoDescricaoAmbiente.getText());
+        ambiente.setEndereco(campoEnderecoAmbiente.getText());
+        ambiente.setProntoReferencia(txtPontoReferenciaAmbiente.getText());
+        setor.setNome(txtNomeSetorAmbiente.getText());
+        setor.setCapacidade(Integer.parseInt(txtCapacidadeSetorAmbiente.getText()));
+        ambiente.setSetor(setor);
+
+        ingresso.setMensagem(campoMensagemPromocaoIngresso.getText());
+        ingresso.setQuantidade(Integer.parseInt(txtQuantidadeIngressoEvento.getText()));
+        ingresso.setQuantidadeDisponivél(Integer.parseInt(txtQuantudadeDisponivelPromocaoIngresso.getText()));
+        ingresso.setValor(Double.parseDouble(txtValorIngressoEvento.getText()));
+        ingresso.setValorDeDesconto(Double.parseDouble(txtlValorDescontoPromocaoIngresso.getText()));
+
+        contatos.setNome(txtNomeContato.getName());
+        contatos.setEmail(txtEmailContato.getText());
+        contatos.setEndereco(campoEnderecoContato.getText());
+        contatos.setTelefone(txtTelefoneContato.getText());
+
+        esporte.setAmbiente(ambiente);
+        esporte.setContatos(contatos);
+        esporte.setIngresso(ingresso);
+
+        return esporte;
+    }
+
+    public void cadastrar() throws Exception {
+        cadastrar.cadastrarEsporte(cadastrarEsporte());
     }
 
     /**
@@ -162,6 +317,9 @@ public class PainelCadastrar extends javax.swing.JFrame {
         labelCapacidadeAmbiente = new javax.swing.JLabel();
         btnAvançarAmbiente = new javax.swing.JButton();
         btnVoltarAmbiente = new javax.swing.JButton();
+        labelEnderecoAmbiente = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        campoEnderecoAmbiente = new javax.swing.JTextArea();
         painelngresso = new javax.swing.JPanel();
         labelngressoEvento = new javax.swing.JLabel();
         labelValorIngresso = new javax.swing.JLabel();
@@ -193,13 +351,13 @@ public class PainelCadastrar extends javax.swing.JFrame {
         btnConcluirContato = new javax.swing.JButton();
         painelGerarPdf = new javax.swing.JPanel();
         comboxListaEventoPDF = new javax.swing.JComboBox();
-        btnSelecionarDataHoraPainelGerarPdf = new javax.swing.JButton();
         btnMenuPrincipalGerarPdf = new javax.swing.JButton();
         comboxSelecionarTamanhoPaginaPainelGerarPdf = new javax.swing.JComboBox();
-        btnSelecionarTamanhoPaginaPainelGerarPdf = new javax.swing.JButton();
         comboxSelecionarCorPainelGerarPdf = new javax.swing.JComboBox();
-        btnSelecionarCorPainelGerarPdf = new javax.swing.JButton();
         btnGerarPdfPainelGerarPdf = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         menuPainelCadastrar = new javax.swing.JMenuBar();
         subMenuPainelCadastrar = new javax.swing.JMenu();
         itamAbrirPastaSubMenuPainelCadastrar = new javax.swing.JMenuItem();
@@ -260,7 +418,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
         );
         painelCadastrarLayout.setVerticalGroup(
             painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 398, Short.MAX_VALUE)
+            .addGap(0, 413, Short.MAX_VALUE)
             .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(painelCadastrarLayout.createSequentialGroup()
                     .addContainerGap()
@@ -275,7 +433,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                     .addGroup(painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(comboxGerarPdfEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnGerarPdfOk))
-                    .addContainerGap(217, Short.MAX_VALUE)))
+                    .addContainerGap(232, Short.MAX_VALUE)))
         );
 
         PainelPrincipal.add(painelCadastrar, "painelCadastrar");
@@ -352,7 +510,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                 .addGroup(painelEsporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNomeEsporte)
                     .addComponent(txtNomeEsporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addComponent(labelEquipeEsporte)
                 .addGap(18, 18, 18)
                 .addComponent(cadastrarEquipeEsporteScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -455,7 +613,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                 .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCensuraFilme)
                     .addComponent(txtCensuraFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
                 .addGroup(painelFilmeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAvançarFilme)
                     .addComponent(btnVoltarFilme))
@@ -565,7 +723,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                 .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelEstiloShow)
                     .addComponent(txtEstilhoShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
                 .addGroup(painelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAvançarShow)
                     .addComponent(btnVoltarShow))
@@ -675,7 +833,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
                 .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCensuraPeca)
                     .addComponent(txtCensuraPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
                 .addGroup(painelPecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAvançarPeca)
                     .addComponent(btnVoltarPeca))
@@ -873,28 +1031,20 @@ public class PainelCadastrar extends javax.swing.JFrame {
             }
         });
 
+        labelEnderecoAmbiente.setText("Endereço: ");
+
+        campoEnderecoAmbiente.setColumns(20);
+        campoEnderecoAmbiente.setRows(5);
+        campoEnderecoAmbiente.setText("Endereço do ambiente: ");
+        jScrollPane6.setViewportView(campoEnderecoAmbiente);
+
         javax.swing.GroupLayout painelAmbienteLayout = new javax.swing.GroupLayout(painelAmbiente);
         painelAmbiente.setLayout(painelAmbienteLayout);
         painelAmbienteLayout.setHorizontalGroup(
             painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelAmbienteLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVoltarAmbiente)
-                .addGap(18, 18, 18)
-                .addComponent(btnAvançarAmbiente)
-                .addContainerGap())
             .addGroup(painelAmbienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painelAmbienteLayout.createSequentialGroup()
-                        .addComponent(labelSetorAmbiente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNomeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelCapacidadeAmbiente)
-                        .addGap(6, 6, 6)
-                        .addComponent(txtCapacidadeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(painelAmbienteLayout.createSequentialGroup()
                         .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
@@ -906,12 +1056,28 @@ public class PainelCadastrar extends javax.swing.JFrame {
                                 .addComponent(labelNomeAmbiente)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtNomeAmbiente))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelAmbienteLayout.createSequentialGroup()
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                                .addGap(193, 193, 193)
+                                .addComponent(btnVoltarAmbiente)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAvançarAmbiente))
                             .addGroup(painelAmbienteLayout.createSequentialGroup()
                                 .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labelDescricaoAmbiente)
-                                    .addComponent(labelCadastrarAmbiente))
+                                    .addComponent(labelCadastrarAmbiente)
+                                    .addComponent(labelEnderecoAmbiente))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(painelAmbienteLayout.createSequentialGroup()
+                        .addComponent(labelSetorAmbiente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNomeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelCapacidadeAmbiente)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtCapacidadeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         painelAmbienteLayout.setVerticalGroup(
             painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -936,11 +1102,18 @@ public class PainelCadastrar extends javax.swing.JFrame {
                     .addComponent(labelCapacidadeAmbiente)
                     .addComponent(txtNomeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCapacidadeSetorAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(labelEnderecoAmbiente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAvançarAmbiente)
-                    .addComponent(btnVoltarAmbiente))
-                .addContainerGap())
+                .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelAmbienteLayout.createSequentialGroup()
+                        .addGroup(painelAmbienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAvançarAmbiente)
+                            .addComponent(btnVoltarAmbiente))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelAmbienteLayout.createSequentialGroup()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))))
         );
 
         PainelPrincipal.add(painelAmbiente, "painelAmbiente");
@@ -1210,8 +1383,6 @@ public class PainelCadastrar extends javax.swing.JFrame {
             }
         });
 
-        btnSelecionarDataHoraPainelGerarPdf.setText("OK");
-
         btnMenuPrincipalGerarPdf.setText("Menu Principal");
         btnMenuPrincipalGerarPdf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1219,15 +1390,22 @@ public class PainelCadastrar extends javax.swing.JFrame {
             }
         });
 
-        comboxSelecionarTamanhoPaginaPainelGerarPdf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tamanho da Página: A1", "Tamanho da Página: A2", "Tamanho da Página: A3", "Tamanho da Página: A4", " " }));
+        comboxSelecionarTamanhoPaginaPainelGerarPdf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A0", "A1", "A2", "A3", "A4", "A5", "B1", "B2", "B3", "B4", "B5" }));
 
-        btnSelecionarTamanhoPaginaPainelGerarPdf.setText("OK");
-
-        comboxSelecionarCorPainelGerarPdf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cor: Banco", "Cor: Preto", "Cor: Azul", "Cor: Cinza" }));
-
-        btnSelecionarCorPainelGerarPdf.setText("OK");
+        comboxSelecionarCorPainelGerarPdf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Banco", "Preto", "Azul", "Cinza" }));
 
         btnGerarPdfPainelGerarPdf.setText("Gerar PDF!");
+        btnGerarPdfPainelGerarPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarPdfPainelGerarPdfActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Tamanho da Página: ");
+
+        jLabel2.setText("Cor: ");
+
+        jLabel3.setText("Evento/Data Inclusão: ");
 
         javax.swing.GroupLayout painelGerarPdfLayout = new javax.swing.GroupLayout(painelGerarPdf);
         painelGerarPdf.setLayout(painelGerarPdfLayout);
@@ -1240,40 +1418,44 @@ public class PainelCadastrar extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnMenuPrincipalGerarPdf))
                     .addGroup(painelGerarPdfLayout.createSequentialGroup()
-                        .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(comboxSelecionarCorPainelGerarPdf, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboxSelecionarTamanhoPaginaPainelGerarPdf, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboxListaEventoPDF, javax.swing.GroupLayout.Alignment.LEADING, 0, 240, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSelecionarDataHoraPainelGerarPdf)
-                            .addComponent(btnSelecionarTamanhoPaginaPainelGerarPdf)
-                            .addComponent(btnSelecionarCorPainelGerarPdf))
-                        .addGap(40, 40, 40)
-                        .addComponent(btnGerarPdfPainelGerarPdf)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(comboxSelecionarTamanhoPaginaPainelGerarPdf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboxSelecionarCorPainelGerarPdf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(painelGerarPdfLayout.createSequentialGroup()
+                                .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(0, 291, Short.MAX_VALUE)))
+                        .addGap(12, 12, 12)
+                        .addComponent(btnGerarPdfPainelGerarPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelGerarPdfLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(comboxListaEventoPDF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         painelGerarPdfLayout.setVerticalGroup(
             painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelGerarPdfLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelGerarPdfLayout.createSequentialGroup()
-                        .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboxSelecionarTamanhoPaginaPainelGerarPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSelecionarTamanhoPaginaPainelGerarPdf))
+                        .addComponent(btnGerarPdfPainelGerarPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMenuPrincipalGerarPdf))
+                    .addGroup(painelGerarPdfLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboxSelecionarTamanhoPaginaPainelGerarPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboxSelecionarCorPainelGerarPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSelecionarCorPainelGerarPdf))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboxSelecionarCorPainelGerarPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(painelGerarPdfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboxListaEventoPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSelecionarDataHoraPainelGerarPdf)))
-                    .addComponent(btnGerarPdfPainelGerarPdf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
-                .addComponent(btnMenuPrincipalGerarPdf)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboxListaEventoPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 194, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1327,7 +1509,15 @@ public class PainelCadastrar extends javax.swing.JFrame {
 
     private void btnGerarPdfOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPdfOkActionPerformed
         if (comboxGerarPdfEvento.getSelectedItem().equals("Esporte")) {
-
+            for (int i = 0; i < cadastrar.getEsporte().size(); i++) {
+                try {
+                    comboxListaEventoPDF.addItem(cadastrar.getEsporte().get(i).getNome()
+                            + formatarData.DateToString(cadastrar.getEsporte().get(i).getDataInclusao()));
+                } catch (Exception ex) {
+                    Logger.getLogger(PainelCadastrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                mudarPainel("painelGerarPdf");
+            }
         } else if (comboxGerarPdfEvento.getSelectedItem().equals("Filme")) {
 
         } else if (comboxGerarPdfEvento.getSelectedItem().equals("Peça")) {
@@ -1547,7 +1737,12 @@ public class PainelCadastrar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAvançarIngressoEventoActionPerformed
 
     private void btnConcluirContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirContatoActionPerformed
-        JOptionPane.showMessageDialog(null, "Cadastrado Com Sucesso!");
+        try {
+            JOptionPane.showMessageDialog(null, "Cadastrado Com Sucesso!");
+            cadastrar.cadastrarEsporte(cadastrarEsporte());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Dados Errados!");
+        }
         mudarPainel("painelCadastrar");
         ///Metodo de Cadastrar
     }//GEN-LAST:event_btnConcluirContatoActionPerformed
@@ -1587,6 +1782,20 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private void btnMenuPrincipalGerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalGerarPdfActionPerformed
         mudarPainel("painelCadastrar");
     }//GEN-LAST:event_btnMenuPrincipalGerarPdfActionPerformed
+
+    private void btnGerarPdfPainelGerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPdfPainelGerarPdfActionPerformed
+        try {
+            gerarPdf();
+            int opcao = JOptionPane.showConfirmDialog(null, "Arquivo Gerado Com Sucesso!"
+                    + "\nDeseja Abrir a Pasta do Arquivo? ");
+            if (opcao == 0) {
+                AbrirPasta abrirPasta = new AbrirPasta();
+                abrirPasta.irURL();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro!");
+        }
+    }//GEN-LAST:event_btnGerarPdfPainelGerarPdfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1637,9 +1846,6 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private javax.swing.JButton btnGerarPdfOk;
     private javax.swing.JButton btnGerarPdfPainelGerarPdf;
     private javax.swing.JButton btnMenuPrincipalGerarPdf;
-    private javax.swing.JButton btnSelecionarCorPainelGerarPdf;
-    private javax.swing.JButton btnSelecionarDataHoraPainelGerarPdf;
-    private javax.swing.JButton btnSelecionarTamanhoPaginaPainelGerarPdf;
     private javax.swing.JButton btnVoltarAmbiente;
     private javax.swing.JButton btnVoltarAmbiente2;
     private javax.swing.JButton btnVoltarContato;
@@ -1652,6 +1858,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private javax.swing.JTextArea campoCadastrarEquipeEsporte;
     private javax.swing.JTextArea campoDescricaoAmbiente;
     private javax.swing.JTextArea campoDescricaoEvento;
+    private javax.swing.JTextArea campoEnderecoAmbiente;
     private javax.swing.JTextArea campoEnderecoContato;
     private javax.swing.JTextArea campoMensagemPromocaoIngresso;
     private javax.swing.JTextArea campoSinopseEvento;
@@ -1663,11 +1870,15 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField formatedDataHoraEvento;
     private javax.swing.JMenuItem itamAbrirPastaSubMenuPainelCadastrar;
     private javax.swing.JMenuItem itamSairSubMenuPainelCadastrar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel labelArtistaShow;
     private javax.swing.JLabel labelCadastrarAmbiente;
     private javax.swing.JLabel labelCadastrarEvento;
@@ -1685,6 +1896,7 @@ public class PainelCadastrar extends javax.swing.JFrame {
     private javax.swing.JLabel labelDetalhesEvento;
     private javax.swing.JLabel labelDuracaoEvento;
     private javax.swing.JLabel labelEmailContato;
+    private javax.swing.JLabel labelEnderecoAmbiente;
     private javax.swing.JLabel labelEnderecoContato;
     private javax.swing.JLabel labelEquipeEsporte;
     private javax.swing.JLabel labelEstiloShow;
